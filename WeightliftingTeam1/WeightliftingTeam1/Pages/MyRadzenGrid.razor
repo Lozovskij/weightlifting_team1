@@ -1,0 +1,34 @@
+﻿@page "/radzengrid"
+@using WeightliftingTeam1.Data
+@inject AthleteResultService athleteResultService
+
+<h3>Radzen Grid Example</h3>
+
+@if(athleteResults == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <RadzenGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="4"
+                AllowSorting="true" Data="@athleteResults" TItem="AthleteResult" ColumnWidth="150px">
+        <Columns>
+            <RadzenGridColumn TItem="AthleteResult" Property="Id" Title="Athlete Id"></RadzenGridColumn>
+            <RadzenGridColumn TItem="AthleteResult" Property="FullName" Title="Full Name"></RadzenGridColumn>
+            <RadzenGridColumn TItem="AthleteResult" Property="Nation" Title="Nation"></RadzenGridColumn>
+            <RadzenGridColumn TItem="AthleteResult" Property="Weight" Title="Weight"></RadzenGridColumn>
+            <RadzenGridColumn TItem="AthleteResult" Property="TotalResult" Title="Total"></RadzenGridColumn>
+        </Columns>
+
+    </RadzenGrid>
+}
+
+@code {
+    IEnumerable<AthleteResult> athleteResults;
+
+    /*Override this method if you will perform an asynchronous operation and want the component to refresh when that operation is completed.*/
+    protected override async Task OnInitializedAsync()
+    {
+        athleteResults = await Task.Run(() => athleteResultService.GetAthleteResults());
+    }
+}
