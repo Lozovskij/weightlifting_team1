@@ -1,0 +1,26 @@
+﻿@using WeightliftingTeam1.Data
+@inject AthleteResultService athleteResultService
+
+<TelerikGrid Data="@athleteResults" Height="400px"
+                Pageable="true" Sortable="true" Groupable="true"
+                FilterMode="Telerik.Blazor.GridFilterMode.FilterRow"
+                Resizable="true" Reorderable="true">
+    <GridColumns>
+        <GridColumn Field="@(nameof(AthleteResult.Id))" Title="Athlete Id"  />
+        <GridColumn Field="@(nameof(AthleteResult.FullName))" Title="Full Name" Groupable="false" />
+        <GridColumn Field="@(nameof(AthleteResult.Nation))" />
+        <GridColumn Field="@(nameof(AthleteResult.Weight))" />
+        <GridColumn Field="@(nameof(AthleteResult.TotalResult))" Title="Total" />
+    </GridColumns>
+</TelerikGrid>
+
+@code {
+    IEnumerable<AthleteResult> athleteResults;
+
+    /*Override this method if you will perform an asynchronous operation and want the component to refresh when that operation is completed.*/
+
+    protected override async Task OnInitializedAsync()
+    {
+        athleteResults = await Task.Run(() => athleteResultService.GetAthleteResults());
+    }
+}
