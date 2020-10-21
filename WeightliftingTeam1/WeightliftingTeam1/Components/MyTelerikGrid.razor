@@ -1,0 +1,27 @@
+﻿@using WeightliftingTeam1.Data
+
+
+@if (AthleteResults == null)
+{
+    <p>Loading......</p>
+}
+else
+{
+    <TelerikGrid Data="@AthleteResults" Height="400px"
+                 Pageable="true" Sortable="true" Groupable="true"
+                 FilterMode="Telerik.Blazor.GridFilterMode.FilterRow"
+                 Resizable="true" Reorderable="true">
+        <GridColumns>
+            <GridColumn Field="@(nameof(AthleteResult.Id))" Title="Athlete Id" />
+            <GridColumn Field="@(nameof(AthleteResult.FullName))" Title="Full Name" Groupable="false" />
+            <GridColumn Field="@(nameof(AthleteResult.Nation))" />
+            <GridColumn Field="@(nameof(AthleteResult.Weight))" />
+            <GridColumn Field="@(nameof(AthleteResult.TotalResult))" Title="Total" />
+        </GridColumns>
+    </TelerikGrid>
+}
+
+@code {
+    [Parameter]
+    public IEnumerable<AthleteResult> AthleteResults { get; set; }
+}
