@@ -34,8 +34,8 @@
         AthleteResults = await Task.Run(() => athleteResultService.GetAthleteResults());
     }
 
-    public void ChangeResultForGrid(AggregationPanelInput PanelInput)
+    public void ChangeResultForGrid(AggregationPanelInput panelInput)
     {
-        Console.WriteLine(PanelInput.WeightCategory);
+        Console.WriteLine(panelInput.WeightCategory);
     }
 }
