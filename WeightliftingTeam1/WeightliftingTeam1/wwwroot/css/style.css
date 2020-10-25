@@ -13,10 +13,6 @@
     background-color: rgba(141, 170, 224, 0.678);
 }
 
-.my-container{
-    min-height: 70vh;
-}
-
 .my-col{
     padding: 10px;
 }
@@ -24,14 +20,6 @@
 .my-param-container {
     padding: 2px;
     border: 1px solid rgb(197, 197, 197);
-}
-
-.my-param {
-    margin: 2px 0;
-}
-
-.my-table {
-    border-radius: 5px;
 }
 
 footer {

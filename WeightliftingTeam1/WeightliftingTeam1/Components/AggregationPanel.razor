@@ -23,14 +23,14 @@
 
     <div class="my-param-container d-flex flex-column">
 
-        <select class="custom-select my-param">
+        <select class="custom-select mb-1 mt-2">
             <option selected>Type</option>
             <option value="1">Snatch</option>
             <option value="2">Clean and jerk</option>
             <option value="3">Clean and press (excluded from 1973)</option>
         </select>
 
-        <select class="custom-select my-param">
+        <select class="custom-select mb-1">
             <option selected>Period</option>
             <option value="1">1928 - 1972</option>
             <option value="2">1973 - 1992</option>
@@ -39,7 +39,7 @@
             <option value="4">2018 +</option>
         </select>
 
-        <InputSelect @bind-Value="InputData.WeightCategory" class="custom-select my-param">
+        <InputSelect @bind-Value="InputData.WeightCategory" class="custom-select mb-2">
             @if (WeightCategories != null)
             {
                 <option value="">Weight category</option>
