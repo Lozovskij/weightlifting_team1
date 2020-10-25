@@ -1,6 +1,26 @@
 ﻿@using WeightliftingTeam1.Data
 
 <EditForm Model="@InputData">
+    <div class="my-param-container d-flex flex-column mb-2">
+
+        <div class="my-param-container d-flex flex-column mb-2">
+            <label for="female">
+                <InputCheckbox class="m-2" id="female" @bind-Value=InputData.IsFemale />
+                Female
+            </label>
+            <label for="male">
+                <InputCheckbox class="m-2" id="male" @bind-Value=InputData.IsMale />
+                Male
+            </label>
+        </div>
+
+        <label for="male">
+            <InputCheckbox class="m-2" id="male" @bind-Value=InputData.IsDisqualified />
+            Disqualified
+        </label>
+
+    </div>
+
     <div class="my-param-container d-flex flex-column">
 
         <select class="custom-select my-param">
@@ -29,12 +49,6 @@
                 }
             }
         </InputSelect>
-
-        <select class="custom-select my-param">
-            <option selected>Disqualified</option>
-            <option value="1">true</option>
-            <option value="2">false</option>
-        </select>
 
         <div class="buttons d-flex justify-content-between flex-wrap">
             <button type="button" class="btn btn-outline-secondary " style="margin:2px; width: 90px;"

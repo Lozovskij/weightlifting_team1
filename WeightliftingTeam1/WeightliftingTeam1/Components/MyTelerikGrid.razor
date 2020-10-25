@@ -7,7 +7,7 @@
 }
 else
 {
-<TelerikGrid Data="@AthleteResults" Height="400px"
+<TelerikGrid Data="@AthleteResults" Height="500px" PageSize="6"
              Pageable="true" Sortable="true" Groupable="false"
              Resizable="false" Reorderable="true"
              Width="100%">
@@ -15,8 +15,8 @@ else
         <GridSearchBox />
     </GridToolBar>
     <GridColumns>
-        <GridColumn Field="@(nameof(AthleteResult.Id))" Title="Athlete Id" Width="100px" />
-        <GridColumn Field="@(nameof(AthleteResult.FullName))" Title="Full Name" Width="200px" />
+        <GridColumn Field="@(nameof(AthleteResult.Id))" Title="Athlete Id" Width="70px" />
+        <GridColumn Field="@(nameof(AthleteResult.FullName))" Title="Full Name" Width="150px" />
         <GridColumn Field="@(nameof(AthleteResult.Nation))" Width="100px" />
         <GridColumn Field="@(nameof(AthleteResult.Weight))" Width="100px" />
         <GridColumn Field="@(nameof(AthleteResult.TotalResult))" Title="Total" Width="100px" />
