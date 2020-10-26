@@ -10,5 +10,11 @@ namespace WeightliftingTeam1.Data
         public string WeightCategory { get; set; }
 
         public int Weight { get; set; }
+
+        public bool IsMale { get; set; } = true;
+
+        public bool IsFemale { get; set; } = true;
+
+        public bool IsDisqualified { get; set; }
     }
 }

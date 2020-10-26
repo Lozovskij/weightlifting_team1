@@ -7,18 +7,21 @@
 }
 else
 {
-    <TelerikGrid Data="@AthleteResults" Height="400px"
-                 Pageable="true" Sortable="true" Groupable="true"
-                 FilterMode="Telerik.Blazor.GridFilterMode.FilterRow"
-                 Resizable="true" Reorderable="true">
-        <GridColumns>
-            <GridColumn Field="@(nameof(AthleteResult.Id))" Title="Athlete Id" />
-            <GridColumn Field="@(nameof(AthleteResult.FullName))" Title="Full Name" Groupable="false" />
-            <GridColumn Field="@(nameof(AthleteResult.Nation))" />
-            <GridColumn Field="@(nameof(AthleteResult.Weight))" />
-            <GridColumn Field="@(nameof(AthleteResult.TotalResult))" Title="Total" />
-        </GridColumns>
-    </TelerikGrid>
+<TelerikGrid Data="@AthleteResults" Height="500px" PageSize="6"
+             Pageable="true" Sortable="true" Groupable="false"
+             Resizable="false" Reorderable="true"
+             Width="100%">
+    <GridToolBar>
+        <GridSearchBox />
+    </GridToolBar>
+    <GridColumns>
+        <GridColumn Field="@(nameof(AthleteResult.Id))" Title="Athlete Id" Width="70px" />
+        <GridColumn Field="@(nameof(AthleteResult.FullName))" Title="Full Name" Width="150px" />
+        <GridColumn Field="@(nameof(AthleteResult.Nation))" Width="100px" />
+        <GridColumn Field="@(nameof(AthleteResult.Weight))" Width="100px" />
+        <GridColumn Field="@(nameof(AthleteResult.TotalResult))" Title="Total" Width="100px" />
+    </GridColumns>
+</TelerikGrid>
 }
 
 @code {

@@ -1,16 +1,36 @@
 ﻿@using WeightliftingTeam1.Data
 
 <EditForm Model="@InputData">
+    <div class="my-param-container d-flex flex-column mb-2">
+
+        <div class="my-param-container d-flex flex-column mb-2">
+            <label for="female">
+                <InputCheckbox class="m-2" id="female" @bind-Value=InputData.IsFemale />
+                Female
+            </label>
+            <label for="male">
+                <InputCheckbox class="m-2" id="male" @bind-Value=InputData.IsMale />
+                Male
+            </label>
+        </div>
+
+        <label for="male">
+            <InputCheckbox class="m-2" id="male" @bind-Value=InputData.IsDisqualified />
+            Disqualified
+        </label>
+
+    </div>
+
     <div class="my-param-container d-flex flex-column">
 
-        <select class="custom-select my-param">
+        <select class="custom-select mb-1 mt-2">
             <option selected>Type</option>
             <option value="1">Snatch</option>
             <option value="2">Clean and jerk</option>
             <option value="3">Clean and press (excluded from 1973)</option>
         </select>
 
-        <select class="custom-select my-param">
+        <select class="custom-select mb-1">
             <option selected>Period</option>
             <option value="1">1928 - 1972</option>
             <option value="2">1973 - 1992</option>
@@ -19,7 +39,7 @@
             <option value="4">2018 +</option>
         </select>
 
-        <InputSelect @bind-Value="InputData.WeightCategory" class="custom-select my-param">
+        <InputSelect @bind-Value="InputData.WeightCategory" class="custom-select mb-2">
             @if (WeightCategories != null)
             {
                 <option value="">Weight category</option>
@@ -29,12 +49,6 @@
                 }
             }
         </InputSelect>
-
-        <select class="custom-select my-param">
-            <option selected>Disqualified</option>
-            <option value="1">true</option>
-            <option value="2">false</option>
-        </select>
 
         <div class="buttons d-flex justify-content-between flex-wrap">
             <button type="button" class="btn btn-outline-secondary " style="margin:2px; width: 90px;"

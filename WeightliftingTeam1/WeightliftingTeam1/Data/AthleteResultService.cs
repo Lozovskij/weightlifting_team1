@@ -16,7 +16,6 @@ namespace WeightliftingTeam1.Data
             new AthleteResult(){ Id= 5, FullName = "LAWGUN Isaac Charlie Ng", Nation = "NZL", Weight = 94.67, TotalResult = 297},
             new AthleteResult(){ Id= 6, FullName = "GRIFFITH Daniel", Nation = "BAR", Weight = 89.55, TotalResult = 255}
         };
-        public static bool DateConstraintIsApplied { get; set; }
         public async Task<List<AthleteResult>> GetAthleteResults() => await Task.Run(() => athleteResults);
     }
 }
