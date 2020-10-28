@@ -9,10 +9,19 @@
 
     <SurveyPrompt Title="How is Blazor working for you?" />*@
 
+<AuthorizeView>
+    <Authorized>
+        <div class="text-section">
+            hi admin 
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="text-section">
+            The site is dedicated to weightlifting results
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
 
-<div class="text-section">
-    The site is dedicated to weightlifting results
-</div>
 
 <div class="container-fluid min-vh-70">
     <div class="row my-row align-items-start">

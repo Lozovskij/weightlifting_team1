@@ -2,6 +2,7 @@
 @page "/login"
 @using WeightliftingTeam1.Data;
 @inject NavigationManager NavigationManager;
+@inject AuthenticationStateProvider AuthenticationStateProvider;
 
 
 <div class="my-param-container p-3">
@@ -22,7 +23,7 @@
             <label class="form-check-label" for="check1">Remember me</label>
         </div>*@
 
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <button type="submit" class="btn btn-primary mt-3">Sign In</button>
     </EditForm>
 </div>
 
@@ -40,6 +41,9 @@
         Console.WriteLine(user.Role);
 
         NavigationManager.NavigateTo("/");
+
+        //if is valid:
+        ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(user.Role);
 
         return await Task.Run(() => true);
     }
