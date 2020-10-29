@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
+﻿using Blazored.SessionStorage;
+using Microsoft.AspNetCore.Components.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,28 @@ namespace WeightliftingTeam1.Data
 {
     public class CustomAuthenticationStateProvider : AuthenticationStateProvider
     {
-        public override Task<AuthenticationState> GetAuthenticationStateAsync()
+        private ISessionStorageService sessionStorageService;
+        public CustomAuthenticationStateProvider(ISessionStorageService sessionStorageService)
         {
-            var identity = new ClaimsIdentity();
-            
+            this.sessionStorageService = sessionStorageService;
+        }
+        public override async Task<AuthenticationState> GetAuthenticationStateAsync()
+        {
+            var role = await sessionStorageService.GetItemAsync<string>("role");
+            ClaimsIdentity identity;
+            if (role != null)
+            {
+                identity = new ClaimsIdentity(new[]{
+                    new Claim(ClaimTypes.Name, role)
+                }, "apiauth_type");
+            }
+            else
+            {
+                identity = new ClaimsIdentity();
+            } 
             var user = new ClaimsPrincipal(identity);
 
-            return Task.FromResult(new AuthenticationState(user));
+            return await Task.FromResult(new AuthenticationState(user));
         }
 
         public void MarkUserAsAuthenticated(string role)
@@ -31,6 +47,8 @@ namespace WeightliftingTeam1.Data
 
         public void MarkUserAsLoggedOut()
         {
+            sessionStorageService.RemoveItemAsync("role");
+
             var identity = new ClaimsIdentity();
 
             var user = new ClaimsPrincipal(identity);

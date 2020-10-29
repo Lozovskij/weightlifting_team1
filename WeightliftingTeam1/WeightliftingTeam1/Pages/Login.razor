@@ -1,15 +1,16 @@
 ﻿@layout LoginLayout
 @page "/login"
 @using WeightliftingTeam1.Data;
-@inject NavigationManager NavigationManager;
-@inject AuthenticationStateProvider AuthenticationStateProvider;
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 
 
 <div class="my-param-container p-3">
     <EditForm Model="@user" OnValidSubmit="@ValidateUser">
         <div class="form-group">
             <label for="inputRole">Role</label>
-            <input type="text" class="form-control" id="inputRole"  @bind="user.Role">
+            <input type="text" class="form-control" id="inputRole" @bind="user.Role">
             <small class="form-text text-muted">Role indicates the level of access</small>
         </div>
 
@@ -19,9 +20,9 @@
         </div>
 
         @*<div class="form-check">
-            <input type="checkbox" class="form-check-input" id="check1">
-            <label class="form-check-label" for="check1">Remember me</label>
-        </div>*@
+                <input type="checkbox" class="form-check-input" id="check1">
+                <label class="form-check-label" for="check1">Remember me</label>
+            </div>*@
 
         <button type="submit" class="btn btn-primary mt-3">Sign In</button>
     </EditForm>
@@ -44,6 +45,8 @@
 
         //if is valid:
         ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(user.Role);
+
+        await sessionStorage.SetItemAsync("role", user.Role);
 
         return await Task.Run(() => true);
     }
