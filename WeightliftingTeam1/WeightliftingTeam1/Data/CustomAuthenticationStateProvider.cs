@@ -28,5 +28,14 @@ namespace WeightliftingTeam1.Data
 
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
         }
+
+        public void MarkUserAsLoggedOut()
+        {
+            var identity = new ClaimsIdentity();
+
+            var user = new ClaimsPrincipal(identity);
+
+            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(user)));
+        }
     }
 }
