@@ -1,4 +1,6 @@
 ﻿@inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider;
+@using WeightliftingTeam1.Data; 
 @*<div class="sidebar">
         <NavMenu />
     </div>
@@ -19,13 +21,26 @@
 
 *@
 <TelerikRootComponent>
-    <nav class="navbar navbar-light navbar-expand-md">
+    <nav class="navbar navbar-light navbar-expand-md" style=" background-color: rgba(244, 248, 250, 0.8);">
         <a class="navbar-brand" href="#">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav ml-auto">
+                <AuthorizeView>
+                    <Authorized>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login" @onclick ="(() => Logout())">Logout</a>
+                        </li>
+                    </Authorized>
+                    <NotAuthorized>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                    </NotAuthorized>
+                </AuthorizeView>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="#">Contacts</a>
                 </li>
@@ -44,3 +59,10 @@
     </footer>
 
 </TelerikRootComponent>
+
+@code{
+    public void Logout()
+    {
+        ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsLoggedOut();
+    }
+}

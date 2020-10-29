@@ -1,20 +1,53 @@
 ﻿@layout LoginLayout
 @page "/login"
+@using WeightliftingTeam1.Data;
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+
 
 <div class="my-param-container p-3">
-    <form>
+    <EditForm Model="@user" OnValidSubmit="@ValidateUser">
         <div class="form-group">
-            <label for="exampleInputPassword">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password">
+            <label for="inputRole">Role</label>
+            <input type="text" class="form-control" id="inputRole" @bind="user.Role">
+            <small class="form-text text-muted">Role indicates the level of access</small>
         </div>
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Remember me</label>
+
+        <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" class="form-control" id="inputPassword" @bind="user.Password">
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
-    </form>
+
+        @*<div class="form-check">
+                <input type="checkbox" class="form-check-input" id="check1">
+                <label class="form-check-label" for="check1">Remember me</label>
+            </div>*@
+
+        <button type="submit" class="btn btn-primary mt-3">Sign In</button>
+    </EditForm>
 </div>
 
 @code {
-    
+    private User user;
+
+    protected override Task OnInitializedAsync()
+    {
+        user = new User();
+        return base.OnInitializedAsync();
+    }
+
+    public async Task<bool> ValidateUser()
+    {
+        Console.WriteLine(user.Role);
+
+        NavigationManager.NavigateTo("/");
+
+        //if is valid:
+        ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(user.Role);
+
+        await sessionStorage.SetItemAsync("role", user.Role);
+
+        return await Task.Run(() => true);
+    }
 }
