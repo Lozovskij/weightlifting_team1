@@ -33,8 +33,7 @@ namespace WeightliftingTeam1.Data
                 return false;
             }
             string hashToCompare = GetHash(password);
-            Console.WriteLine(hashToCompare);
-            return hashToCompare == _hash.ToUpper();
+            return IsValidHash(hashToCompare);
         }
 
         public static bool IsValidHash(string hashToCompare) => hashToCompare == _hash.ToUpper();
