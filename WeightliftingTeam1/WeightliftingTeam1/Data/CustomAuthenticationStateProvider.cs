@@ -19,7 +19,7 @@ namespace WeightliftingTeam1.Data
         {
             var hash = await sessionStorageService.GetItemAsync<string>("hash");
             ClaimsIdentity identity;
-            if (hash != null)
+            if (PasswordValidation.IsValidHash(hash))
             {
                 identity = new ClaimsIdentity(new[]{
                     new Claim(ClaimTypes.Name, hash)

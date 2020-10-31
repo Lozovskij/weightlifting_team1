@@ -37,5 +37,7 @@ namespace WeightliftingTeam1.Data
             return hashToCompare == _hash.ToUpper();
         }
 
+        public static bool IsValidHash(string hashToCompare) => hashToCompare == _hash.ToUpper();
+
     }
 }
