@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace WeightliftingTeam1.Data
 {
-    public class User
+    public class Admin
     {
-        public string Role { get; set; }
-
         public string Password { get; set; }
     }
 }
