@@ -9,14 +9,9 @@
 <div class="my-param-container p-3">
     <EditForm Model="@user" OnValidSubmit="@ValidateUser">
         <div class="form-group">
-            <label for="inputRole">Role</label>
-            <input type="text" class="form-control" id="inputRole" @bind="user.Role">
-            <small class="form-text text-muted">Role indicates the level of access</small>
-        </div>
-
-        <div class="form-group">
             <label for="inputPassword">Password</label>
             <input type="password" class="form-control" id="inputPassword" @bind="user.Password">
+            <small class="form-text text-muted">@LoginMessage</small>
         </div>
 
         @*<div class="form-check">
@@ -29,24 +24,33 @@
 </div>
 
 @code {
-    private User user;
+    private Admin user;
+
+    public string LoginMessage { get; set; }
 
     protected override Task OnInitializedAsync()
     {
-        user = new User();
+        user = new Admin();
+        LoginMessage = "Admin rights lets you modify db";
         return base.OnInitializedAsync();
     }
 
     public async Task<bool> ValidateUser()
     {
-        Console.WriteLine(user.Role);
-
-        NavigationManager.NavigateTo("/");
 
         //if is valid:
-        ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(user.Role);
+        if (PasswordValidation.IsValid(user.Password))
+        {
+            ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(PasswordValidation.GetHash(user.Password));
 
-        await sessionStorage.SetItemAsync("role", user.Role);
+            await sessionStorage.SetItemAsync("hash", PasswordValidation.GetHash(user.Password));
+
+            NavigationManager.NavigateTo("/");
+        }
+        else
+        {
+            LoginMessage = "Access is denied! Try again";
+        }
 
         return await Task.Run(() => true);
     }

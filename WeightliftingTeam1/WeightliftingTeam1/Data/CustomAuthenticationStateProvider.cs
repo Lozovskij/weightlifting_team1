@@ -17,12 +17,12 @@ namespace WeightliftingTeam1.Data
         }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var role = await sessionStorageService.GetItemAsync<string>("role");
+            var hash = await sessionStorageService.GetItemAsync<string>("hash");
             ClaimsIdentity identity;
-            if (role != null)
+            if (PasswordValidation.IsValidHash(hash))
             {
                 identity = new ClaimsIdentity(new[]{
-                    new Claim(ClaimTypes.Name, role)
+                    new Claim(ClaimTypes.Name, hash)
                 }, "apiauth_type");
             }
             else
@@ -34,10 +34,10 @@ namespace WeightliftingTeam1.Data
             return await Task.FromResult(new AuthenticationState(user));
         }
 
-        public void MarkUserAsAuthenticated(string role)
+        public void MarkUserAsAuthenticated(string hash)
         {
             var identity = new ClaimsIdentity(new[]{
-                new Claim(ClaimTypes.Name, role)
+                new Claim(ClaimTypes.Name, hash)
             },"apiauth_type");
 
             var user = new ClaimsPrincipal(identity);
@@ -47,7 +47,7 @@ namespace WeightliftingTeam1.Data
 
         public void MarkUserAsLoggedOut()
         {
-            sessionStorageService.RemoveItemAsync("role");
+            sessionStorageService.RemoveItemAsync("hash");
 
             var identity = new ClaimsIdentity();
 
