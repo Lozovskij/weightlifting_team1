@@ -1,21 +1,21 @@
 ﻿@using WeightliftingTeam1.Data
 
-<EditForm Model="@InputData">
+<EditForm Model="@Input">
     <div class="my-param-container d-flex flex-column mb-2">
 
         <div class="my-param-container d-flex flex-column mb-2">
             <label for="female">
-                <InputCheckbox class="m-2" id="female" @bind-Value=InputData.IsFemale />
+                <InputCheckbox class="m-2" id="female" @bind-Value=Input.IsFemale />
                 Female
             </label>
             <label for="male">
-                <InputCheckbox class="m-2" id="male" @bind-Value=InputData.IsMale />
+                <InputCheckbox class="m-2" id="male" @bind-Value=Input.IsMale />
                 Male
             </label>
         </div>
 
         <label for="checkboxDisqualified">
-            <InputCheckbox class="m-2" id="checkboxDisqualified" @bind-Value=InputData.IsDisqualified />
+            <InputCheckbox class="m-2" id="checkboxDisqualified" @bind-Value=Input.IsDisqualified />
             Disqualified
         </label>
 
@@ -39,7 +39,7 @@
             <option value="4">2018 +</option>
         </select>
 
-        <InputSelect @bind-Value="InputData.WeightCategory" class="custom-select mb-2">
+        <InputSelect @bind-Value="Input.WeightCategory" class="custom-select mb-2">
             @if (WeightCategories != null)
             {
                 <option value="">Weight category</option>
@@ -58,7 +58,7 @@
                 </svg>
             </button>
             <button type="button" class="btn btn-success" style="margin:2px; width: 90px;"
-                    @onclick="(() => OnSearchClick.InvokeAsync(InputData))" value="Save">
+                    @onclick="(() => OnSearchClick.InvokeAsync(Input))" value="Save">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
                     <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
@@ -74,18 +74,18 @@
     [Parameter]
     public EventCallback<AggregationPanelInput> OnSearchClick { get; set; }
 
-    public AggregationPanelInput InputData { get; set; }
+    public AggregationPanelInput Input { get; set; }
 
     public string[] WeightCategories { get; set; } = new string[] { "one", "two", "three" };
 
     protected override void OnInitialized()
     {
-        InputData = new AggregationPanelInput();
+        Input = new AggregationPanelInput();
     }
 
     private void ClearPanel()
     {
-        InputData = new AggregationPanelInput();
+        Input = new AggregationPanelInput();
     }
 
 }
