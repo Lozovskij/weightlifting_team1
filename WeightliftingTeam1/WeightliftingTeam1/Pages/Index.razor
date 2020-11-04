@@ -35,7 +35,7 @@
                     }
                 }
             </select>
-            <AggregationPanel OnSearchClick="ChangeResultForGrid"></AggregationPanel>
+            <AggregationPanel PanelType="@PanelType" OnSearchClick="ChangeResultForGrid"></AggregationPanel>
         </div>
         <div class="col-md-9 my-col ">
             <MyTelerikGrid AthleteResults="AthleteResults"></MyTelerikGrid>
@@ -47,13 +47,16 @@
 
     public List<AthleteResult> AthleteResults { get; set; }
 
-    public string[] PanelTypes { get; set; } = new string[] { "Athletes", "Attempts" };
+    public string[] PanelTypes { get; set; }
 
     public string PanelType { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         AthleteResults = await Task.Run(() => athleteResultService.GetAthleteResults());
+
+        PanelTypes = await Task.Run(() => athleteResultService.GetPanelTypes());
+
         PanelType = PanelTypes[0];
     }
 
