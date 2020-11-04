@@ -1,106 +1,100 @@
 ﻿@using WeightliftingTeam1.Data
 @inject AthleteResultService athleteResultService
 
-    <div class="my-param-container d-flex flex-column mb-2">
-        @if (PanelTypes != null)
+<div class="my-param-container d-flex flex-column mb-2">
+    <EditForm Model="@Input">
+        @if (PanelType == MyPanelType.Athletes)
         {
-            @if (PanelType == PanelTypes[0])
-            {
-                <EditForm Model="@Input">
-                    <div class="my-param-container d-flex flex-column mb-2">
-                        <label for="female">
-                            <InputCheckbox class="m-2" id="female" @bind-Value=Input.IsFemale />
-                            Female
-                        </label>
-                        <label for="male">
-                            <InputCheckbox class="m-2" id="male" @bind-Value=Input.IsMale />
-                            Male
-                        </label>
-                    </div>
-                    <label for="checkboxDisqualified">
-                        <InputCheckbox class="m-2" id="checkboxDisqualified" @bind-Value=Input.IsDisqualified />
-                        Disqualified
-                    </label>
-
-                    <select class="custom-select mb-1 mt-2">
-                        <option selected>Type</option>
-                        <option value="1">Snatch</option>
-                        <option value="2">Clean and jerk</option>
-                        <option value="3">Clean and press (excluded from 1973)</option>
-                    </select>
-
-                    <select class="custom-select mb-1">
-                        <option selected>Period</option>
-                        <option value="1">1928 - 1972</option>
-                        <option value="2">1973 - 1992</option>
-                        <option value="3">1993 - 1997</option>
-                        <option value="4">1998 - 2017</option>
-                        <option value="4">2018 +</option>
-                    </select>
-
-                    <InputSelect @bind-Value="Input.WeightCategory" class="custom-select mb-2">
-                        @if (WeightCategories != null)
-                        {
-                            <option value="">Weight category</option>
-                            @foreach (var category in WeightCategories)
-                            {
-                                <option value="@category">@category</option>
-                            }
-                        }
-                    </InputSelect>
-                </EditForm>
-            }
-            else if (PanelType == PanelTypes[1])
-            {
-                <EditForm Model="@Input2">
-
-
-                    <select class="custom-select mb-1 mt-2">
-                        <option selected>Type</option>
-                        <option value="1">Snatch</option>
-                        <option value="2">Clean and jerk</option>
-                        <option value="3">Clean and press (excluded from 1973)</option>
-                    </select>
-
-                    <select class="custom-select mb-1">
-                        <option selected>Period</option>
-                        <option value="1">1928 - 1972</option>
-                        <option value="2">1973 - 1992</option>
-                        <option value="3">1993 - 1997</option>
-                        <option value="4">1998 - 2017</option>
-                        <option value="4">2018 +</option>
-                    </select>
-
-                    <InputSelect @bind-Value="Input.WeightCategory" class="custom-select mb-2">
-                        @if (WeightCategories != null)
-                        {
-                            <option value="">Weight category</option>
-                            @foreach (var category in WeightCategories)
-                            {
-                                <option value="@category">@category</option>
-                            }
-                        }
-                    </InputSelect>
-                </EditForm>
-            }
-        }
-            <div class="buttons d-flex justify-content-between flex-wrap">
-                <button type="button" class="btn btn-outline-secondary " style="margin:2px; width: 90px;"
-                        @onclick="ClearPanel" value="Clear">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                    </svg>
-                </button>
-                <button type="button" class="btn btn-success" style="margin:2px; width: 90px;"
-                        @onclick="(() => OnSearchClick.InvokeAsync(Input))" value="Save">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                    </svg>
-                </button>
+            <div class="my-param-container d-flex flex-column mb-2">
+                <label for="female">
+                    <InputCheckbox class="m-2" id="female" @bind-Value=Input.IsFemale />
+                    Female
+                </label>
+                <label for="male">
+                    <InputCheckbox class="m-2" id="male" @bind-Value=Input.IsMale />
+                    Male
+                </label>
             </div>
+            <label for="checkboxDisqualified">
+                <InputCheckbox class="m-2" id="checkboxDisqualified" @bind-Value=Input.IsDisqualified />
+                Disqualified
+            </label>
 
-        </div>
+            <select class="custom-select mb-1 mt-2">
+                <option selected>Type</option>
+                <option value="1">Snatch</option>
+                <option value="2">Clean and jerk</option>
+                <option value="3">Clean and press (excluded from 1973)</option>
+            </select>
+
+            <select class="custom-select mb-1">
+                <option selected>Period</option>
+                <option value="1">1928 - 1972</option>
+                <option value="2">1973 - 1992</option>
+                <option value="3">1993 - 1997</option>
+                <option value="4">1998 - 2017</option>
+                <option value="4">2018 +</option>
+            </select>
+
+            <InputSelect @bind-Value="Input.WeightCategory" class="custom-select mb-2">
+                @if (WeightCategories != null)
+                    {
+                    <option value="">Weight category</option>
+                    @foreach (var category in WeightCategories)
+                        {
+                        <option value="@category">@category</option>
+                        }
+                    }
+            </InputSelect>
+        }
+        else if (PanelType == MyPanelType.Attempts)
+        {
+            <select class="custom-select mb-1 mt-2">
+                <option selected>Type</option>
+                <option value="1">Snatch</option>
+                <option value="2">Clean and jerk</option>
+                <option value="3">Clean and press (excluded from 1973)</option>
+            </select>
+
+            <select class="custom-select mb-1">
+                <option selected>Period</option>
+                <option value="1">1928 - 1972</option>
+                <option value="2">1973 - 1992</option>
+                <option value="3">1993 - 1997</option>
+                <option value="4">1998 - 2017</option>
+                <option value="4">2018 +</option>
+            </select>
+
+            <InputSelect @bind-Value="Input.WeightCategory" class="custom-select mb-2">
+                @if (WeightCategories != null)
+                    {
+                    <option value="">Weight category</option>
+                    @foreach (var category in WeightCategories)
+                        {
+                        <option value="@category">@category</option>
+                        }
+                    }
+            </InputSelect>
+        }
+    </EditForm>
+
+    <div class="buttons d-flex justify-content-between flex-wrap">
+        <button type="button" class="btn btn-outline-secondary " style="margin:2px; width: 90px;"
+                @onclick="ClearPanel" value="Clear">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+        </button>
+        <button type="button" class="btn btn-success" style="margin:2px; width: 90px;"
+                @onclick="(() => OnSearchClick.InvokeAsync(Input))" value="Save">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+            </svg>
+        </button>
+    </div>
+
+</div>
 
 @code {
 
@@ -108,21 +102,15 @@
     public EventCallback<AggregationPanelInput> OnSearchClick { get; set; }
 
     [Parameter]
-    public string PanelType { get; set; }
-
-    public string[] PanelTypes { get; set; }
+    public MyPanelType PanelType { get; set; }
 
     public AggregationPanelInput Input { get; set; }
-    public AggregationPanelInput Input2 { get; set; }
 
     public string[] WeightCategories { get; set; } = new string[] { "one", "two", "three" };
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         Input = new AggregationPanelInput();
-        Input2 = new AggregationPanelInput();
-
-        PanelTypes = await Task.Run(() => athleteResultService.GetPanelTypes());
     }
 
     private void ClearPanel()

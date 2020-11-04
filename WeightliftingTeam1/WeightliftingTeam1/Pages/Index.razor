@@ -27,13 +27,8 @@
     <div class="row align-items-start">
         <div class="col-md-3 order-md-12  my-col">
             <select @bind="PanelType" class="custom-select mb-1">
-                @if (PanelTypes != null)
-                {
-                    @foreach (var panelType in PanelTypes)
-                    {
-                        <option value="@panelType">@panelType</option>
-                    }
-                }
+                <option value="@MyPanelType.Athletes">@MyPanelType.Athletes</option>
+                <option value="@MyPanelType.Attempts">@MyPanelType.Attempts</option>
             </select>
             <AggregationPanel PanelType="@PanelType" OnSearchClick="ChangeResultForGrid"></AggregationPanel>
         </div>
@@ -47,21 +42,18 @@
 
     public List<AthleteResult> AthleteResults { get; set; }
 
-    public string[] PanelTypes { get; set; }
-
-    public string PanelType { get; set; }
+    public MyPanelType PanelType { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
+        PanelType = MyPanelType.Athletes;
         AthleteResults = await Task.Run(() => athleteResultService.GetAthleteResults());
-
-        PanelTypes = await Task.Run(() => athleteResultService.GetPanelTypes());
-
-        PanelType = PanelTypes[0];
     }
 
     public void ChangeResultForGrid(AggregationPanelInput panelInput)
     {
+        //
+        //AthleteResults = athleteResultService.GetSearchResults(panelInput, PanelType)
         Console.WriteLine(panelInput.WeightCategory);
         Console.WriteLine(PanelType);
     }

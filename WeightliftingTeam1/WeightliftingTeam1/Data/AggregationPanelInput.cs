@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 
 namespace WeightliftingTeam1.Data
 {
+    public enum MyPanelType
+    {
+        Athletes,
+        Attempts
+    }
     public class AggregationPanelInput
     {
         public string WeightCategory { get; set; }
