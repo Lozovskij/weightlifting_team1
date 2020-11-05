@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WeightliftingTeam1.Data
+namespace WeightliftingTeam1.ModelsForOutput
 {
     public class AthleteResult
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WeightliftingTeam1.ModelsForOutput;
 
 namespace WeightliftingTeam1.Data
 {

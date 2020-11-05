@@ -1,7 +1,7 @@
 ﻿@page "/"
 @using WeightliftingTeam1.Components
 @using WeightliftingTeam1.Data
-@using WeightliftingTeam1.TestModel
+@using WeightliftingTeam1.ModelsForOutput
 @inject SearchResultService searchResultService
 @*<h1>Hello, world!</h1>
 
@@ -36,12 +36,12 @@
         {
             case MyPanelType.Athletes:
                 <div class="col-md-9 my-col ">
-                    <MyTelerikGrid AthleteResults="AthleteResults"></MyTelerikGrid>
+                    <MyTelerikGrid PanelType="MyPanelType.Athletes" AthleteResults="AthleteResults"></MyTelerikGrid>
                 </div>
                 break;
             case MyPanelType.Attempts:
                 <div class="col-md-9 my-col ">
-                    <MyTelerikGrid Attempts="Attempts"></MyTelerikGrid>
+                    <MyTelerikGrid PanelType="MyPanelType.Attempts" Attempts="Attempts"></MyTelerikGrid>
                 </div>
                 break;
         }
