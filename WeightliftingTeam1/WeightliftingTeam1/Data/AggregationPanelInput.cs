@@ -10,7 +10,20 @@ namespace WeightliftingTeam1.Data
         Athletes,
         Attempts
     }
-    public class AggregationPanelInput
+    public interface IAthletesPanel
+    {
+        public string WeightCategory { get; set; }
+
+        public int Weight { get; set; }
+
+        public bool IsMale { get; set; }
+
+        public bool IsFemale { get; set; }
+
+        public bool IsDisqualified { get; set; }
+    }
+
+    public class AggregationPanelInput : IAthletesPanel
     {
         public string WeightCategory { get; set; }
 

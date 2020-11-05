@@ -2,7 +2,7 @@
 @using WeightliftingTeam1.Components
 @using WeightliftingTeam1.Data
 @using WeightliftingTeam1.TestModel
-@inject AthleteResultService athleteResultService
+@inject SearchResultService searchResultService
 @*<h1>Hello, world!</h1>
 
     Welcome to your new app.
@@ -55,19 +55,36 @@
 
     public MyPanelType PanelType { get; set; }
 
+    public AggregationPanelInput DefaultPanelInput { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         PanelType = MyPanelType.Athletes;
-        AthleteResults = await Task.Run(() => athleteResultService.GetAthleteResults());
+        DefaultPanelInput = new AggregationPanelInput();
+        AthleteResults = await Task.Run(() => searchResultService.GetAthleteResults(DefaultPanelInput));
     }
 
     public async Task ChangePanelTypeEvent(ChangeEventArgs e)
     {
         PanelType = (MyPanelType)Enum.Parse(typeof(MyPanelType), e.Value.ToString(), true);
+        await UpdateData(DefaultPanelInput);
+    }
+
+
+    public async Task ChangeResultForGrid(AggregationPanelInput panelInput)
+    {
+        //AthleteResults = athleteResultService.GetSearchResults(panelInput, PanelType)
+        await UpdateData(panelInput);
+        Console.WriteLine(panelInput.WeightCategory);
+        Console.WriteLine(PanelType);
+    }
+
+    public async Task UpdateData(AggregationPanelInput panelInput)
+    {
         switch (PanelType)
         {
             case MyPanelType.Athletes:
-                AthleteResults = await Task.Run(() => athleteResultService.GetAthleteResults());
+                AthleteResults = await Task.Run(() => searchResultService.GetAthleteResults(panelInput));
                 break;
             case MyPanelType.Attempts:
                 Attempts = null;
@@ -75,11 +92,4 @@
         }
     }
 
-    public void ChangeResultForGrid(AggregationPanelInput panelInput)
-    {
-        //
-        //AthleteResults = athleteResultService.GetSearchResults(panelInput, PanelType)
-        Console.WriteLine(panelInput.WeightCategory);
-        Console.WriteLine(PanelType);
-    }
 }

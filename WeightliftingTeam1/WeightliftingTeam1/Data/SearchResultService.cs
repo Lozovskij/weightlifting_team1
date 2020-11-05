@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WeightliftingTeam1.Data
 {
-    public class AthleteResultService
+    public class SearchResultService
     {   
 
         List<AthleteResult> athleteResults = new List<AthleteResult>()
@@ -18,7 +18,7 @@ namespace WeightliftingTeam1.Data
             new AthleteResult(){ Id= 6, FullName = "GRIFFITH Daniel", Nation = "BAR", Weight = 89.55, TotalResult = 255}
         };
 
-        public async Task<List<AthleteResult>> GetAthleteResults() => await Task.Run(() => athleteResults);
+        public async Task<List<AthleteResult>> GetAthleteResults(IAthletesPanel athletesPanel) => await Task.Run(() => athleteResults);
 
     }
 }
