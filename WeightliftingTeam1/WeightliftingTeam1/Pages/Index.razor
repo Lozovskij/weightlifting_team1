@@ -32,18 +32,11 @@
             </select>
             <AggregationPanel PanelType="PanelType" OnSearchClick="ChangeResultForGrid"></AggregationPanel>
         </div>
-        @switch (PanelType)
-        {
-            case MyPanelType.Attempts:
-                <div class="col-md-9 my-col ">
-                    <MyTelerikGrid PanelType="MyPanelType.Attempts" Attempts="Attempts"></MyTelerikGrid>
-                </div>
-                break;
-            case MyPanelType.Athletes:
-                <div class="col-md-9 my-col ">
-                    <MyTelerikGrid PanelType="MyPanelType.Athletes" Athletes="Athletes"></MyTelerikGrid>
-                </div>
-                break;
-        }
+        <div class="col-md-9 my-col ">
+            <MyTelerikGrid PanelType="PanelType" 
+                           Attempts="Attempts"
+                           Athletes="Athletes">
+            </MyTelerikGrid>
+        </div>
     </div>
 </div>
