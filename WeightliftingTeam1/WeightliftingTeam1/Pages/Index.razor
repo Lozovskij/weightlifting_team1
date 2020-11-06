@@ -27,28 +27,23 @@
     <div class="row align-items-start">
         <div class="col-md-3 order-md-12  my-col">
             <select @onchange="ChangePanelTypeEvent" class="custom-select mb-1">
-                <option value="@MyPanelType.Athletes">@MyPanelType.Athletes</option>
                 <option value="@MyPanelType.Attempts">@MyPanelType.Attempts</option>
+                <option value="@MyPanelType.Athletes">@MyPanelType.Athletes</option>
             </select>
             <AggregationPanel PanelType="PanelType" OnSearchClick="ChangeResultForGrid"></AggregationPanel>
         </div>
         @switch (PanelType)
         {
-            case MyPanelType.Athletes:
-                <div class="col-md-9 my-col ">
-                    <MyTelerikGrid PanelType="MyPanelType.Athletes" AthleteResults="AthleteResults"></MyTelerikGrid>
-                </div>
-                break;
             case MyPanelType.Attempts:
                 <div class="col-md-9 my-col ">
                     <MyTelerikGrid PanelType="MyPanelType.Attempts" Attempts="Attempts"></MyTelerikGrid>
                 </div>
                 break;
+            case MyPanelType.Athletes:
+                <div class="col-md-9 my-col ">
+                    <MyTelerikGrid PanelType="MyPanelType.Athletes" Athletes="Athletes"></MyTelerikGrid>
+                </div>
+                break;
         }
     </div>
 </div>
-
-@code{
-
-
-}

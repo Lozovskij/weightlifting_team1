@@ -11,8 +11,8 @@ namespace WeightliftingTeam1.Pages
     public partial class Index
     {
 
-        public List<AthleteResult> AthleteResults { get; set; }
         public List<Attempt> Attempts { get; set; }
+        public List<Athlete> Athletes { get; set; }
 
         public MyPanelType PanelType { get; set; }
 
@@ -20,9 +20,9 @@ namespace WeightliftingTeam1.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            PanelType = MyPanelType.Athletes;
+            PanelType = MyPanelType.Attempts;
             DefaultPanelInput = new AggregationPanelInput();
-            AthleteResults = await Task.Run(() => searchResultService.GetAthleteResults(DefaultPanelInput));
+            Attempts = await Task.Run(() => searchResultService.GetAthleteResults(DefaultPanelInput));
         }
 
         public async Task ChangePanelTypeEvent(ChangeEventArgs e)
@@ -44,11 +44,11 @@ namespace WeightliftingTeam1.Pages
         {
             switch (PanelType)
             {
-                case MyPanelType.Athletes:
-                    AthleteResults = await Task.Run(() => searchResultService.GetAthleteResults(panelInput));
-                    break;
                 case MyPanelType.Attempts:
-                    Attempts = null;
+                    Attempts = await Task.Run(() => searchResultService.GetAthleteResults(panelInput));
+                    break;
+                case MyPanelType.Athletes:
+                    Athletes = null;
                     break;
             }
         }

@@ -14,9 +14,9 @@ namespace WeightliftingTeam1.Components
         public MyPanelType PanelType { get; set; }
 
         [Parameter]
-        public List<AthleteResult> AthleteResults { get; set; }
+        public List<Attempt> Attempts { get; set; }
 
         [Parameter]
-        public List<Attempt> Attempts { get; set; }
+        public List<Athlete> Athletes { get; set; }
     }
 }

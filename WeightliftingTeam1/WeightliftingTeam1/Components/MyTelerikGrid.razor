@@ -4,14 +4,14 @@
 
 @switch (PanelType)
 {
-    case MyPanelType.Athletes:
-        @if (AthleteResults == null)
+    case MyPanelType.Attempts:
+        @if (Attempts == null)
         {
             <p>Loading......</p>
         }
         else
         {
-            <TelerikGrid Data="@(AthleteResults)"
+            <TelerikGrid Data="@(Attempts)"
                          Height="500px" PageSize="6"
                          Pageable="true" Sortable="true" Groupable="false"
                          Resizable="false" Reorderable="true" AutoGenerateColumns="true"
@@ -25,14 +25,14 @@
             </TelerikGrid>
         }
         break;
-    case MyPanelType.Attempts:
-        @if (Attempts == null)
+    case MyPanelType.Athletes:
+        @if (Athletes == null)
         {
             <p>Loading......</p>
         }
         else
         {
-            <TelerikGrid Data="@(Attempts)"
+            <TelerikGrid Data="@(Athletes)"
                          Height="500px" PageSize="6"
                          Pageable="true" Sortable="true" Groupable="false"
                          Resizable="false" Reorderable="true" AutoGenerateColumns="true"

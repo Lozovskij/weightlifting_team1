@@ -7,8 +7,8 @@ namespace WeightliftingTeam1.Data
 {
     public enum MyPanelType
     {
-        Athletes,
-        Attempts
+        Attempts,
+        Athletes
     }
     public interface IAthletesPanel
     {
