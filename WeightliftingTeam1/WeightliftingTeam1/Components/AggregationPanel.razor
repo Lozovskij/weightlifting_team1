@@ -95,27 +95,3 @@
     </div>
 
 </div>
-
-@code {
-
-    [Parameter]
-    public EventCallback<AggregationPanelInput> OnSearchClick { get; set; }
-
-    [Parameter]
-    public MyPanelType PanelType { get; set; }
-
-    public AggregationPanelInput Input { get; set; }
-
-    public string[] WeightCategories { get; set; } = new string[] { "one", "two", "three" };
-
-    protected override void OnInitialized()
-    {
-        Input = new AggregationPanelInput();
-    }
-
-    private void ClearPanel()
-    {
-        Input = new AggregationPanelInput();
-    }
-
-}
