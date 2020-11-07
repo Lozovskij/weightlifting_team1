@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WeightliftingTeam1.Data
+namespace WeightliftingTeam1.ModelsForOutput
 {
-    public class Admin
+    public interface IGridModel
     {
-        public string Password { get; set; }
     }
 }
