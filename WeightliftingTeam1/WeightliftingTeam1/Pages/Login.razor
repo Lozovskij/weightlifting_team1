@@ -22,36 +22,3 @@
         <button type="submit" class="btn btn-primary mt-3">Sign In</button>
     </EditForm>
 </div>
-
-@code {
-    private Admin user;
-
-    public string LoginMessage { get; set; }
-
-    protected override Task OnInitializedAsync()
-    {
-        user = new Admin();
-        LoginMessage = "Admin rights lets you modify db";
-        return base.OnInitializedAsync();
-    }
-
-    public async Task<bool> ValidateUser()
-    {
-
-        //if is valid:
-        if (PasswordValidation.IsValid(user.Password))
-        {
-            ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(PasswordValidation.GetHash(user.Password));
-
-            await sessionStorage.SetItemAsync("hash", PasswordValidation.GetHash(user.Password));
-
-            NavigationManager.NavigateTo("/");
-        }
-        else
-        {
-            LoginMessage = "Access is denied! Try again";
-        }
-
-        return await Task.Run(() => true);
-    }
-}
