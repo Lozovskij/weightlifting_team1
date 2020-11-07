@@ -14,9 +14,6 @@ namespace WeightliftingTeam1.Components
         public MyPanelType PanelType { get; set; }
 
         [Parameter]
-        public List<Attempt> Attempts { get; set; }
-
-        [Parameter]
-        public List<Athlete> Athletes { get; set; }
+        public List<IGridModel> DataForGrid { get; set; }
     }
 }

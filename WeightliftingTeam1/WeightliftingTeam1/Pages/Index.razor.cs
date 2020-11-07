@@ -10,47 +10,42 @@ namespace WeightliftingTeam1.Pages
 {
     public partial class Index
     {
-
-        public List<Attempt> Attempts { get; set; }
-        public List<Athlete> Athletes { get; set; }
+        public List<IGridModel> DataForGrid { get; set; }
 
         public MyPanelType PanelType { get; set; }
 
-        public AggregationPanelInput DefaultPanelInput { get; set; }
+        public AggregationPanelInput PanelInput { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             PanelType = MyPanelType.Attempts;
-            DefaultPanelInput = new AggregationPanelInput();
-            Attempts = await Task.Run(() => searchResultService.GetAthleteResults(DefaultPanelInput));
+            //it is Default Panel Input
+            PanelInput = new AggregationPanelInput();
+            await UpdateTable(PanelInput);
         }
 
         public async Task ChangePanelTypeEvent(ChangeEventArgs e)
         {
             PanelType = (MyPanelType)Enum.Parse(typeof(MyPanelType), e.Value.ToString(), true);
-            await UpdateData(DefaultPanelInput);
+            await UpdateTable(PanelInput);
         }
 
-
-        public async Task ChangeResultForGrid(AggregationPanelInput panelInput)
-        {
-            //AthleteResults = athleteResultService.GetSearchResults(panelInput, PanelType)
-            await UpdateData(panelInput);
-            Console.WriteLine(panelInput.WeightCategory);
-            Console.WriteLine(PanelType);
-        }
-
-        public async Task UpdateData(AggregationPanelInput panelInput)
+        public async Task UpdateTable(AggregationPanelInput panelInput)
         {
             switch (PanelType)
             {
+                //Stratagy???
                 case MyPanelType.Attempts:
-                    Attempts = await Task.Run(() => searchResultService.GetAthleteResults(panelInput));
+                    DataForGrid = (await searchResultService.GetAthleteResults(panelInput)).Cast<IGridModel>().ToList();
                     break;
                 case MyPanelType.Athletes:
-                    Athletes = null;
+                    DataForGrid = null;
                     break;
             }
+
+            //ChangeServiceSearchStrategy();
+            //Data = await searchResultService.GetSearchResults();
+            Console.WriteLine(PanelType);
         }
     }
 }

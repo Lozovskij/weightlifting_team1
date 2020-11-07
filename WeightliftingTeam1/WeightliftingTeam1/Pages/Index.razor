@@ -30,13 +30,10 @@
                 <option value="@MyPanelType.Attempts">@MyPanelType.Attempts</option>
                 <option value="@MyPanelType.Athletes">@MyPanelType.Athletes</option>
             </select>
-            <AggregationPanel PanelType="PanelType" OnSearchClick="ChangeResultForGrid"></AggregationPanel>
+            <AggregationPanel PanelType="PanelType" OnSearchClick="UpdateTable"></AggregationPanel>
         </div>
         <div class="col-md-9 my-col ">
-            <MyTelerikGrid PanelType="PanelType" 
-                           Attempts="Attempts"
-                           Athletes="Athletes">
-            </MyTelerikGrid>
+            <MyTelerikGrid PanelType="PanelType" DataForGrid="DataForGrid"></MyTelerikGrid>
         </div>
     </div>
 </div>
