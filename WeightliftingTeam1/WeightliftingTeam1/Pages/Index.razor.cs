@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WeightliftingTeam1.Components;
 using WeightliftingTeam1.Data;
 using WeightliftingTeam1.ModelsForOutput;
 
@@ -19,8 +20,7 @@ namespace WeightliftingTeam1.Pages
         protected override async Task OnInitializedAsync()
         {
             CurrPanelType = PanelType.Attempts;
-            //it is Default Panel Input
-            PanelInput = new AggregationPanelInput();
+            PanelInput = new AggregationPanelInput();//it is Default Panel Input
             await UpdateTable(PanelInput);
         }
 
@@ -34,19 +34,13 @@ namespace WeightliftingTeam1.Pages
         {
             switch (CurrPanelType)
             {
-                //Stratagy???
                 case PanelType.Attempts:
-                    DataForGrid = (await searchResultService.GetAthleteResults(panelInput)).Cast<IGridModel>().ToList();
+                    DataForGrid = (await searchResultService.SearchForAttempts(panelInput)).Cast<IGridModel>().ToList();
                     break;
                 case PanelType.Athletes:
                     DataForGrid = null;
                     break;
             }
-
-            //ChangeServiceSearchStrategy();
-            //searchResultService.ChangeSearchStrategy(PanelType);
-            //Data = await searchResultService.GetSearchResults();
-            Console.WriteLine(CurrPanelType);
         }
     }
 }

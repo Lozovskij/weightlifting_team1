@@ -8,16 +8,20 @@ namespace WeightliftingTeam1.ModelsForOutput
 {
     public class Attempt : IGridModel
     {
-        public int Id { get; set; }
+        public string Date { get; set; }
 
-        [Display(Name = "Full name")]
-        public string FullName { get; set; }
+        public string Competition { get; set; }
 
-        public string Nation { get; set; }
+        public string Excercise { get; set; }
 
-        public double Weight { get; set; }
+        [Display(Name = "Category")]
+        public string WeightCategory { get; set; }
 
-        [Display(Name = "Total result")]
-        public int TotalResult { get; set; }
+        [Display(Name = "Result")]
+        public int Result { get; set; }
+
+        [Display(Name = "Name")]
+        public string AthleteName { get; set; }
+
     }
 }
