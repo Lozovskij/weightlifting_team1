@@ -12,13 +12,13 @@ namespace WeightliftingTeam1.Pages
     {
         public List<IGridModel> DataForGrid { get; set; }
 
-        public MyPanelType PanelType { get; set; }
+        public PanelType CurrPanelType { get; set; }
 
         public AggregationPanelInput PanelInput { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            PanelType = MyPanelType.Attempts;
+            CurrPanelType = PanelType.Attempts;
             //it is Default Panel Input
             PanelInput = new AggregationPanelInput();
             await UpdateTable(PanelInput);
@@ -26,26 +26,27 @@ namespace WeightliftingTeam1.Pages
 
         public async Task ChangePanelTypeEvent(ChangeEventArgs e)
         {
-            PanelType = (MyPanelType)Enum.Parse(typeof(MyPanelType), e.Value.ToString(), true);
+            CurrPanelType = (PanelType)Enum.Parse(typeof(PanelType), e.Value.ToString(), true);
             await UpdateTable(PanelInput);
         }
 
         public async Task UpdateTable(AggregationPanelInput panelInput)
         {
-            switch (PanelType)
+            switch (CurrPanelType)
             {
                 //Stratagy???
-                case MyPanelType.Attempts:
+                case PanelType.Attempts:
                     DataForGrid = (await searchResultService.GetAthleteResults(panelInput)).Cast<IGridModel>().ToList();
                     break;
-                case MyPanelType.Athletes:
+                case PanelType.Athletes:
                     DataForGrid = null;
                     break;
             }
 
             //ChangeServiceSearchStrategy();
+            //searchResultService.ChangeSearchStrategy(PanelType);
             //Data = await searchResultService.GetSearchResults();
-            Console.WriteLine(PanelType);
+            Console.WriteLine(CurrPanelType);
         }
     }
 }

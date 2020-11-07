@@ -11,7 +11,7 @@ namespace WeightliftingTeam1.Components
     public partial class MyTelerikGrid
     {
         [Parameter]
-        public MyPanelType PanelType { get; set; }
+        public PanelType PanelType { get; set; }
 
         [Parameter]
         public List<IGridModel> DataForGrid { get; set; }

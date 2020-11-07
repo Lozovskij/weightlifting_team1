@@ -3,7 +3,7 @@
 
 <div class="my-param-container d-flex flex-column mb-2">
     <EditForm Model="@Input">
-        @if (PanelType == MyPanelType.Attempts)
+        @if (PanelType == PanelType.Attempts)
         {
             <div class="my-param-container d-flex flex-column mb-2">
                 <label for="female">
@@ -47,7 +47,7 @@
                     }
             </InputSelect>
         }
-        else if (PanelType == MyPanelType.Athletes)
+        else if (PanelType == PanelType.Athletes)
         {
             <select class="custom-select mb-1 mt-2">
                 <option selected>Type</option>

@@ -27,13 +27,13 @@
     <div class="row align-items-start">
         <div class="col-md-3 order-md-12  my-col">
             <select @onchange="ChangePanelTypeEvent" class="custom-select mb-1">
-                <option value="@MyPanelType.Attempts">@MyPanelType.Attempts</option>
-                <option value="@MyPanelType.Athletes">@MyPanelType.Athletes</option>
+                <option value="@PanelType.Attempts">@PanelType.Attempts</option>
+                <option value="@PanelType.Athletes">@PanelType.Athletes</option>
             </select>
-            <AggregationPanel PanelType="PanelType" OnSearchClick="UpdateTable"></AggregationPanel>
+            <AggregationPanel PanelType="CurrPanelType" OnSearchClick="UpdateTable"></AggregationPanel>
         </div>
         <div class="col-md-9 my-col ">
-            <MyTelerikGrid PanelType="PanelType" DataForGrid="DataForGrid"></MyTelerikGrid>
+            <MyTelerikGrid PanelType="CurrPanelType" DataForGrid="DataForGrid"></MyTelerikGrid>
         </div>
     </div>
 </div>

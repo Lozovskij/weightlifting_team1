@@ -13,7 +13,7 @@ namespace WeightliftingTeam1.Components
         public EventCallback<AggregationPanelInput> OnSearchClick { get; set; }
 
         [Parameter]
-        public MyPanelType PanelType { get; set; }
+        public PanelType PanelType { get; set; }
 
         public AggregationPanelInput Input { get; set; }
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WeightliftingTeam1.Data
 {
-    public enum MyPanelType
+    public enum PanelType
     {
         Attempts,
         Athletes

@@ -4,7 +4,7 @@
 
 @switch (PanelType)
 {
-    case MyPanelType.Attempts:
+    case PanelType.Attempts:
         @if (DataForGrid == null)
         {
             <p>Loading Attempts......</p>
@@ -25,7 +25,7 @@
             </TelerikGrid>
         }
         break;
-    case MyPanelType.Athletes:
+    case PanelType.Athletes:
         @if (DataForGrid == null)
         {
             <p>Loading Athletes......</p>
