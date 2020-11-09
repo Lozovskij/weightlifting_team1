@@ -25,14 +25,14 @@
 <div class="container-fluid min-vh-70">
 
     <div class="row align-items-start">
-        <div class="col-md-3 order-md-12  my-col">
+        <div class="col-md-4 col-lg-3 order-md-12  my-col">
             <select @onchange="ChangePanelTypeEvent" class="custom-select mb-1">
                 <option value="@PanelType.Attempts">@PanelType.Attempts</option>
                 <option value="@PanelType.Athletes">@PanelType.Athletes</option>
             </select>
             <AggregationPanel PanelType="CurrPanelType" OnSearchClick="UpdateTable"></AggregationPanel>
         </div>
-        <div class="col-md-9 my-col ">
+        <div class="col-md-8 col-lg-9 my-col ">
             <MyTelerikGrid PanelType="CurrPanelType" DataForGrid="DataForGrid"></MyTelerikGrid>
         </div>
     </div>

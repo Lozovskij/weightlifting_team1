@@ -1,20 +1,25 @@
 ﻿@inherits LayoutComponentBase
 
-<TelerikRootComponent>
-    <nav class="navbar navbar-light navbar-expand-md" style=" background-color: rgba(244, 248, 250, 0.8);">
-        <a class="navbar-brand" href="#">Home</a>
-    </nav>
-    <br />
-    <br />
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-lg-4">
-            </div>
-            <div class="col-md-6 col-lg-4">
-                @Body
-            </div>
-            <div class="col-md-3 col-lg-4">
+    <TelerikRootComponent>
+        <nav class="navbar navbar-light navbar-expand-md" style=" background-color: rgba(244, 248, 250, 0.8);">
+            <a class="navbar-brand" href="#">Home</a>
+        </nav>
+        
+        <div class="content" style="background-color:white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-lg-4">
+                    </div>
+                    <div class="col-md-6 col-lg-4 p-4">
+                        @Body
+                    </div>
+                    <div class="col-md-3 col-lg-4">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</TelerikRootComponent>
+        <footer class="d-flex  flex-row-reverse align-items-end">
+            <a class="text-light p-4" href="https://github.com/Lozovskij/weightlifting_team1">github.com</a>
+        </footer>
+
+    </TelerikRootComponent>

@@ -3,14 +3,12 @@
     padding: 0px;
     box-sizing: border-box;
 }
-.text-section
-{
-    padding: 0 40px;
-    height: 27vh;
+.text-section {
+    padding: 0 40px 40px 40px;
+    min-height: 20vh;
     font-size: 2rem;
-
     color: white;
-    background-color: rgba(141, 170, 224, 0.678);
+    background-color: rgba(142, 173, 230, 0.678);
 }
 
 .my-col{
@@ -25,6 +23,7 @@
 
 .content {
     background-color: rgba(244, 248, 250, 0.8);
+    min-height: 90vh;
 }
 
 nav {
@@ -32,9 +31,8 @@ nav {
 }
 
 footer {
-    
-    background-color: rgba(141, 170, 224, 0.678);
-    height: 60px;
+    background-color: rgba(123, 151, 201, 1);
+    height: 20vh;
 }
 
 
