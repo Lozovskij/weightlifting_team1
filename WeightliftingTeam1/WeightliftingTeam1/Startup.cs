@@ -33,7 +33,7 @@ namespace WeightliftingTeam1
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
 
-            services.AddTransient<AthleteResultService>();
+            services.AddTransient<SearchResultService>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             services.AddTelerikBlazor();
             services.AddBlazoredSessionStorage();
