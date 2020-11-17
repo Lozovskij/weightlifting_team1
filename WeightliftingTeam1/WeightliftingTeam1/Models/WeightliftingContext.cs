@@ -31,6 +31,10 @@ namespace WeightliftingTeam1.Models
         public virtual DbSet<Records> Records { get; set; }
         public virtual DbSet<WeightCategories> WeightCategories { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=weightlifting;Username=postgres;Password=postgres");
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresExtension("uuid-ossp");
