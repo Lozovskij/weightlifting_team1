@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WeightliftingTeam1
+namespace WeightliftingTeam1.Models
 {
     public partial class Attempts
     {

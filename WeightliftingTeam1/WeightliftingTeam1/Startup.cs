@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WeightliftingTeam1.Data;
+using WeightliftingTeam1.Models;
 
 namespace WeightliftingTeam1
 {

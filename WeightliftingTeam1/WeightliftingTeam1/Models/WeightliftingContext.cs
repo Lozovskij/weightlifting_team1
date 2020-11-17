@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace WeightliftingTeam1
+namespace WeightliftingTeam1.Models
 {
     public partial class WeightliftingContext : DbContext
     {
