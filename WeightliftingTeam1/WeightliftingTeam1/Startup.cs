@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WeightliftingTeam1.Data;
+using WeightliftingTeam1.Models;
 
 namespace WeightliftingTeam1
 {
@@ -36,6 +38,8 @@ namespace WeightliftingTeam1
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             services.AddTelerikBlazor();
             services.AddBlazoredSessionStorage();
+
+            services.AddDbContext<WeightliftingContext>(options => options.UseNpgsql(Configuration.GetConnectionString("WeightliftingDatabase")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
