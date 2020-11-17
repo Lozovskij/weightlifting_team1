@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WeightliftingTeam1.Components;
 using WeightliftingTeam1.ModelsForOutput;
+using WeightliftingTeam1.Panels;
 
 namespace WeightliftingTeam1.Data
 {

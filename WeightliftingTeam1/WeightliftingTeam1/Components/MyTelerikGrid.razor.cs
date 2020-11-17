@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Telerik.Blazor.Components;
 using WeightliftingTeam1.Data;
 using WeightliftingTeam1.ModelsForOutput;
+using WeightliftingTeam1.Panels;
 
 namespace WeightliftingTeam1.Components
 {
