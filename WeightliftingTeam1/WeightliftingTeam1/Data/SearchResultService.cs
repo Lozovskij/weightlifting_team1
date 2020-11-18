@@ -18,17 +18,7 @@ namespace WeightliftingTeam1.Data
             //data = await GetDataFromDB(request);
             //return data;
 
-            using WeightliftingContext db = new WeightliftingContext();
-            var attempts = db.Attempts.Select(a => new Attempt
-            {
-                AthleteName = a.Athlete.Name,
-                Competition = a.Competition.Name,
-                Date = a.Date.ToString(),
-                Excercise = a.Exercise.Name,
-                Result = a.Result,
-                WeightCategory = db.AttemptCategory.Single(ac => ac.AttemptId == a.Id).Category.Name
-            });
-            return await Task.Run(() => new List<IGridModel>(attempts));
+            return await HelpSearchForAttempts.GetDataFromDB(null);
         }
     }
 
@@ -40,9 +30,19 @@ namespace WeightliftingTeam1.Data
             throw new NotImplementedException();
         }
 
-        public static Task<IGridModel> GetDataFromDB(string request)
+        public static Task<List<IGridModel>> GetDataFromDB(string request)
         {
-            throw new NotImplementedException();
+            using WeightliftingContext db = new WeightliftingContext();
+            var attempts = db.Attempts.Select(a => new Attempt
+            {
+                AthleteName = a.Athlete.Name,
+                Competition = a.Competition.Name,
+                Date = a.Date.ToString(),
+                Excercise = a.Exercise.Name,
+                Result = a.Result,
+                WeightCategory = db.AttemptCategory.Single(ac => ac.AttemptId == a.Id).Category.Name
+            }).ToArray();
+            return Task.Run(() => new List<IGridModel>(attempts));
         }
     }
 }
