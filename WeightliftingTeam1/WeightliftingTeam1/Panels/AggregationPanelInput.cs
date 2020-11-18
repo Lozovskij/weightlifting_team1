@@ -9,9 +9,9 @@ namespace WeightliftingTeam1.Panels
     public class AggregationPanelInput
     {
         public AttemptPanel AttemptPanel;
-        public AggregationPanelInput()
+        public AggregationPanelInput(string[] competitions, string[] athleteNames)
         {
-            AttemptPanel = new AttemptPanel();
+            AttemptPanel = new AttemptPanel(competitions, athleteNames);
         }
 
 

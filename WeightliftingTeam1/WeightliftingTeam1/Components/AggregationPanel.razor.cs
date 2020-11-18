@@ -17,18 +17,25 @@ namespace WeightliftingTeam1.Components
         [Parameter]
         public PanelType PanelType { get; set; }
 
-        public AggregationPanelInput Input { get; set; }
+        public AggregationPanelInput PanelInput { get; set; }
+
+        [Parameter]
+        public string[] Competitions { get; set; }
+
+        [Parameter]
+        public string[] AthleteNames { get; set; }
+
 
         public string[] WeightCategories { get; set; } = new string[] { "one", "two", "three" };
 
         protected override void OnInitialized()
         {
-            Input = new AggregationPanelInput();
+            PanelInput = new AggregationPanelInput(Competitions, AthleteNames);
         }
 
         private void ClearPanel()
         {
-            Input = new AggregationPanelInput();
+            PanelInput = new AggregationPanelInput(Competitions, AthleteNames);
         }
     }
 }

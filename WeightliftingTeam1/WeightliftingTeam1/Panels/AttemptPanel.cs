@@ -9,14 +9,12 @@ namespace WeightliftingTeam1.Panels
 {
     public class AttemptPanel
     {
-        public AttemptPanel()
+        public AttemptPanel(string[] competitions, string[] athleteNames)
         {
             DateLowerLimit = new DateTime(1920, 1, 1);
             DateUpperLimit = DateTime.Now;
-            //get it from the service
-            Competitions = new string[] { "Olimpic games 2019", "Winter olimpics 22", "Universe competition" };
-            //get it from the service
-            AthleteNames = new string[] { "DIMAS Pyrros", "ASANIDZE George", "BAGHERI Kouroush", " WU Jingbiao" };
+            Competitions = competitions;
+            AthleteNames = athleteNames;
         }
         public DateTime DateLowerLimit { get; set; }
         public DateTime DateUpperLimit { get; set; }

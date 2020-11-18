@@ -3,11 +3,11 @@
 @inject SearchResultService athleteResultService
 
 <div class="my-param-container d-flex flex-column mb-2">
-    <EditForm Model="@Input">
+    <EditForm Model="@PanelInput">
         <DataAnnotationsValidator />
         @if (PanelType == PanelType.Attempts)
         {
-            <select @onchange="Input.AttemptPanel.ChangePeriodEvent" class="custom-select mt-2">
+            <select @onchange="PanelInput.AttemptPanel.ChangePeriodEvent" class="custom-select mt-2">
                 <option value="">Period</option>
                 <option value="1920 - 1972">1920 - 1972</option>
                 <option value="1973 - 1992">1973 - 1992</option>
@@ -16,63 +16,63 @@
             </select>
             <label class="m-1">Lower Date:</label>
             <div>
-                <InputDate @bind-Value=Input.AttemptPanel.DateLowerLimit class="form-control" />
+                <InputDate @bind-Value=PanelInput.AttemptPanel.DateLowerLimit class="form-control" />
             </div>
             <label class="m-1">Upper Date:</label>
             <div class="mb-1">
-                <InputDate @bind-Value=Input.AttemptPanel.DateUpperLimit class="form-control" />
+                <InputDate @bind-Value=PanelInput.AttemptPanel.DateUpperLimit class="form-control" />
             </div>
 
 
             <div class="my-param-container d-flex flex-column mb-1">
                 <div>
-                    <InputCheckbox class="m-2" id="snatch" @bind-Value=Input.AttemptPanel.SnatchIsIncluded />
+                    <InputCheckbox class="m-2" id="snatch" @bind-Value=PanelInput.AttemptPanel.SnatchIsIncluded />
                     <label for="snatch">
                         Include Snatch
                     </label>
                 </div>
                 <div>
-                    <InputCheckbox class="m-2" id="press" @bind-Value=Input.AttemptPanel.PressIsIncluded />
+                    <InputCheckbox class="m-2" id="press" @bind-Value=PanelInput.AttemptPanel.PressIsIncluded />
                     <label for="press">
                         Include Press
                     </label>
                 </div>
                 <div class="d-flex">
-                    <InputCheckbox class="m-2 " id="cleanAndJerk" @bind-Value=Input.AttemptPanel.CleanAndJerkIsIncluded />
+                    <InputCheckbox class="m-2 " id="cleanAndJerk" @bind-Value=PanelInput.AttemptPanel.CleanAndJerkIsIncluded />
                     <label for="cleanAndJerk">
                         Clean and jerk (is excluded from 1973)
                     </label>
                 </div>
             </div>
 
-            <TelerikAutoComplete Data="@Input.AttemptPanel.Competitions" @bind-Value="@Input.AttemptPanel.Competition"
+            <TelerikAutoComplete Data="@PanelInput.AttemptPanel.Competitions" @bind-Value="@PanelInput.AttemptPanel.Competition"
                                  Placeholder="Enter Competition" ClearButton="true"
                                  Width="100%" Class="mb-1" />
 
-            <TelerikAutoComplete Data="@Input.AttemptPanel.AthleteNames" @bind-Value="@Input.AttemptPanel.AthleteName"
+            <TelerikAutoComplete Data="@PanelInput.AttemptPanel.AthleteNames" @bind-Value="@PanelInput.AttemptPanel.AthleteName"
                                  Placeholder="Enter Athlete's Name" ClearButton="true"
                                  Width="100%" Class="mb-1" />
 
             <div class="my-param-container d-flex flex-column mb-1">
                 <label class="m-1">Athlete's weight:</label>
                 <div class="d-flex">
-                    <InputNumber class="form-control m-1" @bind-Value=Input.AttemptPanel.WeightLowerLimit ParsingErrorMessage="Must be an integer value" />
+                    <InputNumber class="form-control m-1" @bind-Value=PanelInput.AttemptPanel.WeightLowerLimit ParsingErrorMessage="Must be an integer value" />
                     <div class="my-auto">—</div>
-                    <InputNumber class="form-control m-1" @bind-Value=Input.AttemptPanel.WeightUpperLimit ParsingErrorMessage="Must be an integer value" />
+                    <InputNumber class="form-control m-1" @bind-Value=PanelInput.AttemptPanel.WeightUpperLimit ParsingErrorMessage="Must be an integer value" />
                 </div>
             </div>
 
             <div class="my-param-container d-flex flex-column mb-1">
                 <label class="m-1">Result:</label>
                 <div class="d-flex">
-                    <InputNumber class="form-control m-1" @bind-Value=Input.AttemptPanel.ResultLowerLimit ParsingErrorMessage="Must be an integer value" />
+                    <InputNumber class="form-control m-1" @bind-Value=PanelInput.AttemptPanel.ResultLowerLimit ParsingErrorMessage="Must be an integer value" />
                     <div class="my-auto">—</div>
-                    <InputNumber class="form-control m-1" @bind-Value=Input.AttemptPanel.ResultUpperLimit ParsingErrorMessage="Must be an integer value" />
+                    <InputNumber class="form-control m-1" @bind-Value=PanelInput.AttemptPanel.ResultUpperLimit ParsingErrorMessage="Must be an integer value" />
                 </div>
             </div>
 
             <label for="checkboxDisqualified">
-                <InputCheckbox class="m-2" id="checkboxDisqualified" @bind-Value=Input.AttemptPanel.IsDisqualified />
+                <InputCheckbox class="m-2" id="checkboxDisqualified" @bind-Value=PanelInput.AttemptPanel.IsDisqualified />
                 Disqualified
             </label>
         }
@@ -96,11 +96,11 @@
 
             <div class="my-param-container d-flex flex-column mb-2">
                 <div>
-                    <InputCheckbox class="m-2" id="isfemale" @bind-Value=Input.IsFemale />
+                    <InputCheckbox class="m-2" id="isfemale" @bind-Value=PanelInput.IsFemale />
                     <label for="isfemale">Female</label>
                 </div>
                 <div>
-                    <InputCheckbox class="m-2" id="male" @bind-Value=Input.IsMale />
+                    <InputCheckbox class="m-2" id="male" @bind-Value=PanelInput.IsMale />
                     <label for="male">
                         Male
                     </label>
@@ -108,7 +108,7 @@
 
             </div>
 
-            <InputSelect @bind-Value="Input.WeightCategory" class="custom-select mb-2">
+            <InputSelect @bind-Value="PanelInput.WeightCategory" class="custom-select mb-2">
                 @if (WeightCategories != null)
                     {
                     <option value="">Weight category</option>
@@ -128,7 +128,7 @@
                 </svg>
             </button>
             <button type="button" class="btn btn-success" style="margin:2px; width: 90px;"
-                    @onclick="(() => OnSearchClick.InvokeAsync(Input))" value="Save">
+                    @onclick="(() => OnSearchClick.InvokeAsync(PanelInput))" value="Save">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
                     <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
