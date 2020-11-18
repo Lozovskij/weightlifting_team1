@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WeightliftingTeam1.Components;
+using WeightliftingTeam1.Models;
 using WeightliftingTeam1.ModelsForOutput;
 using WeightliftingTeam1.Panels;
 
@@ -16,12 +18,7 @@ namespace WeightliftingTeam1.Data
             //data = await GetDataFromDB(request);
             //return data;
 
-            List<IGridModel> results = new List<IGridModel>() {
-                new Attempt(){ Date = "07.11.2020", AthleteName = "Ivan Ivanov", Competition = "Olimpic games 2020", Excercise = "Snatch",
-                WeightCategory = "70-83 kg", Result = 130 
-                }
-            };
-            return await Task.Run(() => results);
+            return await HelpSearchForAttempts.GetDataFromDB(null);
         }
     }
 
@@ -33,9 +30,19 @@ namespace WeightliftingTeam1.Data
             throw new NotImplementedException();
         }
 
-        public static Task<IGridModel> GetDataFromDB(string request)
+        public static Task<List<IGridModel>> GetDataFromDB(string request)
         {
-            throw new NotImplementedException();
+            using WeightliftingContext db = new WeightliftingContext();
+            var attempts = db.Attempts.Select(a => new Attempt
+            {
+                AthleteName = a.Athlete.Name,
+                Competition = a.Competition.Name,
+                Date = a.Date.ToString(),
+                Excercise = a.Exercise.Name,
+                Result = a.Result,
+                WeightCategory = db.AttemptCategory.Single(ac => ac.AttemptId == a.Id).Category.Name
+            }).ToArray();
+            return Task.Run(() => new List<IGridModel>(attempts));
         }
     }
 }

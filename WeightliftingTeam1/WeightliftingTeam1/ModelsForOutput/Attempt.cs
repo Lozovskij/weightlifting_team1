@@ -17,8 +17,7 @@ namespace WeightliftingTeam1.ModelsForOutput
         [Display(Name = "Category")]
         public string WeightCategory { get; set; }
 
-        [Display(Name = "Result")]
-        public int Result { get; set; }
+        public float Result { get; set; }
 
         [Display(Name = "Name")]
         public string AthleteName { get; set; }
