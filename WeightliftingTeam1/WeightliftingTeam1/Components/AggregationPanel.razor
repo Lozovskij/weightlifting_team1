@@ -7,13 +7,13 @@
         <DataAnnotationsValidator />
         @if (PanelType == PanelType.Attempts)
         {
-            <InputSelect @bind-Value=Input.AttemptPanel.Period class="custom-select mt-2">
+            <select @onchange="Input.AttemptPanel.ChangePeriodEvent" class="custom-select mt-2">
                 <option value="">Period</option>
                 <option value="1920 - 1972">1920 - 1972</option>
                 <option value="1973 - 1992">1973 - 1992</option>
                 <option value="1993 - 1997">1993 - 1997</option>
                 <option value="(current)1998+">(current)1998+</option>
-            </InputSelect>
+            </select>
             <label class="m-1">Lower Date:</label>
             <div>
                 <InputDate @bind-Value=Input.AttemptPanel.DateLowerLimit class="form-control" />

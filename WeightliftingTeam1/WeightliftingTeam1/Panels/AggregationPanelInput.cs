@@ -8,24 +8,12 @@ namespace WeightliftingTeam1.Panels
 {
     public class AggregationPanelInput
     {
-        public Athlete AthleteItem;
-        public Attempt AttemptItem;
-
         public AttemptPanel AttemptPanel;
-
         public AggregationPanelInput()
         {
-            AthleteItem = new Athlete();
-            AttemptItem = new Attempt();
-
             AttemptPanel = new AttemptPanel();
         }
 
-        public AggregationPanelInput(Athlete athleteItem, Attempt attemptItem)
-        {
-            AthleteItem = athleteItem;
-            AttemptItem = attemptItem;
-        }
 
         public string WeightCategory { get; set; }
 

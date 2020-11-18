@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,14 +11,13 @@ namespace WeightliftingTeam1.Panels
     {
         public AttemptPanel()
         {
-            DateLowerLimit = new DateTime(1971, 1, 1);
+            DateLowerLimit = new DateTime(1920, 1, 1);
             DateUpperLimit = DateTime.Now;
             //get it from the service
             Competitions = new string[] { "Olimpic games 2019", "Winter olimpics 22", "Universe competition" };
             //get it from the service
             AthleteNames = new string[] { "DIMAS Pyrros", "ASANIDZE George", "BAGHERI Kouroush", " WU Jingbiao" };
         }
-        public string Period;
         public DateTime DateLowerLimit { get; set; }
         public DateTime DateUpperLimit { get; set; }
         public string[] Competitions;
@@ -34,5 +34,30 @@ namespace WeightliftingTeam1.Panels
         public int AthleteId { get; set; }
         public bool IsDisqualified { get; set; }
         public bool ShowOnlyRecords { get; set; }
+
+        public void ChangePeriodEvent(ChangeEventArgs e)
+        {
+            string period = e.Value.ToString();
+            if (period == "1920 - 1972")
+            {
+                DateLowerLimit = new DateTime(1920, 1, 1);
+                DateUpperLimit = new DateTime(1972, 12, 31);
+            } 
+            else if (period == "1973 - 1992")
+            {
+                DateLowerLimit = new DateTime(1973, 1, 1);
+                DateUpperLimit = new DateTime(1992, 12, 31);
+            }
+            else if(period == "1993 - 1997")
+            {
+                DateLowerLimit = new DateTime(1993, 1, 1);
+                DateUpperLimit = new DateTime(1997, 12, 31);
+            }
+            else if(period == "(current)1998+")
+            {
+                DateLowerLimit = new DateTime(1998, 1, 1);
+                DateUpperLimit = DateTime.Now;
+            }
+        }
     }
 }

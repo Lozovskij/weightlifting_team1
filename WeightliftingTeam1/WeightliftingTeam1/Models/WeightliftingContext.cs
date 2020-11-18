@@ -33,7 +33,7 @@ namespace WeightliftingTeam1.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=weightlifting;Username=postgres;Password=postgres");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=weightlifting;Username=postgres;Password=password");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
