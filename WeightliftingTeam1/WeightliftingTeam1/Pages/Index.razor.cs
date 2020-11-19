@@ -20,7 +20,7 @@ namespace WeightliftingTeam1.Pages
 
         private string[] AthleteNames { get; set; }
 
-        public AggregationPanelInput PanelInput { get; set; }
+        public AggregationPanels PanelInput { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -29,7 +29,7 @@ namespace WeightliftingTeam1.Pages
             //get it from the service, it is for dropdown
             Competitions = new string[] { "Olimpic games 2019", "Winter olimpics 22", "Universe competition" };
             AthleteNames = new string[] { "DIMAS Pyrros", "ASANIDZE George", "BAGHERI Kouroush", " WU Jingbiao" };
-            PanelInput = new AggregationPanelInput(Competitions, AthleteNames);//it is Default Panel Input
+            PanelInput = new AggregationPanels(Competitions, AthleteNames);//it is Default Panel Input
             await UpdateTable(PanelInput);
         }
 
@@ -39,7 +39,7 @@ namespace WeightliftingTeam1.Pages
             await UpdateTable(PanelInput);
         }
 
-        public async Task UpdateTable(AggregationPanelInput panelInput)
+        public async Task UpdateTable(AggregationPanels panelInput)
         {
             switch (CurrPanelType)
             {

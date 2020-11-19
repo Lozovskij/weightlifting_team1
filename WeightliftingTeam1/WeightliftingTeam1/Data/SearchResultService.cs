@@ -12,7 +12,7 @@ namespace WeightliftingTeam1.Data
 {
     public class SearchResultService
     {
-        public async Task<List<IGridModel>> SearchForAttempts(AggregationPanelInput panelInput)
+        public async Task<List<IGridModel>> SearchForAttempts(AggregationPanels panelInput)
         {
             //request = CreateRequest(panelInput)
             //data = await GetDataFromDB(request);
