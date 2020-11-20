@@ -6,26 +6,14 @@ using WeightliftingTeam1.ModelsForOutput;
 
 namespace WeightliftingTeam1.Panels
 {
-    public class AggregationPanelInput
+    public class AggregationPanels
     {
-        public Athlete AthleteItem;
-        public Attempt AttemptItem;
-
         public AttemptPanel AttemptPanel;
-
-        public AggregationPanelInput()
+        public AggregationPanels(string[] competitions, string[] athleteNames)
         {
-            AthleteItem = new Athlete();
-            AttemptItem = new Attempt();
-
-            AttemptPanel = new AttemptPanel();
+            AttemptPanel = new AttemptPanel(competitions, athleteNames);
         }
 
-        public AggregationPanelInput(Athlete athleteItem, Attempt attemptItem)
-        {
-            AthleteItem = athleteItem;
-            AttemptItem = attemptItem;
-        }
 
         public string WeightCategory { get; set; }
 
