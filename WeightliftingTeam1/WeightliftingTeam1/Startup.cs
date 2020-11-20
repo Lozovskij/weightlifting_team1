@@ -38,6 +38,8 @@ namespace WeightliftingTeam1
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             services.AddTelerikBlazor();
             services.AddBlazoredSessionStorage();
+
+            services.AddDbContextFactory<WeightliftingContext>(options => options.UseNpgsql(Configuration.GetConnectionString("WeightliftingDatabase")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
