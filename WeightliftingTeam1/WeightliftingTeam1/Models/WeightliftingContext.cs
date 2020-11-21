@@ -6,10 +6,6 @@ namespace WeightliftingTeam1.Models
 {
     public partial class WeightliftingContext : DbContext
     {
-        public WeightliftingContext()
-        {
-        }
-
         public WeightliftingContext(DbContextOptions<WeightliftingContext> options)
             : base(options)
         {
@@ -31,10 +27,6 @@ namespace WeightliftingTeam1.Models
         public virtual DbSet<Records> Records { get; set; }
         public virtual DbSet<WeightCategories> WeightCategories { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=weightlifting;Username=postgres;Password=password");
-        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresExtension("uuid-ossp");

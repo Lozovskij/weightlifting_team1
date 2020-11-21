@@ -12,13 +12,19 @@ namespace WeightliftingTeam1.Data
 {
     public class SearchResultService
     {
+        private readonly IDbContextFactory<WeightliftingContext> _contextFactory;
+        public SearchResultService(IDbContextFactory<WeightliftingContext> contextFactory)
+        {
+            _contextFactory = contextFactory;
+        }
         public async Task<List<IGridModel>> SearchForAttempts(AggregationPanels panelInput)
         {
             //request = CreateRequest(panelInput)
             //data = await GetDataFromDB(request);
             //return data;
 
-            return await HelpSearchForAttempts.GetDataFromDB(null);
+            using var context = _contextFactory.CreateDbContext();
+            return await HelpSearchForAttempts.GetDataFromDB(null, context);
         }
     }
 
@@ -30,17 +36,16 @@ namespace WeightliftingTeam1.Data
             throw new NotImplementedException();
         }
 
-        public static Task<List<IGridModel>> GetDataFromDB(string request)
+        public static Task<List<IGridModel>> GetDataFromDB(string request, WeightliftingContext context)
         {
-            using WeightliftingContext db = new WeightliftingContext();
-            var attempts = db.Attempts.Select(a => new Attempt
+            var attempts = context.Attempts.Select(a => new Attempt
             {
                 AthleteName = a.Athlete.Name,
                 Competition = a.Competition.Name,
                 Date = a.Date.ToString(),
                 Excercise = a.Exercise.Name,
                 Result = a.Result,
-                WeightCategory = db.AttemptCategory.Single(ac => ac.AttemptId == a.Id).Category.Name
+                WeightCategory = context.AttemptCategory.Single(ac => ac.AttemptId == a.Id).Category.Name
             }).ToArray();
             return Task.Run(() => new List<IGridModel>(attempts));
         }
