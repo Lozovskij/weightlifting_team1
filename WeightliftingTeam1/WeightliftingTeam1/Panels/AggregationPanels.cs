@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WeightliftingTeam1.Data;
 using WeightliftingTeam1.ModelsForOutput;
 
 namespace WeightliftingTeam1.Panels
@@ -9,11 +10,10 @@ namespace WeightliftingTeam1.Panels
     public class AggregationPanels
     {
         public AttemptPanel AttemptPanel;
-        public AggregationPanels(string[] competitions, string[] athleteNames)
+        public AggregationPanels(DataForDropdowns dataForDropdowns)
         {
-            AttemptPanel = new AttemptPanel(competitions, athleteNames);
+            AttemptPanel = new AttemptPanel(dataForDropdowns);
         }
-
 
         public string WeightCategory { get; set; }
 

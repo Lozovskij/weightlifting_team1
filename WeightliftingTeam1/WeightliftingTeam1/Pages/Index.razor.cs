@@ -16,9 +16,7 @@ namespace WeightliftingTeam1.Pages
 
         public PanelType CurrPanelType { get; set; }
 
-        private string[] Competitions { get; set; }
-
-        private string[] AthleteNames { get; set; }
+        public DataForDropdowns DataForDropdowns { get; set; }
 
         public AggregationPanels PanelInput { get; set; }
 
@@ -27,9 +25,11 @@ namespace WeightliftingTeam1.Pages
             CurrPanelType = PanelType.Attempts;
 
             //get it from the service, it is for dropdown
-            Competitions = new string[] { "Olimpic games 2019", "Winter olimpics 22", "Universe competition" };
-            AthleteNames = new string[] { "DIMAS Pyrros", "ASANIDZE George", "BAGHERI Kouroush", " WU Jingbiao" };
-            PanelInput = new AggregationPanels(Competitions, AthleteNames);//it is Default Panel Input
+            string[] competitions = { "Olimpic games 2019", "Winter olimpics 22", "Universe competition" };
+            string[] athleteNames = { "DIMAS Pyrros", "ASANIDZE George", "BAGHERI Kouroush", " WU Jingbiao" };
+            DataForDropdowns = new DataForDropdowns(competitions, athleteNames);
+
+            PanelInput = new AggregationPanels(DataForDropdowns);//it is Default Panel Input
             await UpdateTable(PanelInput);
         }
 

@@ -20,22 +20,18 @@ namespace WeightliftingTeam1.Components
         public AggregationPanels PanelInput { get; set; }
 
         [Parameter]
-        public string[] Competitions { get; set; }
-
-        [Parameter]
-        public string[] AthleteNames { get; set; }
-
+        public DataForDropdowns DataForDropdowns { get; set; }
 
         public string[] WeightCategories { get; set; } = new string[] { "one", "two", "three" };
 
         protected override void OnInitialized()
         {
-            PanelInput = new AggregationPanels(Competitions, AthleteNames);
+            PanelInput = new AggregationPanels(DataForDropdowns);
         }
 
         private void ClearPanel()
         {
-            PanelInput = new AggregationPanels(Competitions, AthleteNames);
+            PanelInput = new AggregationPanels(DataForDropdowns);
         }
     }
 }
