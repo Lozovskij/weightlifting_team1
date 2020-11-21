@@ -12,8 +12,8 @@
         }
         else
         {
-            <TelerikGrid Data="@(DataForGrid.Cast<Attempt>().ToList())"
-                         Height="500px" PageSize="6"
+            <TelerikGrid Data="@(DataForGrid.Cast<Attempt>().ToList())" @bind-Page=CurrentPage PageSize=PageSize
+                         Height="100%"
                          Pageable="true" Sortable="true" Groupable="false"
                          Resizable="false" Reorderable="true" AutoGenerateColumns="true"
                          Width="100%"
@@ -80,3 +80,17 @@
         }
         break;
 }
+
+
+@code{
+    int CurrentPage { get; set; } = 1;
+    int PageSize { get; set; } = 11;
+}
+
+<style>
+    @@media (max-width: 520px) {
+        .k-pager-numbers-wrap {
+            display: none;
+        }
+    }
+</style>

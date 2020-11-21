@@ -32,7 +32,7 @@ namespace WeightliftingTeam1.Panels
         public string AthleteName;
         public int AthleteId { get; set; }
         public bool IsDisqualified { get; set; }
-        public bool ShowOnlyRecords { get; set; }
+        //public bool ShowOnlyRecords { get; set; }
 
         public void ChangePeriodEvent(ChangeEventArgs e)
         {
