@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WeightliftingTeam1.Data;
-using WeightliftingTeam1.ModelsForOutput;
 using WeightliftingTeam1.Panels;
 
 namespace WeightliftingTeam1.Components
@@ -17,21 +12,28 @@ namespace WeightliftingTeam1.Components
         [Parameter]
         public PanelType PanelType { get; set; }
 
-        public AggregationPanels PanelInput { get; set; }
-
         [Parameter]
-        public DataForDropdowns DataForDropdowns { get; set; }
+        public AggregationPanels AggregationPanels { get; set; }
 
         public string[] WeightCategories { get; set; } = new string[] { "one", "two", "three" };
 
-        protected override void OnInitialized()
-        {
-            PanelInput = new AggregationPanels(DataForDropdowns);
-        }
+        protected override void OnInitialized() { }
 
         private void ClearPanel()
         {
-            PanelInput = new AggregationPanels(DataForDropdowns);
+            if (AggregationPanels == null)
+            {
+                return;
+            }
+            switch (PanelType)
+            {
+                case PanelType.Attempts:
+                    AggregationPanels.AttemptPanel = new AttemptPanel(AggregationPanels.DataForDropdowns);
+                    break;
+                case PanelType.Athletes:
+                    //AggregationPanels.AthletePanel = new AthletePanel(DataForDropdowns);
+                    break;
+            }
         }
     }
 }

@@ -16,35 +16,36 @@ namespace WeightliftingTeam1.Pages
 
         public PanelType CurrPanelType { get; set; }
 
-        public DataForDropdowns DataForDropdowns { get; set; }
-
         public AggregationPanels AggregationPanels { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             CurrPanelType = PanelType.Attempts;
+            AggregationPanels = InitializeAggregationPanels();
+            await UpdateTable();
+        }
 
+        private AggregationPanels InitializeAggregationPanels()
+        {
             //get it from the service, it is for dropdown
             string[] competitions = { "Olimpic games 2019", "Winter olimpics 22", "Universe competition" };
             string[] athleteNames = { "DIMAS Pyrros", "ASANIDZE George", "BAGHERI Kouroush", " WU Jingbiao" };
-            DataForDropdowns = new DataForDropdowns(competitions, athleteNames);
-
-            AggregationPanels = new AggregationPanels(DataForDropdowns);//it is Default Panel Input
-            await UpdateTable(AggregationPanels);
+            DataForDropdowns dataForDropdowns = new DataForDropdowns(competitions, athleteNames);
+            return new AggregationPanels(dataForDropdowns);
         }
 
         public async Task ChangePanelTypeEvent(ChangeEventArgs e)
         {
             CurrPanelType = (PanelType)Enum.Parse(typeof(PanelType), e.Value.ToString(), true);
-            await UpdateTable(AggregationPanels);
+            await UpdateTable();
         }
 
-        public async Task UpdateTable(AggregationPanels aggregationPanels)
+        public async Task UpdateTable()
         {
             switch (CurrPanelType)
             {
                 case PanelType.Attempts:
-                    DataForGrid = (await searchResultService.FindData(aggregationPanels.AttemptPanel)).Cast<IGridModel>().ToList();
+                    DataForGrid = (await searchResultService.FindData(AggregationPanels.AttemptPanel)).Cast<IGridModel>().ToList();
                     break;
                 case PanelType.Athletes:
                     DataForGrid = null;

@@ -9,20 +9,12 @@ namespace WeightliftingTeam1.Panels
 {
     public class AggregationPanels
     {
-        public AttemptPanel AttemptPanel;
+        public DataForDropdowns DataForDropdowns { get; }
+        public AttemptPanel AttemptPanel { get; set; }
         public AggregationPanels(DataForDropdowns dataForDropdowns)
         {
+            DataForDropdowns = dataForDropdowns;
             AttemptPanel = new AttemptPanel(dataForDropdowns);
         }
-
-        public string WeightCategory { get; set; }
-
-        public int Weight { get; set; }
-
-        public bool IsMale { get; set; } = true;
-
-        public bool IsFemale { get; set; } = true;
-
-        public bool IsDisqualified { get; set; }
     }
 }
