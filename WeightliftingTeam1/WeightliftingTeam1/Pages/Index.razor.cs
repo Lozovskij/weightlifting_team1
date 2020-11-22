@@ -18,7 +18,7 @@ namespace WeightliftingTeam1.Pages
 
         public DataForDropdowns DataForDropdowns { get; set; }
 
-        public AggregationPanels PanelInput { get; set; }
+        public AggregationPanels AggregationPanels { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -29,22 +29,22 @@ namespace WeightliftingTeam1.Pages
             string[] athleteNames = { "DIMAS Pyrros", "ASANIDZE George", "BAGHERI Kouroush", " WU Jingbiao" };
             DataForDropdowns = new DataForDropdowns(competitions, athleteNames);
 
-            PanelInput = new AggregationPanels(DataForDropdowns);//it is Default Panel Input
-            await UpdateTable(PanelInput);
+            AggregationPanels = new AggregationPanels(DataForDropdowns);//it is Default Panel Input
+            await UpdateTable(AggregationPanels);
         }
 
         public async Task ChangePanelTypeEvent(ChangeEventArgs e)
         {
             CurrPanelType = (PanelType)Enum.Parse(typeof(PanelType), e.Value.ToString(), true);
-            await UpdateTable(PanelInput);
+            await UpdateTable(AggregationPanels);
         }
 
-        public async Task UpdateTable(AggregationPanels panelInput)
+        public async Task UpdateTable(AggregationPanels aggregationPanels)
         {
             switch (CurrPanelType)
             {
                 case PanelType.Attempts:
-                    DataForGrid = (await searchResultService.SearchForAttempts(panelInput)).Cast<IGridModel>().ToList();
+                    DataForGrid = (await searchResultService.FindData(aggregationPanels.AttemptPanel)).Cast<IGridModel>().ToList();
                     break;
                 case PanelType.Athletes:
                     DataForGrid = null;

@@ -17,7 +17,7 @@ namespace WeightliftingTeam1.Data
         {
             _contextFactory = contextFactory;
         }
-        public async Task<List<IGridModel>> SearchForAttempts(AggregationPanels panelInput)
+        public async Task<List<IGridModel>> FindData(AttemptPanel attemptPanel)
         {
             //request = CreateRequest(panelInput)
             //data = await GetDataFromDB(request);
