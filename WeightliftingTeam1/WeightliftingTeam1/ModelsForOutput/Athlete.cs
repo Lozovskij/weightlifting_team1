@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeightliftingTeam1.ModelsForOutput
 {
-    public class Athlete : IGridModel
+    public class Athlete
     {
         public string Name { get; set; }
 

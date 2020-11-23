@@ -15,8 +15,11 @@ namespace WeightliftingTeam1.Components
         [Parameter]
         public PanelType PanelType { get; set; }
 
+        //[Parameter]
+        //public List<IGridModel> DataForGrid { get; set; }
+
         [Parameter]
-        public List<IGridModel> DataForGrid { get; set; }
+        public DataForGrids DataForGrids { get; set; }
 
         async Task GetGridData()
         {

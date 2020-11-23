@@ -12,17 +12,27 @@ namespace WeightliftingTeam1.Pages
 {
     public partial class Index
     {
-        public List<IGridModel> DataForGrid { get; set; }
-
         public PanelType CurrPanelType { get; set; }
 
         public AggregationPanels AggregationPanels { get; set; }
+
+        public DataForGrids DataForGrids { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             CurrPanelType = PanelType.Attempts;
             AggregationPanels = InitializeAggregationPanels();
-            await UpdateTable();
+            DataForGrids = await InitializeDataForGrids();
+        }
+
+        private async Task<DataForGrids> InitializeDataForGrids()
+        {
+            DataForGrids dataForGrids = new DataForGrids();
+            dataForGrids.DefaultAthletes = null;
+            dataForGrids.DefaultAttempts = await searchResultService.FindData(AggregationPanels.AttemptPanel);
+            dataForGrids.Athletes = dataForGrids.DefaultAthletes;
+            dataForGrids.Attempts = dataForGrids.DefaultAttempts;
+            return dataForGrids;
         }
 
         private AggregationPanels InitializeAggregationPanels()
@@ -34,21 +44,40 @@ namespace WeightliftingTeam1.Pages
             return new AggregationPanels(dataForDropdowns);
         }
 
-        public async Task ChangePanelTypeEvent(ChangeEventArgs e)
+        public void ChangePanelTypeEvent(ChangeEventArgs e)
         {
             CurrPanelType = (PanelType)Enum.Parse(typeof(PanelType), e.Value.ToString(), true);
-            await UpdateTable();
         }
 
-        public async Task UpdateTable()
+        private async Task SetDataForGrid(PanelType panelType)
         {
-            switch (CurrPanelType)
+            Console.WriteLine("setting data for grid");
+            if (panelType == PanelType.Attempts)
+            {
+                Console.WriteLine("setting data");
+                DataForGrids.Attempts = await searchResultService.FindData(AggregationPanels.AttemptPanel);
+            }
+            else if (panelType == PanelType.Athletes)
+            {
+                DataForGrids = null;
+            }
+            else
+            {
+                DataForGrids = null;
+            }
+        }
+
+        public void OnClearButtonClick(PanelType panelType)
+        {
+            switch (panelType)
             {
                 case PanelType.Attempts:
-                    DataForGrid = (await searchResultService.FindData(AggregationPanels.AttemptPanel)).Cast<IGridModel>().ToList();
+                    DataForGrids.Attempts = DataForGrids.DefaultAttempts;
+                    AggregationPanels.AttemptPanel = new AttemptPanel(AggregationPanels.DataForDropdowns);
                     break;
                 case PanelType.Athletes:
-                    DataForGrid = null;
+                    //DataForGrids.Attempts = DataForGrids.DefaultAthletes;
+                    //AggregationPanels.AthletePanel = new AthletePanel(AggregationPanels.DataForDropdowns);
                     break;
             }
         }

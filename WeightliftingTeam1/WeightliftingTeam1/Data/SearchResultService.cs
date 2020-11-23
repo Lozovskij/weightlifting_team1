@@ -17,26 +17,26 @@ namespace WeightliftingTeam1.Data
         {
             _contextFactory = contextFactory;
         }
-        public async Task<List<IGridModel>> FindData(AttemptPanel attemptPanel)
+        public async Task<IEnumerable<Attempt>> FindData(AttemptPanel attemptPanel)
         {
             //request = CreateRequest(panelInput)
             //data = await GetDataFromDB(request);
             //return data;
 
-            using var context = _contextFactory.CreateDbContext();
-            return await HelpSearchForAttempts.GetDataFromDB(null, context);
+            var context = _contextFactory.CreateDbContext();
+            return await SearchForAttemptsHelper.GetDataFromDB(null, context);
         }
     }
 
     //here you can do anything you need to get the data
-    public static class HelpSearchForAttempts
+    public static class SearchForAttemptsHelper
     {
         public static string CreateRequest()
         {
             throw new NotImplementedException();
         }
 
-        public static Task<List<IGridModel>> GetDataFromDB(string request, WeightliftingContext context)
+        public static Task<IEnumerable<Attempt>> GetDataFromDB(string request, WeightliftingContext context)
         {
             var attempts = context.Attempts.Select(a => new Attempt
             {
@@ -46,8 +46,8 @@ namespace WeightliftingTeam1.Data
                 Excercise = a.Exercise.Name,
                 Result = a.Result,
                 WeightCategory = context.AttemptCategory.Single(ac => ac.AttemptId == a.Id).Category.Name
-            }).ToArray();
-            return Task.Run(() => new List<IGridModel>(attempts));
+            });
+            return Task.Run(() => (IEnumerable<Attempt>)attempts);
         }
     }
 }

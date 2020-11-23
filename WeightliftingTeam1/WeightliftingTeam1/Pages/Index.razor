@@ -34,11 +34,12 @@
 
             <AggregationPanel PanelType="CurrPanelType"
                               AggregationPanels="AggregationPanels"
-                              OnSearchClick="UpdateTable">
+                              OnSearchClick="SetDataForGrid"
+                              OnClearButtonClick="OnClearButtonClick">
             </AggregationPanel>
         </div>
         <div class="col-md-8 col-lg-9 my-col ">
-            <MyTelerikGrid PanelType="CurrPanelType" DataForGrid="DataForGrid"></MyTelerikGrid>
+            <MyTelerikGrid PanelType="CurrPanelType" DataForGrids="DataForGrids"></MyTelerikGrid>
         </div>
     </div>
 </div>

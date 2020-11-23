@@ -97,11 +97,11 @@
 
     <div class="buttons d-flex justify-content-between flex-wrap">
         <button type="button" class="btn btn-outline-secondary " style="margin:2px; width: 90px;"
-                @onclick="ClearPanel" value="Clear">
+                @onclick="(() => OnClearButtonClick.InvokeAsync(PanelType))" value="Clear">
             <i class="fas fa-times"></i>
         </button>
         <button type="button" class="btn btn-success" style="margin:2px; width: 90px;"
-                @onclick="(() => OnSearchClick.InvokeAsync(AggregationPanels))" value="Save">
+                @onclick="(() => OnSearchClick.InvokeAsync(PanelType))" value="Save">
             <i class="fas fa-search"></i>
         </button>
         
