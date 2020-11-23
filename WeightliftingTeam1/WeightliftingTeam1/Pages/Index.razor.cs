@@ -12,42 +12,72 @@ namespace WeightliftingTeam1.Pages
 {
     public partial class Index
     {
-        public List<IGridModel> DataForGrid { get; set; }
-
         public PanelType CurrPanelType { get; set; }
 
-        private string[] Competitions { get; set; }
+        public AggregationPanels AggregationPanels { get; set; }
 
-        private string[] AthleteNames { get; set; }
-
-        public AggregationPanels PanelInput { get; set; }
+        public DataForGrids DataForGrids { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             CurrPanelType = PanelType.Attempts;
-
-            //get it from the service, it is for dropdown
-            Competitions = new string[] { "Olimpic games 2019", "Winter olimpics 22", "Universe competition" };
-            AthleteNames = new string[] { "DIMAS Pyrros", "ASANIDZE George", "BAGHERI Kouroush", " WU Jingbiao" };
-            PanelInput = new AggregationPanels(Competitions, AthleteNames);//it is Default Panel Input
-            await UpdateTable(PanelInput);
+            AggregationPanels = InitializeAggregationPanels();
+            DataForGrids = await InitializeDataForGrids();
         }
 
-        public async Task ChangePanelTypeEvent(ChangeEventArgs e)
+        private async Task<DataForGrids> InitializeDataForGrids()
+        {
+            DataForGrids dataForGrids = new DataForGrids();
+            dataForGrids.DefaultAthletes = null;
+            dataForGrids.DefaultAttempts = await searchResultService.FindData(AggregationPanels.AttemptPanel);
+            dataForGrids.Athletes = dataForGrids.DefaultAthletes;
+            dataForGrids.Attempts = dataForGrids.DefaultAttempts;
+            return dataForGrids;
+        }
+
+        private AggregationPanels InitializeAggregationPanels()
+        {
+            //get it from the service, it is for dropdown
+            string[] competitions = { "Olimpic games 2019", "Winter olimpics 22", "Universe competition" };
+            string[] athleteNames = { "DIMAS Pyrros", "ASANIDZE George", "BAGHERI Kouroush", " WU Jingbiao" };
+            DataForDropdowns dataForDropdowns = new DataForDropdowns(competitions, athleteNames);
+            return new AggregationPanels(dataForDropdowns);
+        }
+
+        public void ChangePanelTypeEvent(ChangeEventArgs e)
         {
             CurrPanelType = (PanelType)Enum.Parse(typeof(PanelType), e.Value.ToString(), true);
-            await UpdateTable(PanelInput);
         }
 
-        public async Task UpdateTable(AggregationPanels panelInput)
+        private async Task SetDataForGrid(PanelType panelType)
         {
-            switch (CurrPanelType)
+            Console.WriteLine("setting data for grid");
+            if (panelType == PanelType.Attempts)
+            {
+                Console.WriteLine("setting data");
+                DataForGrids.Attempts = await searchResultService.FindData(AggregationPanels.AttemptPanel);
+            }
+            else if (panelType == PanelType.Athletes)
+            {
+                DataForGrids = null;
+            }
+            else
+            {
+                DataForGrids = null;
+            }
+        }
+
+        public void OnClearButtonClick(PanelType panelType)
+        {
+            switch (panelType)
             {
                 case PanelType.Attempts:
-                    DataForGrid = (await searchResultService.SearchForAttempts(panelInput)).Cast<IGridModel>().ToList();
+                    DataForGrids.Attempts = DataForGrids.DefaultAttempts;
+                    AggregationPanels.AttemptPanel = new AttemptPanel(AggregationPanels.DataForDropdowns);
                     break;
                 case PanelType.Athletes:
-                    DataForGrid = null;
+                    //DataForGrids.Attempts = DataForGrids.DefaultAthletes;
+                    //AggregationPanels.AthletePanel = new AthletePanel(AggregationPanels.DataForDropdowns);
                     break;
             }
         }

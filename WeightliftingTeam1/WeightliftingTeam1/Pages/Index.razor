@@ -32,15 +32,25 @@
                 <option value="@PanelType.Athletes">@PanelType.Athletes</option>
             </select>
 
-            <AggregationPanel PanelType="CurrPanelType" 
-                              Competitions="Competitions" 
-                              AthleteNames="AthleteNames" 
-                              OnSearchClick="UpdateTable">
-
+            <AggregationPanel PanelType="CurrPanelType"
+                              AggregationPanels="AggregationPanels"
+                              OnSearchClick="SetDataForGrid"
+                              OnClearButtonClick="OnClearButtonClick">
             </AggregationPanel>
         </div>
         <div class="col-md-8 col-lg-9 my-col ">
-            <MyTelerikGrid PanelType="CurrPanelType" DataForGrid="DataForGrid"></MyTelerikGrid>
+            <MyTelerikGrid PanelType="CurrPanelType" DataForGrids="DataForGrids"></MyTelerikGrid>
         </div>
     </div>
 </div>
+<style>
+    /* hide the built-in grid pager */
+    .custom-pager .k-grid .k-pager-wrap {
+        display: none;
+    }
+
+    /* just to showcase how the wrapper contrls the width of both components since they are now separate */
+    .custom-pager {
+        width: 600px;
+    }
+</style>

@@ -4,21 +4,22 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WeightliftingTeam1.Data;
 
 namespace WeightliftingTeam1.Panels
 {
     public class AttemptPanel
     {
-        public AttemptPanel(string[] competitions, string[] athleteNames)
+        public AttemptPanel(DataForDropdowns dataForDropdowns)
         {
             DateLowerLimit = new DateTime(1920, 1, 1);
             DateUpperLimit = DateTime.Now;
-            Competitions = competitions;
-            AthleteNames = athleteNames;
+            Competitions = dataForDropdowns.Competitions;
+            AthleteNames = dataForDropdowns.AthleteNames;
         }
         public DateTime DateLowerLimit { get; set; }
         public DateTime DateUpperLimit { get; set; }
-        public string[] Competitions;
+        public IEnumerable<string> Competitions;
         public string Competition;
         public bool SnatchIsIncluded { get; set; } = true;
         public bool PressIsIncluded { get; set; } = true;
@@ -27,11 +28,11 @@ namespace WeightliftingTeam1.Panels
         public int WeightUpperLimit { get; set; }
         public int ResultLowerLimit { get; set; }
         public int ResultUpperLimit { get; set; }
-        public string[] AthleteNames;
+        public IEnumerable<string> AthleteNames;
         public string AthleteName;
         public int AthleteId { get; set; }
         public bool IsDisqualified { get; set; }
-        public bool ShowOnlyRecords { get; set; }
+        //public bool ShowOnlyRecords { get; set; }
 
         public void ChangePeriodEvent(ChangeEventArgs e)
         {
