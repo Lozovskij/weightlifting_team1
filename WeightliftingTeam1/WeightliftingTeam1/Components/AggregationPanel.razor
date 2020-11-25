@@ -2,112 +2,115 @@
 @using WeightliftingTeam1.Panels
 @inject SearchResultService athleteResultService
 
-<div class="my-param-container d-flex flex-column mb-2">
-    <EditForm Model="@AggregationPanels">
-        <DataAnnotationsValidator />
-        @if (PanelType == PanelType.Attempts)
-        {
-            <select @onchange="AggregationPanels.AttemptPanel.ChangePeriodEvent" class="custom-select mt-2">
-                <option value="">Period</option>
-                <option value="1920 - 1972">1920 - 1972</option>
-                <option value="1973 - 1992">1973 - 1992</option>
-                <option value="1993 - 1997">1993 - 1997</option>
-                <option value="(current)1998+">(current)1998+</option>
-            </select>
-            <label class="m-1">Lower Date:</label>
-            <div>
-                <InputDate @bind-Value=AggregationPanels.AttemptPanel.DateLowerLimit class="form-control" />
-            </div>
-            <label class="m-1">Upper Date:</label>
-            <div class="mb-1">
-                <InputDate @bind-Value=AggregationPanels.AttemptPanel.DateUpperLimit class="form-control" />
-            </div>
-
-
-            <div class="my-param-container d-flex flex-column mb-1">
+    <div class="my-param-container d-flex flex-column mb-2 pt-2">
+        <EditForm Model="@AggregationPanels">
+            <DataAnnotationsValidator />
+            @if (PanelType == PanelType.Attempts)
+            {
+                <select @onchange="AggregationPanels.AttemptPanel.ChangePeriodEvent" class="custom-select">
+                    <option value="">Period</option>
+                    <option value="1920 - 1972">1920 - 1972</option>
+                    <option value="1973 - 1992">1973 - 1992</option>
+                    <option value="1993 - 1997">1993 - 1997</option>
+                    <option value="(current)1998+">(current)1998+</option>
+                </select>
+                <label class="m-1">Lower Date:</label>
                 <div>
-                    <InputCheckbox class="m-2" id="snatch" @bind-Value=AggregationPanels.AttemptPanel.SnatchIsIncluded />
-                    <label for="snatch">
-                        Include Snatch
-                    </label>
+                    <InputDate @bind-Value=AggregationPanels.AttemptPanel.DateLowerLimit class="form-control" />
                 </div>
-                <div>
-                    <InputCheckbox class="m-2" id="press" @bind-Value=AggregationPanels.AttemptPanel.PressIsIncluded />
-                    <label for="press">
-                        Include Press
-                    </label>
+                <label class="m-1">Upper Date:</label>
+                <div class="mb-1">
+                    <InputDate @bind-Value=AggregationPanels.AttemptPanel.DateUpperLimit class="form-control" />
                 </div>
-                <div class="d-flex">
-                    <InputCheckbox class="m-2 " id="cleanAndJerk" @bind-Value=AggregationPanels.AttemptPanel.CleanAndJerkIsIncluded />
-                    <label for="cleanAndJerk">
-                        Clean and jerk (is excluded from 1973)
-                    </label>
+
+
+                <div class="my-param-container d-flex flex-column mb-1">
+                    <div>
+                        <InputCheckbox class="m-2" id="snatch" @bind-Value=AggregationPanels.AttemptPanel.SnatchIsIncluded />
+                        <label for="snatch">
+                            Include Snatch
+                        </label>
+                    </div>
+                    <div>
+                        <InputCheckbox class="m-2" id="press" @bind-Value=AggregationPanels.AttemptPanel.PressIsIncluded />
+                        <label for="press">
+                            Include Press
+                        </label>
+                    </div>
+                    <div class="d-flex">
+                        <InputCheckbox class="m-2 " id="cleanAndJerk" @bind-Value=AggregationPanels.AttemptPanel.CleanAndJerkIsIncluded />
+                        <label for="cleanAndJerk">
+                            Clean and jerk (is excluded from 1973)
+                        </label>
+                    </div>
                 </div>
-            </div>
 
-            <TelerikAutoComplete Data="@AggregationPanels.AttemptPanel.Competitions" @bind-Value="@AggregationPanels.AttemptPanel.Competition"
-                                 Placeholder="Enter Competition" ClearButton="true"
-                                 Width="100%" Class="mb-1" />
+                <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.Competitions" @bind-Value="@AggregationPanels.AttemptPanel.Competition"
+                                     Placeholder="Enter Competition" ClearButton="true"
+                                     Width="100%" Class="mb-1" />
 
-            <TelerikAutoComplete Data="@AggregationPanels.AttemptPanel.AthleteNames" @bind-Value="@AggregationPanels.AttemptPanel.AthleteName"
-                                 Placeholder="Enter Athlete's Name" ClearButton="true"
-                                 Width="100%" Class="mb-1" />
+                <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.AthleteNames" @bind-Value="@AggregationPanels.AttemptPanel.AthleteName"
+                                     Placeholder="Enter Athlete's Name" ClearButton="true"
+                                     Width="100%" Class="mb-1" />
 
-            <div class="my-param-container d-flex flex-column mb-1">
-                <label class="m-1">Athlete's weight:</label>
-                <div class="d-flex">
-                    <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.AttemptPanel.WeightLowerLimit />
-                    <div class="my-auto">—</div>
-                    <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.AttemptPanel.WeightUpperLimit />
+                <div class="my-param-container d-flex flex-column mb-1">
+                    <label class="m-1">Athlete's weight:</label>
+                    <div class="d-flex">
+                        <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.AttemptPanel.WeightLowerLimit />
+                        <div class="my-auto">—</div>
+                        <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.AttemptPanel.WeightUpperLimit />
+                    </div>
                 </div>
-            </div>
 
-            <div class="my-param-container d-flex flex-column mb-1">
-                <label class="m-1">Result:</label>
-                <div class="d-flex">
-                    <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.AttemptPanel.ResultLowerLimit />
-                    <div class="my-auto">—</div>
-                    <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.AttemptPanel.ResultUpperLimit />
+                <div class="my-param-container d-flex flex-column mb-1">
+                    <label class="m-1">Result:</label>
+                    <div class="d-flex">
+                        <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.AttemptPanel.ResultLowerLimit />
+                        <div class="my-auto">—</div>
+                        <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.AttemptPanel.ResultUpperLimit />
+                    </div>
                 </div>
-            </div>
 
-            <label for="checkboxDisqualified">
-                <InputCheckbox class="m-2" id="checkboxDisqualified" @bind-Value=AggregationPanels.AttemptPanel.IsDisqualified />
-                Disqualified
-            </label>
-        }
-        else if (PanelType == PanelType.Athletes)
-        {
-            <select class="custom-select mb-1 mt-2">
-                <option selected>Type</option>
-                <option value="1">Snatch</option>
-                <option value="2">Clean and jerk</option>
-                <option value="3">Clean and press (excluded from 1973)</option>
-            </select>
+                <label for="checkboxDisqualified">
+                    <InputCheckbox class="m-2" id="checkboxDisqualified" @bind-Value=AggregationPanels.AttemptPanel.IsDisqualified />
+                    Disqualified
+                </label>
+            }
+            else if (PanelType == PanelType.Athletes)
+            {
+                <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.AthleteNames" @bind-Value="@AggregationPanels.AthletePanel.Name"
+                                     Placeholder="Name" ClearButton="true"
+                                     Width="100%" Class="mb-1" />
 
-            <select class="custom-select mb-1">
-                <option selected>Period</option>
-                <option value="1">1928 - 1972</option>
-                <option value="2">1973 - 1992</option>
-                <option value="3">1993 - 1997</option>
-                <option value="4">1998 - 2017</option>
-                <option value="4">2018 +</option>
-            </select>
-        }
+                <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.Countries" @bind-Value="@AggregationPanels.AthletePanel.Country"
+                                     Placeholder="Country" ClearButton="true"
+                                     Width="100%" Class="mb-1" />
+                <div class="my-param-container d-flex flex-column mb-1">
+                    <div>
+                        <InputCheckbox class="m-2" id="snatch" @bind-Value=AggregationPanels.AthletePanel.MenIsIncluded />
+                        <label for="snatch">
+                            Men
+                        </label>
+                    </div>
+                    <div>
+                        <InputCheckbox class="m-2" id="press" @bind-Value=AggregationPanels.AthletePanel.WomenIsIncluded />
+                        <label for="press">
+                            Women
+                        </label>
+                    </div>
+                </div>
+            }
+        </EditForm>
 
-    <div class="buttons d-flex justify-content-between flex-wrap">
-        <button type="button" class="btn btn-outline-secondary " style="margin:2px; width: 90px;"
-                @onclick="(() => OnClearButtonClick.InvokeAsync(PanelType))" value="Clear">
-            <i class="fas fa-times"></i>
-        </button>
-        <button type="button" class="btn btn-success" style="margin:2px; width: 90px;"
-                @onclick="(() => OnSearchClick.InvokeAsync(PanelType))" value="Save">
-            <i class="fas fa-search"></i>
-        </button>
-        
+        <div class="buttons d-flex justify-content-between flex-wrap">
+            <button type="button" class="btn btn-outline-secondary " style="margin:2px; width: 90px;"
+                    @onclick="(() => OnClearButtonClick.InvokeAsync(PanelType))" value="Clear">
+                <i class="fas fa-times"></i>
+            </button>
+            <button type="button" class="btn btn-success" style="margin:2px; width: 90px;"
+                    @onclick="(() => OnSearchClick.InvokeAsync(PanelType))" value="Save">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
     </div>
-    </EditForm>
-
-
-
-</div>

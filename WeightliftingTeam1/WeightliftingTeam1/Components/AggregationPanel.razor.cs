@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Threading.Tasks;
 using WeightliftingTeam1.Data;
 using WeightliftingTeam1.Panels;
 

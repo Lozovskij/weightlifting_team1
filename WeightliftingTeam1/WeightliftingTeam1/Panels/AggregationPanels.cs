@@ -11,10 +11,12 @@ namespace WeightliftingTeam1.Panels
     {
         public DataForDropdowns DataForDropdowns { get; }
         public AttemptPanel AttemptPanel { get; set; }
+        public AthletePanel AthletePanel { get; set; }
         public AggregationPanels(DataForDropdowns dataForDropdowns)
         {
             DataForDropdowns = dataForDropdowns;
-            AttemptPanel = new AttemptPanel(dataForDropdowns);
+            AttemptPanel = new AttemptPanel();
+            AthletePanel = new AthletePanel();
         }
     }
 }

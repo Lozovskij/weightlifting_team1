@@ -10,16 +10,13 @@ namespace WeightliftingTeam1.Panels
 {
     public class AttemptPanel
     {
-        public AttemptPanel(DataForDropdowns dataForDropdowns)
+        public AttemptPanel()
         {
             DateLowerLimit = new DateTime(1920, 1, 1);
             DateUpperLimit = DateTime.Now;
-            Competitions = dataForDropdowns.Competitions;
-            AthleteNames = dataForDropdowns.AthleteNames;
         }
         public DateTime DateLowerLimit { get; set; }
         public DateTime DateUpperLimit { get; set; }
-        public IEnumerable<string> Competitions;
         public string Competition;
         public bool SnatchIsIncluded { get; set; } = true;
         public bool PressIsIncluded { get; set; } = true;
@@ -28,7 +25,6 @@ namespace WeightliftingTeam1.Panels
         public int WeightUpperLimit { get; set; }
         public int ResultLowerLimit { get; set; }
         public int ResultUpperLimit { get; set; }
-        public IEnumerable<string> AthleteNames;
         public string AthleteName;
         public int AthleteId { get; set; }
         public bool IsDisqualified { get; set; }

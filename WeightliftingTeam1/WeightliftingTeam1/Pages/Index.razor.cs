@@ -21,7 +21,7 @@ namespace WeightliftingTeam1.Pages
         protected override async Task OnInitializedAsync()
         {
             CurrPanelType = PanelType.Attempts;
-            AggregationPanels = InitializeAggregationPanels();
+            AggregationPanels = await InitializeAggregationPanels();
             DataForGrids = await InitializeDataForGrids();
         }
 
@@ -35,12 +35,13 @@ namespace WeightliftingTeam1.Pages
             return dataForGrids;
         }
 
-        private AggregationPanels InitializeAggregationPanels()
+        private async Task<AggregationPanels> InitializeAggregationPanels()
         {
             //get it from the service, it is for dropdown
             string[] competitions = { "Olimpic games 2019", "Winter olimpics 22", "Universe competition" };
             string[] athleteNames = { "DIMAS Pyrros", "ASANIDZE George", "BAGHERI Kouroush", " WU Jingbiao" };
-            DataForDropdowns dataForDropdowns = new DataForDropdowns(competitions, athleteNames);
+            string[] countries = { "Abkhazia", "Australia", "Brazil", "Belarus" };
+            DataForDropdowns dataForDropdowns = new DataForDropdowns(competitions, athleteNames, countries);
             return new AggregationPanels(dataForDropdowns);
         }
 
@@ -73,11 +74,11 @@ namespace WeightliftingTeam1.Pages
             {
                 case PanelType.Attempts:
                     DataForGrids.Attempts = DataForGrids.DefaultAttempts;
-                    AggregationPanels.AttemptPanel = new AttemptPanel(AggregationPanels.DataForDropdowns);
+                    AggregationPanels.AttemptPanel = new AttemptPanel();
                     break;
                 case PanelType.Athletes:
-                    //DataForGrids.Attempts = DataForGrids.DefaultAthletes;
-                    //AggregationPanels.AthletePanel = new AthletePanel(AggregationPanels.DataForDropdowns);
+                    DataForGrids.Athletes = DataForGrids.DefaultAthletes;
+                    AggregationPanels.AthletePanel = new AthletePanel();
                     break;
             }
         }
