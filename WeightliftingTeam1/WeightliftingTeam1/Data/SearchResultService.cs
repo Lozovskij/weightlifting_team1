@@ -61,7 +61,7 @@ namespace WeightliftingTeam1.Data
                                                          Result = attempt.Result,
                                                          WeightCategory = context.AttemptCategory.Single(category => category.AttemptId == attempt.Id).Category.Name
                                                      });
-            return Task.Run(() => (IEnumerable<Attempt>)resultAttemtps);
+            return Task.Run(() => (IEnumerable<Attempt>)resultAttemtps.ToList());
         }
     }
 }
