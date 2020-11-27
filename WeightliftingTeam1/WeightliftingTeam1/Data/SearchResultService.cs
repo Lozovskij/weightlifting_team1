@@ -34,14 +34,9 @@ namespace WeightliftingTeam1.Data
         public static Task<IEnumerable<Attempt>> GetDataFromDB(WeightliftingContext context, AttemptPanel attemptPanel)
         {
             var resultAttemtps = context.Attempts.Where(attempt => attempt.Date >= attemptPanel.DateLowerLimit && attempt.Date <= attemptPanel.DateUpperLimit &&
-                                                       (attempt.Exercise.Name == (attemptPanel.SnatchIsIncluded &&
-                                                                                  attemptPanel.CleanAndPressIsIncluded &&
-                                                                                  attemptPanel.CleanAndJerkIsIncluded ? Total : null) ||
-                                                       attempt.Exercise.Name == (attemptPanel.SnatchIsIncluded ? Snatch :
-                                                                                 attemptPanel.CleanAndPressIsIncluded ? Press :
-                                                                                 attemptPanel.CleanAndJerkIsIncluded ? CleanAndJerk : null) ||
-                                                       attempt.Exercise.Name == (attemptPanel.CleanAndPressIsIncluded ? Press :
-                                                                                 attemptPanel.CleanAndJerkIsIncluded ? CleanAndJerk : null) ||
+                                                       (attempt.Exercise.Name == (attemptPanel.TotalIsIncluded ? Total : null) ||
+                                                       attempt.Exercise.Name == (attemptPanel.SnatchIsIncluded ? Snatch : null) ||
+                                                       attempt.Exercise.Name == (attemptPanel.CleanAndPressIsIncluded ? Press : null) ||
                                                        attempt.Exercise.Name == (attemptPanel.CleanAndJerkIsIncluded ? CleanAndJerk : null)) &&
                                                        (attemptPanel.Competition == null ? true : attempt.Competition.Name == attemptPanel.Competition) &&
                                                        (attemptPanel.AthleteName == null ? true : attempt.Athlete.Name == attemptPanel.AthleteName) &&
