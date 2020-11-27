@@ -46,12 +46,12 @@ namespace WeightliftingTeam1.Data
         {
             var resultAttemtps = context.Attempts.Where(attempt => attempt.Date >= attemptPanel.DateLowerLimit && attempt.Date <= attemptPanel.DateUpperLimit &&
                                                        (attempt.Exercise.Name == (attemptPanel.SnatchIsIncluded &&
-                                                                                  attemptPanel.PressIsIncluded &&
+                                                                                  attemptPanel.CleanAndPressIsIncluded &&
                                                                                   attemptPanel.CleanAndJerkIsIncluded ? Total : null) ||
                                                        attempt.Exercise.Name == (attemptPanel.SnatchIsIncluded ? Snatch :
-                                                                                 attemptPanel.PressIsIncluded ? Press :
+                                                                                 attemptPanel.CleanAndPressIsIncluded ? Press :
                                                                                  attemptPanel.CleanAndJerkIsIncluded ? CleanAndJerk : null) ||
-                                                       attempt.Exercise.Name == (attemptPanel.PressIsIncluded ? Press :
+                                                       attempt.Exercise.Name == (attemptPanel.CleanAndPressIsIncluded ? Press :
                                                                                  attemptPanel.CleanAndJerkIsIncluded ? CleanAndJerk : null) ||
                                                        attempt.Exercise.Name == (attemptPanel.CleanAndJerkIsIncluded ? CleanAndJerk : null)) &&
                                                        (attemptPanel.Competition == null ? true : attempt.Competition.Name == attemptPanel.Competition) &&

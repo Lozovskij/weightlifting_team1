@@ -21,6 +21,16 @@ namespace WeightliftingTeam1.Components
         [Parameter]
         public DataForGrids DataForGrids { get; set; }
 
+        int CurrentPage { get; set; } = 1;
+
+        int PageSize { get; set; } = 11;
+
+        protected override void OnParametersSet()
+        {
+            CurrentPage = 1;
+            base.OnParametersSet();
+        }
+
         async Task GetGridData()
         {
             //DataForGrid = await MyService.Read();
