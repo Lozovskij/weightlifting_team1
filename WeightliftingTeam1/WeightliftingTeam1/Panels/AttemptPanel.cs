@@ -19,8 +19,8 @@ namespace WeightliftingTeam1.Panels
         public DateTime DateUpperLimit { get; set; }
         public string Competition;
         public bool SnatchIsIncluded { get; set; } = true;
-        public bool PressIsIncluded { get; set; } = true;
-        public bool CleanAndJerkIsIncluded { get; set; } = false;
+        public bool CleanAndJerkIsIncluded { get; set; } = true;
+        public bool CleanAndPressIsIncluded { get; set; } = false;
         public int WeightLowerLimit { get; set; }
         public int WeightUpperLimit { get; set; } = 500;
         public int ResultLowerLimit { get; set; }

@@ -31,16 +31,17 @@
                             Include Snatch
                         </label>
                     </div>
-                    <div>
-                        <InputCheckbox class="m-2" id="press" @bind-Value=AggregationPanels.AttemptPanel.PressIsIncluded />
-                        <label for="press">
-                            Include Press
-                        </label>
-                    </div>
+
                     <div class="d-flex">
                         <InputCheckbox class="m-2 " id="cleanAndJerk" @bind-Value=AggregationPanels.AttemptPanel.CleanAndJerkIsIncluded />
                         <label for="cleanAndJerk">
-                            Clean and jerk (is excluded from 1973)
+                            Include Clean and jerk
+                        </label>
+                    </div>
+                    <div>
+                        <InputCheckbox class="m-2" id="press" @bind-Value=AggregationPanels.AttemptPanel.CleanAndPressIsIncluded />
+                        <label for="press">
+                            Clean and press (is excluded from 1973)
                         </label>
                     </div>
                 </div>
