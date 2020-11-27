@@ -54,10 +54,8 @@ namespace WeightliftingTeam1.Pages
 
         private async Task SetDataForGrid(PanelType panelType)
         {
-            Console.WriteLine("setting data for grid");
             if (panelType == PanelType.Attempts)
             {
-                Console.WriteLine("setting data");
                 DataForGrids.Attempts = await searchResultService.FindData(AggregationPanels.AttemptPanel);
             }
             else if (panelType == PanelType.Athletes)
