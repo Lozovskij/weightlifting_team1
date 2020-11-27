@@ -20,6 +20,7 @@ namespace WeightliftingTeam1.Panels
         public string Competition;
         public bool SnatchIsIncluded { get; set; } = true;
         public bool CleanAndJerkIsIncluded { get; set; } = true;
+        public bool TotalIsIncluded { get; set; } = true;
         public bool CleanAndPressIsIncluded { get; set; } = false;
         public int WeightLowerLimit { get; set; }
         public int WeightUpperLimit { get; set; } = 500;
