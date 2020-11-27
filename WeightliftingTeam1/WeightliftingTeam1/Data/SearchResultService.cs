@@ -34,23 +34,14 @@ namespace WeightliftingTeam1.Data
         public static Task<IEnumerable<Attempt>> GetDataFromDB(WeightliftingContext context, AttemptPanel attemptPanel)
         {
             var resultAttemtps = context.Attempts.Where(attempt => attempt.Date >= attemptPanel.DateLowerLimit && attempt.Date <= attemptPanel.DateUpperLimit &&
-                                                       (attempt.Exercise.Name == (attemptPanel.SnatchIsIncluded &&
-                                                                                  attemptPanel.CleanAndPressIsIncluded &&
-                                                                                  attemptPanel.CleanAndJerkIsIncluded ? Total : null) ||
-                                                       attempt.Exercise.Name == (attemptPanel.SnatchIsIncluded ? Snatch :
-                                                                                 attemptPanel.CleanAndPressIsIncluded ? Press :
-                                                                                 attemptPanel.CleanAndJerkIsIncluded ? CleanAndJerk : null) ||
-                                                       attempt.Exercise.Name == (attemptPanel.CleanAndPressIsIncluded ? Press :
-                                                                                 attemptPanel.CleanAndJerkIsIncluded ? CleanAndJerk : null) ||
+                                                       (attempt.Exercise.Name == (attemptPanel.TotalIsIncluded ? Total : null) ||
+                                                       attempt.Exercise.Name == (attemptPanel.SnatchIsIncluded ? Snatch : null) ||
+                                                       attempt.Exercise.Name == (attemptPanel.CleanAndPressIsIncluded ? Press : null) ||
                                                        attempt.Exercise.Name == (attemptPanel.CleanAndJerkIsIncluded ? CleanAndJerk : null)) &&
-                                                       (attemptPanel.Competition == null ? true : attempt.Competition.Name == attemptPanel.Competition) &&
-                                                       (attemptPanel.AthleteName == null ? true : attempt.Athlete.Name == attemptPanel.AthleteName) &&
-                                                       (attemptPanel.WeightLowerLimit == 0 && attemptPanel.WeightUpperLimit == 0 ?
-                                                            attempt.AthleteWeight >= 0 && attempt.AthleteWeight <= 200 :
-                                                            attempt.AthleteWeight >= attemptPanel.WeightLowerLimit && attempt.AthleteWeight <= attemptPanel.WeightUpperLimit) &&
-                                                       (attemptPanel.ResultLowerLimit == 0 && attemptPanel.ResultUpperLimit == 0 ?
-                                                            attempt.Result >= 0 && attempt.Result <= 500 :
-                                                            attempt.Result >= attemptPanel.ResultLowerLimit && attempt.Result <= attemptPanel.ResultUpperLimit) &&
+                                                       (attemptPanel.Competition == null || attempt.Competition.Name == attemptPanel.Competition) &&
+                                                       (attemptPanel.AthleteName == null || attempt.Athlete.Name == attemptPanel.AthleteName) &&
+                                                       attempt.AthleteWeight >= attemptPanel.WeightLowerLimit && attempt.AthleteWeight <= attemptPanel.WeightUpperLimit &&
+                                                       attempt.Result >= attemptPanel.ResultLowerLimit && attempt.Result <= attemptPanel.ResultUpperLimit &&
                                                        attempt.IsDsq == attemptPanel.IsDisqualified)
                                                     .Select(attempt => new Attempt
                                                      {
