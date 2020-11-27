@@ -35,12 +35,12 @@ namespace WeightliftingTeam1.Data
         {
             var resultAttemtps = context.Attempts.Where(attempt => attempt.Date >= attemptPanel.DateLowerLimit && attempt.Date <= attemptPanel.DateUpperLimit &&
                                                        (attempt.Exercise.Name == (attemptPanel.SnatchIsIncluded &&
-                                                                                  attemptPanel.PressIsIncluded &&
+                                                                                  attemptPanel.CleanAndPressIsIncluded &&
                                                                                   attemptPanel.CleanAndJerkIsIncluded ? Total : null) ||
                                                        attempt.Exercise.Name == (attemptPanel.SnatchIsIncluded ? Snatch :
-                                                                                 attemptPanel.PressIsIncluded ? Press :
+                                                                                 attemptPanel.CleanAndPressIsIncluded ? Press :
                                                                                  attemptPanel.CleanAndJerkIsIncluded ? CleanAndJerk : null) ||
-                                                       attempt.Exercise.Name == (attemptPanel.PressIsIncluded ? Press :
+                                                       attempt.Exercise.Name == (attemptPanel.CleanAndPressIsIncluded ? Press :
                                                                                  attemptPanel.CleanAndJerkIsIncluded ? CleanAndJerk : null) ||
                                                        attempt.Exercise.Name == (attemptPanel.CleanAndJerkIsIncluded ? CleanAndJerk : null)) &&
                                                        (attemptPanel.Competition == null ? true : attempt.Competition.Name == attemptPanel.Competition) &&
@@ -61,7 +61,7 @@ namespace WeightliftingTeam1.Data
                                                          Result = attempt.Result,
                                                          WeightCategory = context.AttemptCategory.Single(category => category.AttemptId == attempt.Id).Category.Name
                                                      });
-            return Task.Run(() => (IEnumerable<Attempt>)resultAttemtps);
+            return Task.Run(() => (IEnumerable<Attempt>)resultAttemtps.ToList());
         }
     }
 }
