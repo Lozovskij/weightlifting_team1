@@ -12,9 +12,8 @@ namespace WeightliftingTeam1.ModelsForOutput
 
         public string Country { get; set; }
 
-        [Display(Name = "Sex")]
         public string Sex { get; set; }
 
-        public DateTime DOB { get; set; }
+        public string DOB { get; set; }
     }
 }

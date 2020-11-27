@@ -19,8 +19,14 @@ namespace WeightliftingTeam1.Data
         }
         public async Task<IEnumerable<Attempt>> FindData(AttemptPanel attemptPanel)
         {
-            var context = _contextFactory.CreateDbContext();
+            using var context = _contextFactory.CreateDbContext();
             return await SearchForAttemptsHelper.GetDataFromDB(context, attemptPanel);
+        }
+
+        public async Task<IEnumerable<Athlete>> FindData(AthletePanel athletePanel)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            return await SearchForAttemptsHelper.GetDataFromDB(context, athletePanel);
         }
     }
 
@@ -43,16 +49,32 @@ namespace WeightliftingTeam1.Data
                                                        attempt.AthleteWeight >= attemptPanel.WeightLowerLimit && attempt.AthleteWeight <= attemptPanel.WeightUpperLimit &&
                                                        attempt.Result >= attemptPanel.ResultLowerLimit && attempt.Result <= attemptPanel.ResultUpperLimit &&
                                                        attempt.IsDsq == attemptPanel.IsDisqualified)
-                                                    .Select(attempt => new Attempt
-                                                     {
-                                                         AthleteName = attempt.Athlete.Name,
-                                                         Competition = attempt.Competition.Name,
-                                                         Date = attempt.Date.ToString(),
-                                                         Excercise = attempt.Exercise.Name,
-                                                         Result = attempt.Result,
-                                                         WeightCategory = context.AttemptCategory.Single(category => category.AttemptId == attempt.Id).Category.Name
-                                                     });
+                                                 .Select(attempt => new Attempt
+                                                 {
+                                                     AthleteName = attempt.Athlete.Name,
+                                                     Competition = attempt.Competition.Name,
+                                                     Date = attempt.Date.ToString(),
+                                                     Excercise = attempt.Exercise.Name,
+                                                     Result = attempt.Result,
+                                                     WeightCategory = context.AttemptCategory.Single(category => category.AttemptId == attempt.Id).Category.Name
+                                                 });
             return Task.Run(() => (IEnumerable<Attempt>)resultAttemtps.ToList());
+        }
+
+        public static Task<IEnumerable<Athlete>> GetDataFromDB(WeightliftingContext context, AthletePanel athletePanel)
+        {
+            var resultAthletes = context.Athletes.Where(athlete => athletePanel.Name != null ? athlete.Name == athletePanel.Name : true &&
+                                                                   athletePanel.Country != null ? athlete.Country.Name == athletePanel.Country : true &&
+                                                                   athletePanel.MenIsIncluded && athletePanel.WomenIsIncluded || 
+                                                                        (athletePanel.MenIsIncluded ? athlete.Sex == "men" : athletePanel.WomenIsIncluded && athlete.Sex == "women"))
+                                                 .Select(athlete => new Athlete
+                                                 {
+                                                     Country = athlete.Country.Name,
+                                                     DOB = athlete.BirthDate.ToString(),
+                                                     Name = athlete.Name,
+                                                     Sex = athlete.Sex
+                                                 });
+            return Task.Run(() => (IEnumerable<Athlete>)resultAthletes.ToList());
         }
     }
 }

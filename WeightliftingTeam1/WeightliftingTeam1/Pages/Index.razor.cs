@@ -27,9 +27,11 @@ namespace WeightliftingTeam1.Pages
 
         private async Task<DataForGrids> InitializeDataForGrids()
         {
-            DataForGrids dataForGrids = new DataForGrids();
-            dataForGrids.DefaultAthletes = null;
-            dataForGrids.DefaultAttempts = await searchResultService.FindData(AggregationPanels.AttemptPanel);
+            DataForGrids dataForGrids = new DataForGrids
+            {
+                DefaultAthletes = await searchResultService.FindData(AggregationPanels.AthletePanel),
+                DefaultAttempts = await searchResultService.FindData(AggregationPanels.AttemptPanel)
+            };
             dataForGrids.Athletes = dataForGrids.DefaultAthletes;
             dataForGrids.Attempts = dataForGrids.DefaultAttempts;
             return dataForGrids;
@@ -58,7 +60,8 @@ namespace WeightliftingTeam1.Pages
             }
             else if (panelType == PanelType.Athletes)
             {
-                DataForGrids = null;
+                Console.WriteLine("setting data");
+                DataForGrids.Athletes = await searchResultService.FindData(AggregationPanels.AthletePanel);
             }
             else
             {
