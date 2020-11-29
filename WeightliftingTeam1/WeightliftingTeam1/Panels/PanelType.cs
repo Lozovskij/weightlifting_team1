@@ -8,6 +8,7 @@ namespace WeightliftingTeam1.Panels
     public enum PanelType
     {
         Attempts,
-        Athletes
+        Athletes, 
+        Records
     }
 }

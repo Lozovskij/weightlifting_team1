@@ -10,7 +10,9 @@ namespace WeightliftingTeam1.Data
     {
         public IEnumerable<Attempt> DefaultAttempts { get; set; }
         public IEnumerable<Athlete> DefaultAthletes { get; set; }
+        public IEnumerable<Record> DefaultRecords { get; set; }
         public IEnumerable<Attempt> Attempts { get; set; }
         public IEnumerable<Athlete> Athletes { get; set; }
+        public IEnumerable<Record> Records { get; set; }
     }
 }

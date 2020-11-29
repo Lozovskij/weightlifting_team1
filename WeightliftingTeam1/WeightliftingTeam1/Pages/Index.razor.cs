@@ -30,10 +30,13 @@ namespace WeightliftingTeam1.Pages
             DataForGrids dataForGrids = new DataForGrids
             {
                 DefaultAthletes = await searchResultService.FindData(AggregationPanels.AthletePanel),
-                DefaultAttempts = await searchResultService.FindData(AggregationPanels.AttemptPanel)
+                DefaultAttempts = await searchResultService.FindData(AggregationPanels.AttemptPanel), 
+                DefaultRecords = await searchResultService.FindData(AggregationPanels.RecordPanel)
             };
             dataForGrids.Athletes = dataForGrids.DefaultAthletes;
             dataForGrids.Attempts = dataForGrids.DefaultAttempts;
+            dataForGrids.Records = dataForGrids.DefaultRecords;
+
             return dataForGrids;
         }
 
@@ -60,8 +63,11 @@ namespace WeightliftingTeam1.Pages
             }
             else if (panelType == PanelType.Athletes)
             {
-                Console.WriteLine("setting data");
                 DataForGrids.Athletes = await searchResultService.FindData(AggregationPanels.AthletePanel);
+            }
+            else if (panelType == PanelType.Records)
+            {
+                DataForGrids.Records = await searchResultService.FindData(AggregationPanels.RecordPanel);
             }
             else
             {
@@ -80,6 +86,10 @@ namespace WeightliftingTeam1.Pages
                 case PanelType.Athletes:
                     DataForGrids.Athletes = DataForGrids.DefaultAthletes;
                     AggregationPanels.AthletePanel = new AthletePanel();
+                    break;
+                case PanelType.Records:
+                    DataForGrids.Records = DataForGrids.DefaultRecords;
+                    AggregationPanels.RecordPanel = new RecordPanel();
                     break;
             }
         }
