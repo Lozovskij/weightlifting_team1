@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using WeightliftingTeam1.Data;
 
 namespace WeightliftingTeam1.Panels
 {
-    public class AttemptPanel
+
+    public class RecordPanel
     {
-        public AttemptPanel()
+        public RecordPanel()
         {
             DateLowerLimit = new DateTime(1920, 1, 1);
             DateUpperLimit = DateTime.Now;
@@ -27,8 +26,11 @@ namespace WeightliftingTeam1.Panels
         public int ResultLowerLimit { get; set; }
         public int ResultUpperLimit { get; set; } = 500;
         public string AthleteName;
-        public bool IsDisqualified { get; set; }
-        //public bool ShowOnlyRecords { get; set; }
+
+        public bool IsWorldRecordsIncluded { get; set; } = true;
+        public bool IsOlympicRecordsIncluded { get; set; } = true;
+        public bool IsActive { get; set; } = true;
+
 
         public void ChangePeriodEvent(ChangeEventArgs e)
         {
@@ -37,18 +39,18 @@ namespace WeightliftingTeam1.Panels
             {
                 DateLowerLimit = new DateTime(1920, 1, 1);
                 DateUpperLimit = new DateTime(1972, 12, 31);
-            } 
+            }
             else if (period == "1973 - 1992")
             {
                 DateLowerLimit = new DateTime(1973, 1, 1);
                 DateUpperLimit = new DateTime(1992, 12, 31);
             }
-            else if(period == "1993 - 1997")
+            else if (period == "1993 - 1997")
             {
                 DateLowerLimit = new DateTime(1993, 1, 1);
                 DateUpperLimit = new DateTime(1997, 12, 31);
             }
-            else if(period == "(current)1998+")
+            else if (period == "(current)1998+")
             {
                 DateLowerLimit = new DateTime(1998, 1, 1);
                 DateUpperLimit = DateTime.Now;
