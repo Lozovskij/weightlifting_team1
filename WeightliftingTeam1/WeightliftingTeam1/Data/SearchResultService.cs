@@ -28,6 +28,12 @@ namespace WeightliftingTeam1.Data
             using var context = _contextFactory.CreateDbContext();
             return await SearchForAttemptsHelper.GetDataFromDB(context, athletePanel);
         }
+
+        public async Task<IEnumerable<Record>> FindData(RecordPanel recordPanel)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            return await SearchForAttemptsHelper.GetDataFromDB(context, recordPanel);
+        }
     }
 
     //here you can do anything you need to get the data
@@ -75,6 +81,11 @@ namespace WeightliftingTeam1.Data
                                                      Sex = athlete.Sex
                                                  });
             return Task.Run(() => (IEnumerable<Athlete>)resultAthletes.ToList());
+        }
+
+        internal static Task<IEnumerable<Record>> GetDataFromDB(WeightliftingContext context, RecordPanel recordPanel)
+        {
+            return Task.Run(()=> (IEnumerable<Record>)(new List<Record>() { }));
         }
     }
 }

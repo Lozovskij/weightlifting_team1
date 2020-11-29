@@ -23,13 +23,13 @@ namespace WeightliftingTeam1.Panels
         public bool CleanAndPressIsIncluded { get; set; } = false;
         public int WeightLowerLimit { get; set; }
         public int WeightUpperLimit { get; set; } = 500;
-        public int ResultLowerLimit { get; set; }
-        public int ResultUpperLimit { get; set; } = 500;
         public string AthleteName;
 
         public bool IsWorldRecordsIncluded { get; set; } = true;
         public bool IsOlympicRecordsIncluded { get; set; } = true;
         public bool IsActive { get; set; } = true;
+        public bool WomenIsIncluded { get; set; } = true;
+        public bool MenIsIncluded { get; set; } = true;
 
 
         public void ChangePeriodEvent(ChangeEventArgs e)
