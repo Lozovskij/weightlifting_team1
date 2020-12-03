@@ -43,7 +43,7 @@ namespace WeightliftingTeam1.Data
         private const string Snatch = "Snatch";
         private const string Press = "Press";
         private const string CleanAndJerk = "Clean and jerk";
-        public static Task<IEnumerable<Attempt>> GetDataFromDB(WeightliftingContext context, AttemptPanel attemptPanel)
+        internal static Task<IEnumerable<Attempt>> GetDataFromDB(WeightliftingContext context, AttemptPanel attemptPanel)
         {
             var resultAttemtps = context.Attempts.Where(attempt => attempt.Date >= attemptPanel.DateLowerLimit && attempt.Date <= attemptPanel.DateUpperLimit &&
                                                        (attempt.Exercise.Name == (attemptPanel.TotalIsIncluded ? Total : null) ||
@@ -67,7 +67,7 @@ namespace WeightliftingTeam1.Data
             return Task.Run(() => (IEnumerable<Attempt>)resultAttemtps.ToList());
         }
 
-        public static Task<IEnumerable<Athlete>> GetDataFromDB(WeightliftingContext context, AthletePanel athletePanel)
+        internal static Task<IEnumerable<Athlete>> GetDataFromDB(WeightliftingContext context, AthletePanel athletePanel)
         {
             var resultAthletes = context.Athletes.Where(athlete => athletePanel.Name != null ? athlete.Name == athletePanel.Name : true &&
                                                                    athletePanel.Country != null ? athlete.Country.Name == athletePanel.Country : true &&
@@ -85,7 +85,31 @@ namespace WeightliftingTeam1.Data
 
         internal static Task<IEnumerable<Record>> GetDataFromDB(WeightliftingContext context, RecordPanel recordPanel)
         {
-            return Task.Run(()=> (IEnumerable<Record>)(new List<Record>() { }));
+            var resultRecords = context.Records.Where(record => (recordPanel.MenIsIncluded && recordPanel.WomenIsIncluded ||
+                                                                    (recordPanel.MenIsIncluded ? record.Attempt.Athlete.Sex == "men" :
+                                                                        recordPanel.WomenIsIncluded && record.Attempt.Athlete.Sex == "women")) &&
+                                                                 (record.Attempt.Date >= recordPanel.DateLowerLimit && record.Attempt.Date <= recordPanel.DateUpperLimit) &&
+                                                                 (recordPanel.TotalIsIncluded ? record.Exercise.Name == Total : false ||
+                                                                 recordPanel.SnatchIsIncluded ? record.Exercise.Name == Snatch : false ||
+                                                                 recordPanel.CleanAndPressIsIncluded ? record.Exercise.Name == Press : false ||
+                                                                 recordPanel.CleanAndJerkIsIncluded ? record.Exercise.Name == CleanAndJerk : false) &&
+                                                                 (recordPanel.Competition == null || record.Attempt.Competition.Name == recordPanel.Competition) &&
+                                                                 (recordPanel.AthleteName == null || record.Attempt.Athlete.Name == recordPanel.AthleteName) &&
+                                                                 (record.Attempt.AthleteWeight >= recordPanel.WeightLowerLimit && record.Attempt.AthleteWeight <= recordPanel.WeightUpperLimit) &&
+                                                                 (recordPanel.IsWorldRecordsIncluded && recordPanel.IsOlympicRecordsIncluded ||
+                                                                    (recordPanel.IsWorldRecordsIncluded ? record.RecordTypeNavigation.Name == "World" :
+                                                                        recordPanel.IsOlympicRecordsIncluded && record.RecordTypeNavigation.Name == "Olympic")) &&
+                                                                 record.Active == recordPanel.IsActive)
+                                               .Select(record => new Record
+                                               {
+                                                   AthleteName = record.Attempt.Athlete.Name,
+                                                   Competition = record.Attempt.Competition.Name,
+                                                   Excercise = record.Exercise.Name,
+                                                   RecordType = record.RecordTypeNavigation.Name,
+                                                   Result = record.Attempt.Result,
+                                                   WeightCategory = record.Category.Name
+                                               });
+            return Task.Run(() => (IEnumerable<Record>)resultRecords.ToList());
         }
     }
 }
