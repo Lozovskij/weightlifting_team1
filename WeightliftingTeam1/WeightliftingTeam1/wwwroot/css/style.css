@@ -11,18 +11,16 @@
     background-color: rgba(142, 173, 230, 0.678);
 }
 
-.my-col{
-    padding: 10px;
-}
-
 .my-param-container {
-    padding: 2px;
+    padding: 5px;
+    border-radius: 5px;
     border: 1px solid rgb(197, 197, 197);
-    background-color:white;
+    background-color: white;
 }
 
 .content {
     background-color: rgba(244, 248, 250, 0.8);
+    background-color: white;
     min-height: 90vh;
 }
 

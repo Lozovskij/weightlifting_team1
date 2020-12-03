@@ -24,34 +24,23 @@
 </AuthorizeView>
 
 <div class="container-fluid min-vh-70">
-
-    <div class="row align-items-start pb-4">
-        <div class="col-md-4 col-lg-3 order-md-12  my-col">
-            <select @onchange="ChangePanelTypeEvent" class="custom-select mb-2">
-                <option value="@PanelType.Attempts">@PanelType.Attempts</option>
-                <option value="@PanelType.Athletes">@PanelType.Athletes</option>
-                <option value="@PanelType.Records">@PanelType.Records</option>
-            </select>
-
-            <AggregationPanel PanelType="CurrPanelType"
-                              AggregationPanels="AggregationPanels"
-                              OnSearchClick="SetDataForGrid"
-                              OnClearButtonClick="OnClearButtonClick">
-            </AggregationPanel>
+        <div class="row align-items-start pb-4">
+            <div class="col-md-4 col-lg-3 order-md-12 p-2">
+                <select @onchange="ChangePanelTypeEvent" class="custom-select mb-2 shadow-sm">
+                    <option value="@PanelType.Attempts">@PanelType.Attempts</option>
+                    <option value="@PanelType.Athletes">@PanelType.Athletes</option>
+                    <option value="@PanelType.Records">@PanelType.Records</option>
+                </select>
+                <div class="shadow-sm">
+                    <AggregationPanel PanelType="CurrPanelType"
+                                      AggregationPanels="AggregationPanels"
+                                      OnSearchClick="SetDataForGrid"
+                                      OnClearButtonClick="OnClearButtonClick">
+                    </AggregationPanel>
+                </div>
+            </div>
+            <div class="col-md-8 col-lg-9 p-2">
+                <MyTelerikGrid PanelType="CurrPanelType" DataForGrids="DataForGrids"></MyTelerikGrid>
+            </div>
         </div>
-        <div class="col-md-8 col-lg-9 my-col ">
-            <MyTelerikGrid PanelType="CurrPanelType" DataForGrids="DataForGrids"></MyTelerikGrid>
-        </div>
-    </div>
 </div>
-<style>
-    /* hide the built-in grid pager */
-    .custom-pager .k-grid .k-pager-wrap {
-        display: none;
-    }
-
-    /* just to showcase how the wrapper contrls the width of both components since they are now separate */
-    .custom-pager {
-        width: 600px;
-    }
-</style>
