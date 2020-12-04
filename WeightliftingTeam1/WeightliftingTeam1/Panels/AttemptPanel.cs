@@ -30,6 +30,9 @@ namespace WeightliftingTeam1.Panels
         public bool IsDisqualified { get; set; }
         //public bool ShowOnlyRecords { get; set; }
 
+        public bool WomenIsIncluded { get; set; } = true;
+        public bool MenIsIncluded { get; set; } = true;
+
         public void ChangePeriodEvent(ChangeEventArgs e)
         {
             string period = e.Value.ToString();

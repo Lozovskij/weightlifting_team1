@@ -7,6 +7,20 @@
             <DataAnnotationsValidator />
             @if (PanelType == PanelType.Attempts)
             {
+                <div class="my-param-container d-flex flex-column mb-1">
+                    <div>
+                        <InputCheckbox class="m-2" id="men" @bind-Value=AggregationPanels.AttemptPanel.MenIsIncluded />
+                        <label for="men">
+                            Men
+                        </label>
+                    </div>
+                    <div>
+                        <InputCheckbox class="m-2" id="women" @bind-Value=AggregationPanels.AttemptPanel.WomenIsIncluded />
+                        <label for="women">
+                            Women
+                        </label>
+                    </div>
+                </div>
                 <select @onchange="AggregationPanels.AttemptPanel.ChangePeriodEvent" class="custom-select">
                     <option value="">Period</option>
                     <option value="1920 - 1972">1920 - 1972</option>
