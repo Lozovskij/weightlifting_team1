@@ -20,24 +20,42 @@ namespace WeightliftingTeam1.Data
         public async Task<IEnumerable<Attempt>> FindData(AttemptPanel attemptPanel)
         {
             using var context = _contextFactory.CreateDbContext();
-            return await SearchForAttemptsHelper.GetDataFromDB(context, attemptPanel);
+            return await SearchHelper.GetDataFromDB(context, attemptPanel);
         }
 
         public async Task<IEnumerable<Athlete>> FindData(AthletePanel athletePanel)
         {
             using var context = _contextFactory.CreateDbContext();
-            return await SearchForAttemptsHelper.GetDataFromDB(context, athletePanel);
+            return await SearchHelper.GetDataFromDB(context, athletePanel);
         }
 
         public async Task<IEnumerable<Record>> FindData(RecordPanel recordPanel)
         {
             using var context = _contextFactory.CreateDbContext();
-            return await SearchForAttemptsHelper.GetDataFromDB(context, recordPanel);
+            return await SearchHelper.GetDataFromDB(context, recordPanel);
+        }
+
+        public async Task<IEnumerable<string>> GetCompetitions()
+        {
+            using var context = _contextFactory.CreateDbContext();
+            return await SearchHelper.GetCompetitions(context);
+        }
+
+        public async Task<IEnumerable<string>> GetAthleteNames()
+        {
+            using var context = _contextFactory.CreateDbContext();
+            return await SearchHelper.GetAthleteNames(context);
+        }
+
+        public async Task<IEnumerable<string>> GetCountries()
+        {
+            using var context = _contextFactory.CreateDbContext();
+            return await SearchHelper.GetCountries(context);
         }
     }
 
     //here you can do anything you need to get the data
-    public static class SearchForAttemptsHelper
+    public static class SearchHelper
     {
         private const string Total = "Total";
         private const string Snatch = "Snatch";
@@ -110,6 +128,21 @@ namespace WeightliftingTeam1.Data
                                                    WeightCategory = record.Category.Name
                                                });
             return Task.Run(() => (IEnumerable<Record>)resultRecords.ToList());
+        }
+
+        internal static Task<IEnumerable<string>> GetCompetitions(WeightliftingContext context)
+        {
+            return Task.Run(() => (IEnumerable<string>)context.Competitions.Select(competition => competition.Name).ToArray());
+        }
+
+        internal static Task<IEnumerable<string>> GetAthleteNames(WeightliftingContext context)
+        {
+            return Task.Run(() => (IEnumerable<string>)context.Athletes.Select(athlete => athlete.Name).ToArray());
+        }
+
+        internal static Task<IEnumerable<string>> GetCountries(WeightliftingContext context)
+        {
+            return Task.Run(() => (IEnumerable<string>)context.Countries.Select(country => country.Name).ToArray());
         }
     }
 }

@@ -42,10 +42,9 @@ namespace WeightliftingTeam1.Pages
 
         private async Task<AggregationPanels> InitializeAggregationPanels()
         {
-            //get it from the service, it is for dropdown
-            string[] competitions = { "Olimpic games 2019", "Winter olimpics 22", "Universe competition" };
-            string[] athleteNames = { "DIMAS Pyrros", "ASANIDZE George", "BAGHERI Kouroush", " WU Jingbiao" };
-            string[] countries = { "Abkhazia", "Australia", "Brazil", "Belarus" };
+            var competitions = await searchResultService.GetCompetitions();
+            var athleteNames = await searchResultService.GetAthleteNames();
+            var countries = await searchResultService.GetCountries();
             DataForDropdowns dataForDropdowns = new DataForDropdowns(competitions, athleteNames, countries);
             return new AggregationPanels(dataForDropdowns);
         }
