@@ -14,8 +14,8 @@ namespace WeightliftingTeam1.Data
             Countries = countries;
             AthleteNames = athleteNames;
         }
-        public IEnumerable<string> Competitions { get; private set; }
-        public IEnumerable<string> AthleteNames { get; private set; }
-        public IEnumerable<string> Countries { get; private set; }
+        public IEnumerable<string> Competitions { get; set; }
+        public IEnumerable<string> AthleteNames { get; set; }
+        public IEnumerable<string> Countries { get; set; }
     }
 }

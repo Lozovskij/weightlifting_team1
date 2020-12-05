@@ -9,7 +9,7 @@ namespace WeightliftingTeam1.Panels
 {
     public class AggregationPanels
     {
-        public DataForDropdowns DataForDropdowns { get; }
+        public DataForDropdowns DataForDropdowns { get; set; }
         public AttemptPanel AttemptPanel { get; set; }
         public AthletePanel AthletePanel { get; set; }
         public RecordPanel RecordPanel { get; set; }
