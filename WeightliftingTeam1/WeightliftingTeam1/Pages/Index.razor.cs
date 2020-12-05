@@ -21,17 +21,20 @@ namespace WeightliftingTeam1.Pages
         protected override async Task OnInitializedAsync()
         {
             CurrPanelType = PanelType.Attempts;
-            AggregationPanels = await InitializeAggregationPanels();
-            DataForGrids = await InitializeDataForGrids();
+            AggregationPanels = new AggregationPanels(new DataForDropdowns());
+            DataForGrids = new DataForGrids() { Attempts = null } ;
+            DataForGrids.Attempts = searchResultService.FindData(AggregationPanels.AttemptPanel);
+            AggregationPanels.DataForDropdowns = await Task.Run(() => InitializeDataForDropdowns());
+            DataForGrids = await Task.Run(() => InitializeDataForGrids());
         }
 
-        private async Task<DataForGrids> InitializeDataForGrids()
+        private DataForGrids InitializeDataForGrids()
         {
             DataForGrids dataForGrids = new DataForGrids
             {
-                DefaultAthletes = await searchResultService.FindData(AggregationPanels.AthletePanel),
-                DefaultAttempts = await searchResultService.FindData(AggregationPanels.AttemptPanel), 
-                DefaultRecords = await searchResultService.FindData(AggregationPanels.RecordPanel)
+                DefaultAthletes = searchResultService.FindData(AggregationPanels.AthletePanel),
+                DefaultAttempts = searchResultService.FindData(AggregationPanels.AttemptPanel), 
+                DefaultRecords = searchResultService.FindData(AggregationPanels.RecordPanel)
             };
             dataForGrids.Athletes = dataForGrids.DefaultAthletes;
             dataForGrids.Attempts = dataForGrids.DefaultAttempts;
@@ -40,33 +43,30 @@ namespace WeightliftingTeam1.Pages
             return dataForGrids;
         }
 
-        private async Task<AggregationPanels> InitializeAggregationPanels()
-        {
-            var competitions = await searchResultService.GetCompetitions();
-            var athleteNames = await searchResultService.GetAthleteNames();
-            var countries = await searchResultService.GetCountries();
-            DataForDropdowns dataForDropdowns = new DataForDropdowns(competitions, athleteNames, countries);
-            return new AggregationPanels(dataForDropdowns);
-        }
+        private DataForDropdowns InitializeDataForDropdowns() => new DataForDropdowns {
+                Competitions = searchResultService.GetCompetitions(),
+                Countries = searchResultService.GetCountries(),
+                AthleteNames = searchResultService.GetAthleteNames()
+        };
 
         public void ChangePanelTypeEvent(ChangeEventArgs e)
         {
             CurrPanelType = (PanelType)Enum.Parse(typeof(PanelType), e.Value.ToString(), true);
         }
 
-        private async Task SetDataForGrid(PanelType panelType)
+        private void SetDataForGrid(PanelType panelType)
         {
             if (panelType == PanelType.Attempts)
             {
-                DataForGrids.Attempts = await searchResultService.FindData(AggregationPanels.AttemptPanel);
+                DataForGrids.Attempts = searchResultService.FindData(AggregationPanels.AttemptPanel);
             }
             else if (panelType == PanelType.Athletes)
             {
-                DataForGrids.Athletes = await searchResultService.FindData(AggregationPanels.AthletePanel);
+                DataForGrids.Athletes = searchResultService.FindData(AggregationPanels.AthletePanel);
             }
             else if (panelType == PanelType.Records)
             {
-                DataForGrids.Records = await searchResultService.FindData(AggregationPanels.RecordPanel);
+                DataForGrids.Records = searchResultService.FindData(AggregationPanels.RecordPanel);
             }
             else
             {
