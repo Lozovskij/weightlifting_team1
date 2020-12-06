@@ -95,10 +95,10 @@ namespace WeightliftingTeam1.Data
 
         internal static IEnumerable<Athlete> GetDataFromDB(WeightliftingContext context, AthletePanel athletePanel)
         {
-            var resultAthletes = context.Athletes.Where(athlete => athletePanel.Name != null ? athlete.Name == athletePanel.Name : true &&
-                                                                   athletePanel.Country != null ? athlete.Country.Name == athletePanel.Country : true &&
-                                                                   athletePanel.MenIsIncluded && athletePanel.WomenIsIncluded || 
-                                                                        (athletePanel.MenIsIncluded ? athlete.Sex == Men : athletePanel.WomenIsIncluded && athlete.Sex == Women))
+            var resultAthletes = context.Athletes.Where(athlete => (athletePanel.Name == null || athlete.Name == athletePanel.Name) &&
+                                                                   (athletePanel.Country == null || athlete.Country.Name == athletePanel.Country) &&
+                                                                   (athletePanel.MenIsIncluded && athletePanel.WomenIsIncluded || 
+                                                                        (athletePanel.MenIsIncluded ? athlete.Sex == Men : athletePanel.WomenIsIncluded && athlete.Sex == Women)))
                                                  .Select(athlete => new Athlete
                                                  {
                                                      Country = athlete.Country.Name,
