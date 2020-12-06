@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using WeightliftingTeam1.Models;
 
-namespace WeightliftingTeam1.Models
+namespace WeightliftingTeam1.Data
 {
     public partial class WeightliftingContext : DbContext
     {
