@@ -13,44 +13,45 @@ namespace WeightliftingTeam1.Data
     public class SearchResultService
     {
         private readonly IDbContextFactory<WeightliftingContext> _contextFactory;
+        private readonly WeightliftingContext _context;
         public SearchResultService(IDbContextFactory<WeightliftingContext> contextFactory)
         {
             _contextFactory = contextFactory;
+            _context = _contextFactory.CreateDbContext();
         }
         public IEnumerable<Attempt> FindData(AttemptPanel attemptPanel)
         {
-            using var context = _contextFactory.CreateDbContext();
-            return SearchHelper.GetDataFromDB(context, attemptPanel);
+            return SearchHelper.GetDataFromDB(_context, attemptPanel);
         }
 
         public IEnumerable<Athlete> FindData(AthletePanel athletePanel)
         {
-            using var context = _contextFactory.CreateDbContext();
-            return SearchHelper.GetDataFromDB(context, athletePanel);
+            return SearchHelper.GetDataFromDB(_context, athletePanel);
         }
 
         public IEnumerable<Record> FindData(RecordPanel recordPanel)
         {
-            using var context = _contextFactory.CreateDbContext();
-            return SearchHelper.GetDataFromDB(context, recordPanel);
+            return SearchHelper.GetDataFromDB(_context, recordPanel);
         }
 
         public IEnumerable<string> GetCompetitions()
         {
-            using var context = _contextFactory.CreateDbContext();
-            return SearchHelper.GetCompetitions(context);
+            return SearchHelper.GetCompetitions(_context);
         }
 
         public IEnumerable<string> GetAthleteNames()
         {
-            using var context = _contextFactory.CreateDbContext();
-            return SearchHelper.GetAthleteNames(context);
+            return SearchHelper.GetAthleteNames(_context);
         }
 
         public IEnumerable<string> GetCountries()
         {
-            using var context = _contextFactory.CreateDbContext();
-            return SearchHelper.GetCountries(context);
+            return SearchHelper.GetCountries(_context);
+        }
+
+        ~SearchResultService()
+        {
+            _context.Dispose();
         }
     }
 
