@@ -63,6 +63,8 @@ namespace WeightliftingTeam1.Data
         private const string CleanAndJerk = "Clean and jerk";
         private const string Men = "men";
         private const string Women = "women";
+        private const string World = "World";
+        private const string Olympic = "Olympic";
         internal static IEnumerable<Attempt> GetDataFromDB(WeightliftingContext context, AttemptPanel attemptPanel)
         {
             var resultAttemtps = context.Attempts.Where(attempt => (attemptPanel.MenIsIncluded && attemptPanel.WomenIsIncluded || 
@@ -95,7 +97,7 @@ namespace WeightliftingTeam1.Data
             var resultAthletes = context.Athletes.Where(athlete => athletePanel.Name != null ? athlete.Name == athletePanel.Name : true &&
                                                                    athletePanel.Country != null ? athlete.Country.Name == athletePanel.Country : true &&
                                                                    athletePanel.MenIsIncluded && athletePanel.WomenIsIncluded || 
-                                                                        (athletePanel.MenIsIncluded ? athlete.Sex == "men" : athletePanel.WomenIsIncluded && athlete.Sex == "women"))
+                                                                        (athletePanel.MenIsIncluded ? athlete.Sex == Men : athletePanel.WomenIsIncluded && athlete.Sex == Women))
                                                  .Select(athlete => new Athlete
                                                  {
                                                      Country = athlete.Country.Name,
@@ -109,8 +111,8 @@ namespace WeightliftingTeam1.Data
         internal static IEnumerable<Record> GetDataFromDB(WeightliftingContext context, RecordPanel recordPanel)
         {
             var resultRecords = context.Records.Where(record => (recordPanel.MenIsIncluded && recordPanel.WomenIsIncluded ||
-                                                                    (recordPanel.MenIsIncluded ? record.Attempt.Athlete.Sex == "men" :
-                                                                        recordPanel.WomenIsIncluded && record.Attempt.Athlete.Sex == "women")) &&
+                                                                    (recordPanel.MenIsIncluded ? record.Attempt.Athlete.Sex == Men :
+                                                                        recordPanel.WomenIsIncluded && record.Attempt.Athlete.Sex == Women)) &&
                                                                  (record.Attempt.Date >= recordPanel.DateLowerLimit && record.Attempt.Date <= recordPanel.DateUpperLimit) &&
                                                                  (recordPanel.TotalIsIncluded ? record.Exercise.Name == Total : false ||
                                                                  recordPanel.SnatchIsIncluded ? record.Exercise.Name == Snatch : false ||
@@ -120,8 +122,8 @@ namespace WeightliftingTeam1.Data
                                                                  (recordPanel.AthleteName == null || record.Attempt.Athlete.Name == recordPanel.AthleteName) &&
                                                                  (record.Attempt.AthleteWeight >= recordPanel.WeightLowerLimit && record.Attempt.AthleteWeight <= recordPanel.WeightUpperLimit) &&
                                                                  (recordPanel.IsWorldRecordsIncluded && recordPanel.IsOlympicRecordsIncluded ||
-                                                                    (recordPanel.IsWorldRecordsIncluded ? record.RecordTypeNavigation.Name == "World" :
-                                                                        recordPanel.IsOlympicRecordsIncluded && record.RecordTypeNavigation.Name == "Olympic")) &&
+                                                                    (recordPanel.IsWorldRecordsIncluded ? record.RecordTypeNavigation.Name == World :
+                                                                        recordPanel.IsOlympicRecordsIncluded && record.RecordTypeNavigation.Name == Olympic)) &&
                                                                  record.Active == recordPanel.IsActive)
                                                .Select(record => new Record
                                                {
