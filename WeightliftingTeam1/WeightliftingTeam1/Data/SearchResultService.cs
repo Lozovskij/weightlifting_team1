@@ -61,9 +61,14 @@ namespace WeightliftingTeam1.Data
         private const string Snatch = "Snatch";
         private const string Press = "Press";
         private const string CleanAndJerk = "Clean and jerk";
+        private const string Men = "men";
+        private const string Women = "women";
         internal static IEnumerable<Attempt> GetDataFromDB(WeightliftingContext context, AttemptPanel attemptPanel)
         {
-            var resultAttemtps = context.Attempts.Where(attempt => attempt.Date >= attemptPanel.DateLowerLimit && attempt.Date <= attemptPanel.DateUpperLimit &&
+            var resultAttemtps = context.Attempts.Where(attempt => (attemptPanel.MenIsIncluded && attemptPanel.WomenIsIncluded || 
+                                                            (attemptPanel.MenIsIncluded ? attempt.Athlete.Sex == Men : 
+                                                                attemptPanel.WomenIsIncluded && attempt.Athlete.Sex == Women)) &&
+                                                       attempt.Date >= attemptPanel.DateLowerLimit && attempt.Date <= attemptPanel.DateUpperLimit &&
                                                        (attempt.Exercise.Name == (attemptPanel.TotalIsIncluded ? Total : null) ||
                                                        attempt.Exercise.Name == (attemptPanel.SnatchIsIncluded ? Snatch : null) ||
                                                        attempt.Exercise.Name == (attemptPanel.CleanAndPressIsIncluded ? Press : null) ||
