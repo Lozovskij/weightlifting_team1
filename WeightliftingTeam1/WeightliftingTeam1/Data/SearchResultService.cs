@@ -13,44 +13,45 @@ namespace WeightliftingTeam1.Data
     public class SearchResultService
     {
         private readonly IDbContextFactory<WeightliftingContext> _contextFactory;
+        private readonly WeightliftingContext _context;
         public SearchResultService(IDbContextFactory<WeightliftingContext> contextFactory)
         {
             _contextFactory = contextFactory;
+            _context = _contextFactory.CreateDbContext();
         }
         public IEnumerable<Attempt> FindData(AttemptPanel attemptPanel)
         {
-            using var context = _contextFactory.CreateDbContext();
-            return SearchHelper.GetDataFromDB(context, attemptPanel);
+            return SearchHelper.GetDataFromDB(_context, attemptPanel);
         }
 
         public IEnumerable<Athlete> FindData(AthletePanel athletePanel)
         {
-            using var context = _contextFactory.CreateDbContext();
-            return SearchHelper.GetDataFromDB(context, athletePanel);
+            return SearchHelper.GetDataFromDB(_context, athletePanel);
         }
 
         public IEnumerable<Record> FindData(RecordPanel recordPanel)
         {
-            using var context = _contextFactory.CreateDbContext();
-            return SearchHelper.GetDataFromDB(context, recordPanel);
+            return SearchHelper.GetDataFromDB(_context, recordPanel);
         }
 
         public IEnumerable<string> GetCompetitions()
         {
-            using var context = _contextFactory.CreateDbContext();
-            return SearchHelper.GetCompetitions(context);
+            return SearchHelper.GetCompetitions(_context);
         }
 
         public IEnumerable<string> GetAthleteNames()
         {
-            using var context = _contextFactory.CreateDbContext();
-            return SearchHelper.GetAthleteNames(context);
+            return SearchHelper.GetAthleteNames(_context);
         }
 
         public IEnumerable<string> GetCountries()
         {
-            using var context = _contextFactory.CreateDbContext();
-            return SearchHelper.GetCountries(context);
+            return SearchHelper.GetCountries(_context);
+        }
+
+        ~SearchResultService()
+        {
+            _context.Dispose();
         }
     }
 
@@ -61,9 +62,16 @@ namespace WeightliftingTeam1.Data
         private const string Snatch = "Snatch";
         private const string Press = "Press";
         private const string CleanAndJerk = "Clean and jerk";
+        private const string Men = "men";
+        private const string Women = "women";
+        private const string World = "World";
+        private const string Olympic = "Olympic";
         internal static IEnumerable<Attempt> GetDataFromDB(WeightliftingContext context, AttemptPanel attemptPanel)
         {
-            var resultAttemtps = context.Attempts.Where(attempt => attempt.Date >= attemptPanel.DateLowerLimit && attempt.Date <= attemptPanel.DateUpperLimit &&
+            var resultAttemtps = context.Attempts.Where(attempt => (attemptPanel.MenIsIncluded && attemptPanel.WomenIsIncluded || 
+                                                            (attemptPanel.MenIsIncluded ? attempt.Athlete.Sex == Men : 
+                                                                attemptPanel.WomenIsIncluded && attempt.Athlete.Sex == Women)) &&
+                                                       attempt.Date >= attemptPanel.DateLowerLimit && attempt.Date <= attemptPanel.DateUpperLimit &&
                                                        (attempt.Exercise.Name == (attemptPanel.TotalIsIncluded ? Total : null) ||
                                                        attempt.Exercise.Name == (attemptPanel.SnatchIsIncluded ? Snatch : null) ||
                                                        attempt.Exercise.Name == (attemptPanel.CleanAndPressIsIncluded ? Press : null) ||
@@ -87,10 +95,10 @@ namespace WeightliftingTeam1.Data
 
         internal static IEnumerable<Athlete> GetDataFromDB(WeightliftingContext context, AthletePanel athletePanel)
         {
-            var resultAthletes = context.Athletes.Where(athlete => athletePanel.Name != null ? athlete.Name == athletePanel.Name : true &&
-                                                                   athletePanel.Country != null ? athlete.Country.Name == athletePanel.Country : true &&
-                                                                   athletePanel.MenIsIncluded && athletePanel.WomenIsIncluded || 
-                                                                        (athletePanel.MenIsIncluded ? athlete.Sex == "men" : athletePanel.WomenIsIncluded && athlete.Sex == "women"))
+            var resultAthletes = context.Athletes.Where(athlete => (athletePanel.Name == null || athlete.Name == athletePanel.Name) &&
+                                                                   (athletePanel.Country == null || athlete.Country.Name == athletePanel.Country) &&
+                                                                   (athletePanel.MenIsIncluded && athletePanel.WomenIsIncluded || 
+                                                                        (athletePanel.MenIsIncluded ? athlete.Sex == Men : athletePanel.WomenIsIncluded && athlete.Sex == Women)))
                                                  .Select(athlete => new Athlete
                                                  {
                                                      Country = athlete.Country.Name,
@@ -104,8 +112,8 @@ namespace WeightliftingTeam1.Data
         internal static IEnumerable<Record> GetDataFromDB(WeightliftingContext context, RecordPanel recordPanel)
         {
             var resultRecords = context.Records.Where(record => (recordPanel.MenIsIncluded && recordPanel.WomenIsIncluded ||
-                                                                    (recordPanel.MenIsIncluded ? record.Attempt.Athlete.Sex == "men" :
-                                                                        recordPanel.WomenIsIncluded && record.Attempt.Athlete.Sex == "women")) &&
+                                                                    (recordPanel.MenIsIncluded ? record.Attempt.Athlete.Sex == Men :
+                                                                        recordPanel.WomenIsIncluded && record.Attempt.Athlete.Sex == Women)) &&
                                                                  (record.Attempt.Date >= recordPanel.DateLowerLimit && record.Attempt.Date <= recordPanel.DateUpperLimit) &&
                                                                  (recordPanel.TotalIsIncluded ? record.Exercise.Name == Total : false ||
                                                                  recordPanel.SnatchIsIncluded ? record.Exercise.Name == Snatch : false ||
@@ -115,8 +123,8 @@ namespace WeightliftingTeam1.Data
                                                                  (recordPanel.AthleteName == null || record.Attempt.Athlete.Name == recordPanel.AthleteName) &&
                                                                  (record.Attempt.AthleteWeight >= recordPanel.WeightLowerLimit && record.Attempt.AthleteWeight <= recordPanel.WeightUpperLimit) &&
                                                                  (recordPanel.IsWorldRecordsIncluded && recordPanel.IsOlympicRecordsIncluded ||
-                                                                    (recordPanel.IsWorldRecordsIncluded ? record.RecordTypeNavigation.Name == "World" :
-                                                                        recordPanel.IsOlympicRecordsIncluded && record.RecordTypeNavigation.Name == "Olympic")) &&
+                                                                    (recordPanel.IsWorldRecordsIncluded ? record.RecordTypeNavigation.Name == World :
+                                                                        recordPanel.IsOlympicRecordsIncluded && record.RecordTypeNavigation.Name == Olympic)) &&
                                                                  record.Active == recordPanel.IsActive)
                                                .Select(record => new Record
                                                {

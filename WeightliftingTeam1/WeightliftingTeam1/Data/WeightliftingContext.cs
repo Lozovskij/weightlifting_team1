@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using WeightliftingTeam1.Models;
 
-namespace WeightliftingTeam1.Models
+namespace WeightliftingTeam1.Data
 {
     public partial class WeightliftingContext : DbContext
     {
@@ -344,7 +345,7 @@ namespace WeightliftingTeam1.Models
                 entity.ToTable("record_types");
 
                 entity.HasIndex(e => e.Id)
-                    .HasName("record_types_id_uindex")
+                    .HasDatabaseName("record_types_id_uindex")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -360,7 +361,7 @@ namespace WeightliftingTeam1.Models
                 entity.ToTable("records");
 
                 entity.HasIndex(e => e.Id)
-                    .HasName("records_id_uindex")
+                    .HasDatabaseName("records_id_uindex")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
