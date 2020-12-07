@@ -22,8 +22,10 @@ namespace WeightliftingTeam1.Pages
         {
             CurrPanelType = PanelType.Attempts;
             AggregationPanels = new AggregationPanels(new DataForDropdowns());
-            DataForGrids = new DataForGrids() { Attempts = null } ;
-            DataForGrids.Attempts = searchResultService.FindData(AggregationPanels.AttemptPanel);
+            DataForGrids = new DataForGrids
+            {
+                Attempts = searchResultService.FindData(AggregationPanels.AttemptPanel)
+            };
             AggregationPanels.DataForDropdowns = await Task.Run(() => InitializeDataForDropdowns());
             DataForGrids = await Task.Run(() => InitializeDataForGrids());
         }

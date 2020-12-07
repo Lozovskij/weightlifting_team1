@@ -84,8 +84,8 @@ namespace WeightliftingTeam1.Data
                                                  .Select(attempt => new Attempt
                                                  {
                                                      AthleteName = attempt.Athlete.Name,
+                                                     Sex = attempt.Athlete.Sex,
                                                      Competition = attempt.Competition.Name,
-                                                     Date = attempt.Date.ToString(),
                                                      Excercise = attempt.Exercise.Name,
                                                      Result = attempt.Result,
                                                      WeightCategory = context.AttemptCategory.Single(category => category.AttemptId == attempt.Id).Category.Name
