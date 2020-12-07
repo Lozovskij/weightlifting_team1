@@ -8,8 +8,6 @@ namespace WeightliftingTeam1.ModelsForOutput
 {
     public class Attempt
     {
-        public string Date { get; set; }
-
         public string Competition { get; set; }
 
         public string Excercise { get; set; }
@@ -21,6 +19,9 @@ namespace WeightliftingTeam1.ModelsForOutput
 
         [Display(Name = "Name")]
         public string AthleteName { get; set; }
+
+        [Display(Name = "Sex")]
+        public string Sex { get; set; }
 
     }
 }
