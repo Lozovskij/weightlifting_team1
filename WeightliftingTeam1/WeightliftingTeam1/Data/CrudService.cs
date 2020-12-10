@@ -136,5 +136,29 @@ namespace WeightliftingTeam1.Data
             _context.WeightCategories.Remove(weightCategory);
             _context.SaveChanges();
         }
+
+        public void CreateCountry(Countries country)
+        {
+            _context.Countries.Add(country);
+            _context.SaveChanges();
+        }
+
+        public Countries ReadCountry(int countryId)
+        {
+            return _context.Countries.Find(countryId);
+        }
+
+        public void UpdateCountry(Countries country)
+        {
+            var countryToUpdate = _context.Countries.Find(country.Id);
+            _context.Countries.Update(countryToUpdate);
+            _context.SaveChanges();
+        }
+
+        public void DeleteCountry(Countries country)
+        {
+            _context.Countries.Remove(country);
+            _context.SaveChanges();
+        }
     }
 }
