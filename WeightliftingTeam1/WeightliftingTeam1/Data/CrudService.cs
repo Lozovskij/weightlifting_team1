@@ -40,5 +40,29 @@ namespace WeightliftingTeam1.Data
             _context.Athletes.Remove(athlete);
             _context.SaveChanges();
         }
+
+        public void CreateAttempt(Attempts attempt)
+        {
+            _context.Attempts.Add(attempt);
+            _context.SaveChanges();
+        }
+
+        public Attempts ReadAttempt(int attemptId)
+        {
+            return _context.Attempts.Find(attemptId);
+        }
+
+        public void UpdateAttempt(Attempts attempt)
+        {
+            var attemptToUpdate = _context.Attempts.Find(attempt.Id);
+            _context.Attempts.Update(attemptToUpdate);
+            _context.SaveChanges();
+        }
+
+        public void DeleteAttempt(Attempts attempt)
+        {
+            _context.Attempts.Remove(attempt);
+            _context.SaveChanges();
+        }
     }
 }
