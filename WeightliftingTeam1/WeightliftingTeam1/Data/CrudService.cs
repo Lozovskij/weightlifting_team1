@@ -17,148 +17,37 @@ namespace WeightliftingTeam1.Data
             _context = _contextFactory.CreateDbContext();
         }
 
-        public void CreateAthlete(Athletes athlete)
+        public void Create<TEntity>(TEntity entity)
         {
-            _context.Athletes.Add(athlete);
+            var propertyInfo = FindProperty(typeof(TEntity));
+            propertyInfo.PropertyType.GetMethod("Add").Invoke(propertyInfo.GetValue(_context), new object[] { entity });
             _context.SaveChanges();
         }
 
-        public Athletes ReadAthlete(int athleteId)
+        public TEntity Read<TEntity>(int id)
         {
-            return _context.Athletes.Find(athleteId);
+            var propertyInfo = FindProperty(typeof(TEntity));
+            return (TEntity)propertyInfo.PropertyType.GetMethod("Find").Invoke(propertyInfo.GetValue(_context), new object[] { id });
         }
 
-        public void UpdateAthlete(Athletes athlete)
+        public void Update<TEntity>(TEntity entity)
         {
-            var athleteToUpdate = _context.Athletes.Find(athlete.Id);
-            _context.Athletes.Update(athleteToUpdate);
+            var propertyInfo = FindProperty(typeof(TEntity));
+            var entityToUpdate = (TEntity)propertyInfo.PropertyType.GetMethod("Find").Invoke(propertyInfo.GetValue(_context), new object[] { typeof(TEntity).GetProperty("Id").GetValue(entity) });
+            propertyInfo.PropertyType.GetMethod("Update").Invoke(propertyInfo.GetValue(_context), new object[] { entityToUpdate });
             _context.SaveChanges();
         }
 
-        public void DeleteAthlete(Athletes athlete)
+        public void Delete<TEntity>(TEntity entity)
         {
-            _context.Athletes.Remove(athlete);
+            var propertyInfo = FindProperty(typeof(TEntity));
+            propertyInfo.PropertyType.GetMethod("Remove").Invoke(propertyInfo.GetValue(_context), new object[] { entity });
             _context.SaveChanges();
         }
 
-        public void CreateAttempt(Attempts attempt)
+        private System.Reflection.PropertyInfo FindProperty(Type genericPropertyType)
         {
-            _context.Attempts.Add(attempt);
-            _context.SaveChanges();
-        }
-
-        public Attempts ReadAttempt(int attemptId)
-        {
-            return _context.Attempts.Find(attemptId);
-        }
-
-        public void UpdateAttempt(Attempts attempt)
-        {
-            var attemptToUpdate = _context.Attempts.Find(attempt.Id);
-            _context.Attempts.Update(attemptToUpdate);
-            _context.SaveChanges();
-        }
-
-        public void DeleteAttempt(Attempts attempt)
-        {
-            _context.Attempts.Remove(attempt);
-            _context.SaveChanges();
-        }
-
-        public void CreateCompetition(Competitions competition)
-        {
-            _context.Competitions.Add(competition);
-            _context.SaveChanges();
-        }
-
-        public Competitions ReadCompetition(int competitionId)
-        {
-            return _context.Competitions.Find(competitionId);
-        }
-
-        public void UpdateCompetition(Competitions competition)
-        {
-            var competitionToUpdate = _context.Competitions.Find(competition.Id);
-            _context.Competitions.Update(competitionToUpdate);
-            _context.SaveChanges();
-        }
-
-        public void DeleteCompetition(Competitions competition)
-        {
-            _context.Competitions.Remove(competition);
-            _context.SaveChanges();
-        }
-
-        public void CreateExercise(Exercises exercise)
-        {
-            _context.Exercises.Add(exercise);
-            _context.SaveChanges();
-        }
-
-        public Exercises ReadExercise(int exerciseId)
-        {
-            return _context.Exercises.Find(exerciseId);
-        }
-
-        public void UpdateExercise(Exercises exercise)
-        {
-            var exerciseToUpdate = _context.Exercises.Find(exercise.Id);
-            _context.Exercises.Update(exerciseToUpdate);
-            _context.SaveChanges();
-        }
-
-        public void DeleteExercise(Exercises exercise)
-        {
-            _context.Exercises.Remove(exercise);
-            _context.SaveChanges();
-        }
-
-        public void CreateWeightCategory(WeightCategories weightCategory)
-        {
-            _context.WeightCategories.Add(weightCategory);
-            _context.SaveChanges();
-        }
-
-        public WeightCategories ReadWeightCategory(int weightCategoryId)
-        {
-            return _context.WeightCategories.Find(weightCategoryId);
-        }
-
-        public void UpdateWeightCategory(WeightCategories weightCategory)
-        {
-            var weightCategoryToUpdate = _context.WeightCategories.Find(weightCategory.Id);
-            _context.WeightCategories.Update(weightCategoryToUpdate);
-            _context.SaveChanges();
-        }
-
-        public void DeleteWeightCategory(WeightCategories weightCategory)
-        {
-            _context.WeightCategories.Remove(weightCategory);
-            _context.SaveChanges();
-        }
-
-        public void CreateCountry(Countries country)
-        {
-            _context.Countries.Add(country);
-            _context.SaveChanges();
-        }
-
-        public Countries ReadCountry(int countryId)
-        {
-            return _context.Countries.Find(countryId);
-        }
-
-        public void UpdateCountry(Countries country)
-        {
-            var countryToUpdate = _context.Countries.Find(country.Id);
-            _context.Countries.Update(countryToUpdate);
-            _context.SaveChanges();
-        }
-
-        public void DeleteCountry(Countries country)
-        {
-            _context.Countries.Remove(country);
-            _context.SaveChanges();
+            return typeof(WeightliftingContext).GetProperties().Single(propertyInfo => propertyInfo.PropertyType.IsGenericType && propertyInfo.PropertyType.GetGenericTypeDefinition() == genericPropertyType);
         }
     }
 }
