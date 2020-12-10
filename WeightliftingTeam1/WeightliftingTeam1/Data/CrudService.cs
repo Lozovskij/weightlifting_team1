@@ -64,5 +64,29 @@ namespace WeightliftingTeam1.Data
             _context.Attempts.Remove(attempt);
             _context.SaveChanges();
         }
+
+        public void CreateCompetition(Competitions competition)
+        {
+            _context.Competitions.Add(competition);
+            _context.SaveChanges();
+        }
+
+        public Competitions ReadCompetition(int competitionId)
+        {
+            return _context.Competitions.Find(competitionId);
+        }
+
+        public void UpdateCompetition(Competitions competition)
+        {
+            var competitionToUpdate = _context.Competitions.Find(competition.Id);
+            _context.Competitions.Update(competitionToUpdate);
+            _context.SaveChanges();
+        }
+
+        public void DeleteCompetition(Competitions competition)
+        {
+            _context.Competitions.Remove(competition);
+            _context.SaveChanges();
+        }
     }
 }
