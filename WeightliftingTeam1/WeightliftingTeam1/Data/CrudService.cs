@@ -112,5 +112,29 @@ namespace WeightliftingTeam1.Data
             _context.Exercises.Remove(exercise);
             _context.SaveChanges();
         }
+
+        public void CreateWeightCategory(WeightCategories weightCategory)
+        {
+            _context.WeightCategories.Add(weightCategory);
+            _context.SaveChanges();
+        }
+
+        public WeightCategories ReadWeightCategory(int weightCategoryId)
+        {
+            return _context.WeightCategories.Find(weightCategoryId);
+        }
+
+        public void UpdateWeightCategory(WeightCategories weightCategory)
+        {
+            var weightCategoryToUpdate = _context.WeightCategories.Find(weightCategory.Id);
+            _context.WeightCategories.Update(weightCategoryToUpdate);
+            _context.SaveChanges();
+        }
+
+        public void DeleteWeightCategory(WeightCategories weightCategory)
+        {
+            _context.WeightCategories.Remove(weightCategory);
+            _context.SaveChanges();
+        }
     }
 }
