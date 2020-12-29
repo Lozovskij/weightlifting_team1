@@ -30,7 +30,7 @@ namespace WeightliftingTeam1.Pages
 
                 await sessionStorage.SetItemAsync("hash", PasswordValidation.GetHash(user.Password));
 
-                NavigationManager.NavigateTo("/");
+                NavigationManager.NavigateTo("/editing");
             }
             else
             {
