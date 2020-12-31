@@ -51,9 +51,14 @@ namespace WeightliftingTeam1.Pages
                 AthleteNames = searchResultService.GetAthleteNames()
         };
 
-        public void ChangePanelTypeEvent(ChangeEventArgs e)
+        //public void ChangePanelTypeEvent(ChangeEventArgs e)
+        //{
+        //    CurrPanelType = (PanelType)Enum.Parse(typeof(PanelType), e.Value.ToString(), true);
+        //}
+
+        public void ChangePanelTypeEvent(PanelType panelType)
         {
-            CurrPanelType = (PanelType)Enum.Parse(typeof(PanelType), e.Value.ToString(), true);
+            CurrPanelType = panelType;
         }
 
         private void SetDataForGrid(PanelType panelType)

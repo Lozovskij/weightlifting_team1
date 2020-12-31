@@ -10,7 +10,7 @@
 
     <SurveyPrompt Title="How is Blazor working for you?" />*@
 
-<AuthorizeView>
+@*<AuthorizeView>
     <Authorized>
         <div class="text-section">
             hi admin
@@ -21,26 +21,45 @@
             The site is dedicated to weightlifting results
         </div>
     </NotAuthorized>
-</AuthorizeView>
+</AuthorizeView>*@
+
+<div class="text-section">
+    This site is dedicated to weightlifting results
+</div>
 
 <div class="container-fluid min-vh-70">
-        <div class="row align-items-start pb-4">
-            <div class="col-md-4 col-lg-3 order-md-12 p-2">
-                <select @onchange="ChangePanelTypeEvent" class="custom-select mb-2 shadow-sm">
-                    <option value="@PanelType.Attempts">@PanelType.Attempts</option>
-                    <option value="@PanelType.Athletes">@PanelType.Athletes</option>
-                    <option value="@PanelType.Records">@PanelType.Records</option>
-                </select>
-                <div class="shadow-sm">
-                    <AggregationPanel PanelType="CurrPanelType"
-                                      AggregationPanels="AggregationPanels"
-                                      OnSearchClick="SetDataForGrid"
-                                      OnClearButtonClick="OnClearButtonClick">
-                    </AggregationPanel>
+
+    <ul class="nav nav-pills mt-2 mb-1" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-attempts-tab" data-toggle="pill" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="true"
+               @onclick="()=>ChangePanelTypeEvent(PanelType.Attempts)">@PanelType.Attempts</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-athletes-tab" data-toggle="pill" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="false"
+               @onclick="()=>ChangePanelTypeEvent(PanelType.Athletes)">@PanelType.Athletes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-records-tab" data-toggle="pill" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="false"
+               @onclick="()=>ChangePanelTypeEvent(PanelType.Records)">@PanelType.Records</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-area" role="tabpanel">
+
+            <div class="row align-items-start pb-4">
+                <div class="col-md-4 col-lg-3 order-md-12 p-2">
+                    <div class="shadow-sm">
+                        <AggregationPanel PanelType="CurrPanelType"
+                                          AggregationPanels="AggregationPanels"
+                                          OnSearchClick="SetDataForGrid"
+                                          OnClearButtonClick="OnClearButtonClick">
+                        </AggregationPanel>
+                    </div>
+                </div>
+                <div class="col-md-8 col-lg-9 p-2">
+                    <MyTelerikGrid PanelType="CurrPanelType" DataForGrids="DataForGrids"></MyTelerikGrid>
                 </div>
             </div>
-            <div class="col-md-8 col-lg-9 p-2">
-                <MyTelerikGrid PanelType="CurrPanelType" DataForGrids="DataForGrids"></MyTelerikGrid>
-            </div>
         </div>
+    </div>
 </div>
