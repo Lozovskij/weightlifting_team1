@@ -23,7 +23,7 @@ namespace WeightliftingTeam1.Components
 
         int CurrentPage { get; set; } = 1;
 
-        int PageSize { get; set; } = 11;
+        int PageSize { get; set; } = 13;
 
         protected override void OnParametersSet()
         {
