@@ -23,43 +23,50 @@
     </NotAuthorized>
 </AuthorizeView>*@
 
-<div class="text-section">
-    This site is dedicated to weightlifting results
-</div>
 
-<div class="container-fluid min-vh-70">
+    <div class="text-section mx-2 mx-sm-3 mx-md-4 mx-lg-5">
+        This site is dedicated to weightlifting results
+    </div>
+<div class="min-vh-70 grid-section">
 
-    <ul class="nav nav-pills mt-2 mb-1" id="pills-tab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="pills-attempts-tab" data-toggle="pill" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="true"
-               @onclick="()=>ChangePanelTypeEvent(PanelType.Attempts)">@PanelType.Attempts</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="pills-athletes-tab" data-toggle="pill" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="false"
-               @onclick="()=>ChangePanelTypeEvent(PanelType.Athletes)">@PanelType.Athletes</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="pills-records-tab" data-toggle="pill" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="false"
-               @onclick="()=>ChangePanelTypeEvent(PanelType.Records)">@PanelType.Records</a>
-        </li>
-    </ul>
-    <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-area" role="tabpanel">
+    <div class="shadow-lg my-container mx-2 mx-sm-3 mx-md-4 mx-lg-5 my-3">
 
-            <div class="row align-items-start pb-4">
-                <div class="col-md-4 col-lg-3 order-md-12 p-2">
-                    <div class="shadow-sm">
-                        <AggregationPanel PanelType="CurrPanelType"
-                                          AggregationPanels="AggregationPanels"
-                                          OnSearchClick="SetDataForGrid"
-                                          OnClearButtonClick="OnClearButtonClick">
-                        </AggregationPanel>
+        <ul class="nav nav-pills mt-2 px-2" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-attempts-tab" data-toggle="pill" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="true"
+                   @onclick="()=>ChangePanelTypeEvent(PanelType.Attempts)">@PanelType.Attempts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-athletes-tab" data-toggle="pill" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="false"
+                   @onclick="()=>ChangePanelTypeEvent(PanelType.Athletes)">@PanelType.Athletes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-records-tab" data-toggle="pill" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="false"
+                   @onclick="()=>ChangePanelTypeEvent(PanelType.Records)">@PanelType.Records</a>
+            </li>
+        </ul>
+        
+        <div class="tab-content" id="pills-tabContent">
+            <div class=" container-fluid tab-pane fade show active" id="pills-area" role="tabpanel">
+
+                <div class="row align-items-start">
+                    <div class="col-md-4 col-lg-3 order-md-12 p-2">
+                        <div class="shadow-sm">
+                            <AggregationPanel PanelType="CurrPanelType"
+                                              AggregationPanels="AggregationPanels"
+                                              OnSearchClick="SetDataForGrid"
+                                              OnClearButtonClick="OnClearButtonClick">
+                            </AggregationPanel>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-8 col-lg-9 p-2">
-                    <MyTelerikGrid PanelType="CurrPanelType" DataForGrids="DataForGrids"></MyTelerikGrid>
+                    <div class="col-md-8 col-lg-9 p-2">
+                        <MyTelerikGrid PanelType="CurrPanelType" DataForGrids="DataForGrids"></MyTelerikGrid>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    
+
 </div>
