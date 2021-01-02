@@ -1,39 +1,31 @@
-﻿using Microsoft.AspNetCore.Components;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Telerik.Blazor.Components;
-using WeightliftingTeam1.Data;
-using WeightliftingTeam1.ModelsForOutput;
-using WeightliftingTeam1.Panels;
+using WeightliftingTeam1.Models;
 
-namespace WeightliftingTeam1.Components
+namespace WeightliftingTeam1.Pages
 {
-    public partial class MyTelerikGrid
+    public partial class Editing
     {
-        [Parameter]
-        public PanelType PanelType { get; set; }
-
-        //[Parameter]
-        //public List<IGridModel> DataForGrid { get; set; }
-
-        [Parameter]
-        public DataForGrids DataForGrids { get; set; }
+        public List<RecordTypes> RecordTypes { get; set; }
 
         int CurrentPage { get; set; } = 1;
 
-        int PageSize { get; set; } = 13;
+        int PageSize { get; set; } = 11;
 
-        protected override void OnParametersSet()
+        
+        protected override async Task OnInitializedAsync()
         {
-            CurrentPage = 1;
-            base.OnParametersSet();
+            RecordTypes = await Task.Run(() => InitializeRecordTypes());
         }
 
-        async Task GetGridData()
+        List<RecordTypes> InitializeRecordTypes()
         {
-            //DataForGrid = await MyService.Read();
+            RecordTypes = new List<RecordTypes>() { new RecordTypes {Id = 3, Name = "test"} };
+            //RecordTypes = getDbDataService.getRecordTypes();
+            return RecordTypes;
         }
 
         async Task EditHandler(GridCommandEventArgs args)
@@ -70,15 +62,15 @@ namespace WeightliftingTeam1.Components
 
         async Task CreateHandler(GridCommandEventArgs args)
         {
-           /*
-            SampleData item = (SampleData)args.Item;
+            /*
+             SampleData item = (SampleData)args.Item;
 
-            // perform actual data source operation here through your service
-            await MyService.Create(item);
+             // perform actual data source operation here through your service
+             await MyService.Create(item);
 
-            // update the local view-model data with the service data
-            await GetGridData();
-           */
+             // update the local view-model data with the service data
+             await GetGridData();
+            */
         }
 
         async Task CancelHandler(GridCommandEventArgs args)

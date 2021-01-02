@@ -16,15 +16,15 @@ else
                          @bind-Page=CurrentPage PageSize=PageSize
                          Height="100%"
                          Pageable="true" Sortable="true" Groupable="false"
-                         Resizable="false" Reorderable="true" AutoGenerateColumns="true"
+                         Resizable="true" Reorderable="true" AutoGenerateColumns="true"
                          Width="100%"
                          OnUpdate="@UpdateHandler" OnEdit="@EditHandler" OnDelete="@DeleteHandler" OnCreate="@CreateHandler" OnCancel="@CancelHandler">
                 <GridToolBar>
-                    <AuthorizeView>
+                    @*<AuthorizeView>
                         <Authorized>
                             <GridCommandButton Command="Add" Icon="add">Add Item</GridCommandButton>
                         </Authorized>
-                    </AuthorizeView>
+                    </AuthorizeView>*@
                     <GridSearchBox />
                 </GridToolBar>
                 <GridColumns>
