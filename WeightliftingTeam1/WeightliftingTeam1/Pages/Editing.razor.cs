@@ -23,7 +23,9 @@ namespace WeightliftingTeam1.Pages
 
         List<RecordTypes> InitializeRecordTypes()
         {
-            RecordTypes = new List<RecordTypes>() { new RecordTypes {Id = 3, Name = "test"} };
+            var recordType1 = crudService.Read<RecordTypes>(1);
+            var recordType2 = crudService.Read<RecordTypes>(2);
+            RecordTypes = new List<RecordTypes>() { recordType1, recordType2 };
             //RecordTypes = getDbDataService.getRecordTypes();
             return RecordTypes;
         }
