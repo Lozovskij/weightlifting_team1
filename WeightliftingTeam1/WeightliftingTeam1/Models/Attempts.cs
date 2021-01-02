@@ -7,7 +7,6 @@ namespace WeightliftingTeam1.Models
     {
         public Attempts()
         {
-            Comments = new HashSet<Comments>();
             Disqualifications = new HashSet<Disqualifications>();
             Records = new HashSet<Records>();
         }
@@ -34,7 +33,6 @@ namespace WeightliftingTeam1.Models
         public virtual Countries AthleteCountry { get; set; }
         public virtual Competitions Competition { get; set; }
         public virtual Exercises Exercise { get; set; }
-        public virtual ICollection<Comments> Comments { get; set; }
         public virtual ICollection<Disqualifications> Disqualifications { get; set; }
         public virtual ICollection<Records> Records { get; set; }
     }

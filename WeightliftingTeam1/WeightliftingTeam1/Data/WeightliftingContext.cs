@@ -16,7 +16,6 @@ namespace WeightliftingTeam1.Data
         public virtual DbSet<Athletes> Athletes { get; set; }
         public virtual DbSet<AttemptCategory> AttemptCategory { get; set; }
         public virtual DbSet<Attempts> Attempts { get; set; }
-        public virtual DbSet<Comments> Comments { get; set; }
         public virtual DbSet<CompetitionTypes> CompetitionTypes { get; set; }
         public virtual DbSet<Competitions> Competitions { get; set; }
         public virtual DbSet<Countries> Countries { get; set; }
@@ -180,35 +179,6 @@ namespace WeightliftingTeam1.Data
                     .HasForeignKey(d => d.ExerciseId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("attempts_exercises_id_fk");
-            });
-
-            modelBuilder.Entity<Comments>(entity =>
-            {
-                entity.ToTable("comments");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Attemptid).HasColumnName("attemptid");
-
-                entity.Property(e => e.Ban).HasColumnName("ban");
-
-                entity.Property(e => e.Content)
-                    .IsRequired()
-                    .HasColumnName("content")
-                    .HasColumnType("character varying");
-
-                entity.Property(e => e.Date)
-                    .HasColumnName("date")
-                    .HasColumnType("timestamp with time zone");
-
-                entity.Property(e => e.Updated).HasColumnName("updated");
-
-                entity.Property(e => e.Userid).HasColumnName("userid");
-
-                entity.HasOne(d => d.Attempt)
-                    .WithMany(p => p.Comments)
-                    .HasForeignKey(d => d.Attemptid)
-                    .HasConstraintName("comments_attemptid_fkey");
             });
 
             modelBuilder.Entity<CompetitionTypes>(entity =>
