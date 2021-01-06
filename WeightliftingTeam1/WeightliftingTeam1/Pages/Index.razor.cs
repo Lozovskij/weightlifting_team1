@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using WeightliftingTeam1.Components;
 using WeightliftingTeam1.Data;
@@ -22,13 +23,10 @@ namespace WeightliftingTeam1.Pages
         {
             CurrPanelType = PanelType.Attempts;
             AggregationPanels = new AggregationPanels(new DataForDropdowns());
-            DataForGrids = new DataForGrids
-            {
-                Attempts = searchResultService.FindData(AggregationPanels.AttemptPanel)
-            };
-            AggregationPanels.DataForDropdowns = await Task.Run(() => InitializeDataForDropdowns());
             DataForGrids = await Task.Run(() => InitializeDataForGrids());
+            AggregationPanels.DataForDropdowns = await Task.Run(() => InitializeDataForDropdowns());
         }
+
 
         private DataForGrids InitializeDataForGrids()
         {
