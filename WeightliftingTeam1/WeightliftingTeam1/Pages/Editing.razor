@@ -20,11 +20,7 @@
                          Width="40%"
                          OnUpdate="@UpdateHandler" OnEdit="@EditHandler" OnDelete="@DeleteHandler" OnCreate="@CreateHandler" OnCancel="@CancelHandler">
                 <GridToolBar>
-                    <AuthorizeView>
-                        <Authorized>
-                            <GridCommandButton Command="Add" Icon="add">Add Item</GridCommandButton>
-                        </Authorized>
-                    </AuthorizeView>
+                    <GridCommandButton Command="Add" Icon="add">Add Item</GridCommandButton>
                     <GridSearchBox />
                 </GridToolBar>
                 <GridColumns>
