@@ -13,45 +13,38 @@ namespace WeightliftingTeam1.Data
     public class SearchResultService
     {
         private readonly IDbContextFactory<WeightliftingContext> _contextFactory;
-        private readonly WeightliftingContext _context;
         public SearchResultService(IDbContextFactory<WeightliftingContext> contextFactory)
         {
             _contextFactory = contextFactory;
-            _context = _contextFactory.CreateDbContext();
         }
         public IEnumerable<Attempt> FindData(AttemptPanel attemptPanel)
         {
-            return SearchHelper.GetDataFromDB(_context, attemptPanel);
+            return SearchHelper.GetDataFromDB(_contextFactory, attemptPanel);
         }
 
         public IEnumerable<Athlete> FindData(AthletePanel athletePanel)
         {
-            return SearchHelper.GetDataFromDB(_context, athletePanel);
+            return SearchHelper.GetDataFromDB(_contextFactory, athletePanel);
         }
 
         public IEnumerable<Record> FindData(RecordPanel recordPanel)
         {
-            return SearchHelper.GetDataFromDB(_context, recordPanel);
+            return SearchHelper.GetDataFromDB(_contextFactory, recordPanel);
         }
 
         public IEnumerable<string> GetCompetitions()
         {
-            return SearchHelper.GetCompetitions(_context);
+            return SearchHelper.GetCompetitions(_contextFactory);
         }
 
         public IEnumerable<string> GetAthleteNames()
         {
-            return SearchHelper.GetAthleteNames(_context);
+            return SearchHelper.GetAthleteNames(_contextFactory);
         }
 
         public IEnumerable<string> GetCountries()
         {
-            return SearchHelper.GetCountries(_context);
-        }
-
-        ~SearchResultService()
-        {
-            _context.Dispose();
+            return SearchHelper.GetCountries(_contextFactory);
         }
     }
 
@@ -66,8 +59,9 @@ namespace WeightliftingTeam1.Data
         private const string Women = "women";
         private const string World = "World";
         private const string Olympic = "Olympic";
-        internal static IEnumerable<Attempt> GetDataFromDB(WeightliftingContext context, AttemptPanel attemptPanel)
+        internal static IEnumerable<Attempt> GetDataFromDB(IDbContextFactory<WeightliftingContext> contextFactory, AttemptPanel attemptPanel)
         {
+            using var context = contextFactory.CreateDbContext();
             var resultAttemtps = context.Attempts.Where(attempt => (attemptPanel.MenIsIncluded && attemptPanel.WomenIsIncluded || 
                                                             (attemptPanel.MenIsIncluded ? attempt.Athlete.Sex == Men : 
                                                                 attemptPanel.WomenIsIncluded && attempt.Athlete.Sex == Women)) &&
@@ -90,11 +84,12 @@ namespace WeightliftingTeam1.Data
                                                      Result = attempt.Result,
                                                      WeightCategory = context.AttemptCategory.Single(category => category.AttemptId == attempt.Id).Category.Name
                                                  });
-            return resultAttemtps.ToList();
+            return resultAttemtps.ToArray();
         }
 
-        internal static IEnumerable<Athlete> GetDataFromDB(WeightliftingContext context, AthletePanel athletePanel)
+        internal static IEnumerable<Athlete> GetDataFromDB(IDbContextFactory<WeightliftingContext> contextFactory, AthletePanel athletePanel)
         {
+            using var context = contextFactory.CreateDbContext();
             var resultAthletes = context.Athletes.Where(athlete => (athletePanel.Name == null || athlete.Name == athletePanel.Name) &&
                                                                    (athletePanel.Country == null || athlete.Country.Name == athletePanel.Country) &&
                                                                    (athletePanel.MenIsIncluded && athletePanel.WomenIsIncluded || 
@@ -106,11 +101,12 @@ namespace WeightliftingTeam1.Data
                                                      Name = athlete.Name,
                                                      Sex = athlete.Sex
                                                  });
-            return resultAthletes.ToList();
+            return resultAthletes.ToArray();
         }
 
-        internal static IEnumerable<Record> GetDataFromDB(WeightliftingContext context, RecordPanel recordPanel)
+        internal static IEnumerable<Record> GetDataFromDB(IDbContextFactory<WeightliftingContext> contextFactory, RecordPanel recordPanel)
         {
+            using var context = contextFactory.CreateDbContext();
             var resultRecords = context.Records.Where(record => (recordPanel.MenIsIncluded && recordPanel.WomenIsIncluded ||
                                                                     (recordPanel.MenIsIncluded ? record.Attempt.Athlete.Sex == Men :
                                                                         recordPanel.WomenIsIncluded && record.Attempt.Athlete.Sex == Women)) &&
@@ -135,21 +131,24 @@ namespace WeightliftingTeam1.Data
                                                    Result = record.Attempt.Result,
                                                    WeightCategory = record.Category.Name
                                                });
-            return resultRecords.ToList();
+            return resultRecords.ToArray();
         }
 
-        internal static IEnumerable<string> GetCompetitions(WeightliftingContext context)
+        internal static IEnumerable<string> GetCompetitions(IDbContextFactory<WeightliftingContext> contextFactory)
         {
+            using var context = contextFactory.CreateDbContext();
             return context.Competitions.Select(competition => competition.Name).ToArray();
         }
 
-        internal static IEnumerable<string> GetAthleteNames(WeightliftingContext context)
+        internal static IEnumerable<string> GetAthleteNames(IDbContextFactory<WeightliftingContext> contextFactory)
         {
+            using var context = contextFactory.CreateDbContext();
             return context.Athletes.Select(athlete => athlete.Name).ToArray();
         }
 
-        internal static IEnumerable<string> GetCountries(WeightliftingContext context)
+        internal static IEnumerable<string> GetCountries(IDbContextFactory<WeightliftingContext> contextFactory)
         {
+            using var context = contextFactory.CreateDbContext();
             return context.Countries.Select(country => country.Name).ToArray();
         }
     }
