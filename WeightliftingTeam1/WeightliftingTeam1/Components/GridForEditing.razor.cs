@@ -11,8 +11,11 @@ namespace WeightliftingTeam1.Components
 {
     public partial class GridForEditing<TItem>
     {
-        [Parameter]
+        
         public IEnumerable<TItem> GridData { get; set; }
+
+        [Parameter]
+        public Task<IEnumerable<TItem>> SearchDataTask { get; set; }
 
         public string TableName { get; set; }
 
@@ -23,6 +26,16 @@ namespace WeightliftingTeam1.Components
         protected override void OnInitialized()
         {
             TableName = typeof(TItem).Name;
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            // the code that you want to measure comes here
+            GridData = await SearchDataTask;
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            Console.WriteLine(elapsedMs);
         }
 
         async Task EditHandler(GridCommandEventArgs args)

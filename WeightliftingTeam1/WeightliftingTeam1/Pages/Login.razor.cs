@@ -13,11 +13,11 @@ namespace WeightliftingTeam1.Pages
 
         public string LoginMessage { get; set; }
 
-        protected override Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
             user = new Admin();
             LoginMessage = "Admin rights lets you modify db";
-            return base.OnInitializedAsync();
+            base.OnInitialized();
         }
 
         public async Task<bool> ValidateUser()
