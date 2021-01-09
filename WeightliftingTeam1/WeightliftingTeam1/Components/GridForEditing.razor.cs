@@ -15,7 +15,7 @@ namespace WeightliftingTeam1.Components
         public IEnumerable<TItem> GridData { get; set; }
 
         [Parameter]
-        public Task<IEnumerable<TItem>> GridDataTask { get; set; }
+        public Task<IEnumerable<TItem>> SearchDataTask { get; set; }
 
         public string TableName { get; set; }
 
@@ -32,7 +32,7 @@ namespace WeightliftingTeam1.Components
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
             // the code that you want to measure comes here
-            GridData = await GridDataTask;
+            GridData = await SearchDataTask;
             watch.Stop();
             var elapsedMs = watch.ElapsedMilliseconds;
             Console.WriteLine(elapsedMs);
