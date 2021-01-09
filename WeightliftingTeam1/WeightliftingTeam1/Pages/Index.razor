@@ -34,15 +34,15 @@
         <ul class="nav nav-pills mt-2 px-2" id="pills-tab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="pills-attempts-tab" data-toggle="pill" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="true"
-                   @onclick="()=>ChangePanelTypeEvent(PanelType.Attempts)">@PanelType.Attempts</a>
+                   >@PanelType.Attempts</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="pills-athletes-tab" data-toggle="pill" href="#pills-area2" role="tab" aria-controls="pills-area2" aria-selected="false"
-                   @onclick="()=>ChangePanelTypeEvent(PanelType.Athletes)">@PanelType.Athletes</a>
+                   >@PanelType.Athletes</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="pills-records-tab" data-toggle="pill" href="#pills-area3" role="tab" aria-controls="pills-area3" aria-selected="false"
-                   @onclick="()=>ChangePanelTypeEvent(PanelType.Records)">@PanelType.Records</a>
+                  >@PanelType.Records</a>
             </li>
         </ul>
         
@@ -59,15 +59,8 @@
                             </AggregationPanel>
                         </div>
                     </div>
-                    <div class="col-md-8 col-lg-9 p-2">
-                        @if (DataForGrids == null)
-                        {
-                            <p>Loading @CurrPanelType......</p>
-                        }
-                        else
-                        {
-                            <GridForUsers GridData="DataForGrids.Attempts"></GridForUsers>
-                        }
+                    <div class="col-md-8 col-lg-9 p-2" >
+                        <GridForUsers @ref="AttemptsGrid" SearchDataTask="AttemptsTask"></GridForUsers>
                     </div>
                 </div>
             </div>
@@ -84,14 +77,7 @@
                         </div>
                     </div>
                     <div class="col-md-8 col-lg-9 p-2">
-                        @if (DataForGrids == null)
-                        {
-                            <p>Loading @CurrPanelType......</p>
-                        }
-                        else
-                        {
-                        <GridForUsers GridData="DataForGrids.Athletes"></GridForUsers>
-                        }
+                        <GridForUsers @ref="AthletesGrid" SearchDataTask="AthletsTask"></GridForUsers>
                     </div>
                 </div>
             </div>
@@ -100,6 +86,7 @@
                 <div class="row align-items-start">
                     <div class="col-md-4 col-lg-3 order-md-12 p-2">
                         <div class="shadow-sm">
+
                             <AggregationPanel PanelType="PanelType.Records"
                                               AggregationPanels="AggregationPanels"
                                               OnSearchClick="SetDataForGrid"
@@ -108,14 +95,9 @@
                         </div>
                     </div>
                     <div class="col-md-8 col-lg-9 p-2">
-                        @if (DataForGrids == null)
-                        {
-                            <p>Loading @CurrPanelType......</p>
-                        }
-                        else
-                        {
-                            <GridForUsers GridData="DataForGrids.Records"></GridForUsers>
-                        }
+                       
+                            <GridForUsers @ref="RecordsGrid" SearchDataTask="RecordsTask" ></GridForUsers>
+
                     </div>
                 </div>
             </div>

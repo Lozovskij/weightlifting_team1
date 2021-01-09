@@ -8,8 +8,14 @@ namespace WeightliftingTeam1.Components
 {
     public partial class GridForUsers<TItem>
     {
+
         [Parameter]
+        public Task<IEnumerable<TItem>> SearchDataTask { get; set; }
+
+        public IEnumerable<TItem> DefaultGridData { get; set; }
         public IEnumerable<TItem> GridData { get; set; }
+
+        public bool IsLoaded { get; set; }
 
         int CurrentPage { get; set; } = 1;
 
@@ -20,5 +26,19 @@ namespace WeightliftingTeam1.Components
             CurrentPage = 1;
             base.OnParametersSet();
         }
+
+        protected override async Task OnInitializedAsync()
+        {
+            GridData = await SearchDataTask;
+            DefaultGridData = GridData;
+            IsLoaded = true;
+        }
+
+        public void SetDefaultData()
+        {
+            GridData = DefaultGridData;
+        }
+
+        
     }
 }

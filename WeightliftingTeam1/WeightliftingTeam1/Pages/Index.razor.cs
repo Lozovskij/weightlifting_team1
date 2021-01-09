@@ -19,52 +19,48 @@ namespace WeightliftingTeam1.Pages
 
         public DataForGrids DataForGrids { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        public Task<IEnumerable<Attempt>> AttemptsTask { get; set; }
+        public Task<IEnumerable<Athlete>> AthletsTask { get; set; }
+        public Task<IEnumerable<Record>> RecordsTask { get; set; }
+
+        public GridForUsers<Attempt> AttemptsGrid { get; set; }
+        public GridForUsers<Athlete> AthletesGrid { get; set; }
+        public GridForUsers<Record> RecordsGrid { get; set; }
+
+        protected override void OnInitialized()
         {
             CurrPanelType = PanelType.Attempts;
             AggregationPanels = new AggregationPanels(new DataForDropdowns());
-            DataForGrids = await Task.Run(() => InitializeDataForGrids());
+
+            AttemptsTask = Task.Run(() => searchResultService.FindData(AggregationPanels.AttemptPanel));
+            AthletsTask = Task.Run(() => searchResultService.FindData(AggregationPanels.AthletePanel));
+            RecordsTask = Task.Run(() => searchResultService.FindData(AggregationPanels.RecordPanel));
         }
 
-
-        private DataForGrids InitializeDataForGrids()
-        {
-            DataForGrids dataForGrids = new DataForGrids
-            {
-                DefaultAthletes = searchResultService.FindData(AggregationPanels.AthletePanel),
-                DefaultAttempts = searchResultService.FindData(AggregationPanels.AttemptPanel), 
-                DefaultRecords = searchResultService.FindData(AggregationPanels.RecordPanel)
-            };
-            dataForGrids.Athletes = dataForGrids.DefaultAthletes;
-            dataForGrids.Attempts = dataForGrids.DefaultAttempts;
-            dataForGrids.Records = dataForGrids.DefaultRecords;
-
-            return dataForGrids;
-        }
 
         //public void ChangePanelTypeEvent(ChangeEventArgs e)
         //{
         //    CurrPanelType = (PanelType)Enum.Parse(typeof(PanelType), e.Value.ToString(), true);
         //}
 
-        public void ChangePanelTypeEvent(PanelType panelType)
-        {
-            CurrPanelType = panelType;
-        }
+        //public void ChangePanelTypeEvent(PanelType panelType)
+        //{
+        //    CurrPanelType = panelType;
+        //}
 
         private void SetDataForGrid(PanelType panelType)
         {
             if (panelType == PanelType.Attempts)
             {
-                DataForGrids.Attempts = searchResultService.FindData(AggregationPanels.AttemptPanel);
+                AttemptsGrid.GridData = searchResultService.FindData(AggregationPanels.AttemptPanel);
             }
             else if (panelType == PanelType.Athletes)
             {
-                DataForGrids.Athletes = searchResultService.FindData(AggregationPanels.AthletePanel);
+                AthletesGrid.GridData = searchResultService.FindData(AggregationPanels.AthletePanel);
             }
             else if (panelType == PanelType.Records)
             {
-                DataForGrids.Records = searchResultService.FindData(AggregationPanels.RecordPanel);
+                RecordsGrid.GridData = searchResultService.FindData(AggregationPanels.RecordPanel);
             }
             else
             {
@@ -74,18 +70,19 @@ namespace WeightliftingTeam1.Pages
 
         public void OnClearButtonClick(PanelType panelType)
         {
+
             switch (panelType)
             {
                 case PanelType.Attempts:
-                    DataForGrids.Attempts = DataForGrids.DefaultAttempts;
+                    AttemptsGrid.SetDefaultData();
                     AggregationPanels.AttemptPanel = new AttemptPanel();
                     break;
                 case PanelType.Athletes:
-                    DataForGrids.Athletes = DataForGrids.DefaultAthletes;
+                    AthletesGrid.SetDefaultData();
                     AggregationPanels.AthletePanel = new AthletePanel();
                     break;
                 case PanelType.Records:
-                    DataForGrids.Records = DataForGrids.DefaultRecords;
+                    RecordsGrid.SetDefaultData();
                     AggregationPanels.RecordPanel = new RecordPanel();
                     break;
             }
