@@ -11,30 +11,29 @@ namespace WeightliftingTeam1.Pages
 {
     public partial class Editing
     {
-        public IEnumerable<Athletes> Athletes { get; set; }
-        public IEnumerable<Attempts> Attempts { get; set; }
-        public IEnumerable<Competitions> Competitions { get; set; }
-        public IEnumerable<CompetitionTypes> CompetitionTypes { get; set; }
-        public IEnumerable<Countries> Countries { get; set; }
-        public IEnumerable<Disqualifications> Disqualifications { get; set; }
-        public IEnumerable<Periods> Periods { get; set; }
-        public IEnumerable<Places> Places { get; set; }
-        public IEnumerable<Records> Records { get; set; }
-        public IEnumerable<RecordTypes> RecordTypes { get; set; }
-        public IEnumerable<WeightCategories> WeightCategories { get; set; }
+        public Task<IEnumerable<Athletes>> AthletesTask { get; set; }
+        public Task<IEnumerable<Attempts>> AttemptsTask { get; set; }
+        public Task<IEnumerable<Competitions>> CompetitionsTask { get; set; }
+        public Task<IEnumerable<Countries>> CountriesTask { get; set; }
+        public Task<IEnumerable<Disqualifications>> DisqualificationsTask { get; set; }
+        public Task<IEnumerable<Periods>> PeriodsTask { get; set; }
+        public Task<IEnumerable<Places>> PlacesTask { get; set; }
+        public Task<IEnumerable<Records>> RecordsTask { get; set; }
+        public Task<IEnumerable<RecordTypes>> RecordTypesTask { get; set; }
+        public Task<IEnumerable<WeightCategories>> WeightCategoriesTask { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            await Task.Run(() => Athletes = dataRetrievalService.GetData<Athletes>());
-            await Task.Run(() => Attempts = dataRetrievalService.GetData<Attempts>());
-            await Task.Run(() => Competitions = dataRetrievalService.GetData<Competitions>());
-            await Task.Run(() => Countries = dataRetrievalService.GetData<Countries>());
-            await Task.Run(() => Disqualifications = dataRetrievalService.GetData<Disqualifications>());
-            await Task.Run(() => Periods = dataRetrievalService.GetData<Periods>());
-            await Task.Run(() => Places = dataRetrievalService.GetData<Places>());
-            await Task.Run(() => Records = dataRetrievalService.GetData<Records>());
-            await Task.Run(() => RecordTypes = dataRetrievalService.GetData<RecordTypes>());
-            await Task.Run(() => WeightCategories = dataRetrievalService.GetData<WeightCategories>());
+            AthletesTask = Task.Run(() => dataRetrievalService.GetData<Athletes>());
+            AttemptsTask = Task.Run(() => dataRetrievalService.GetData<Attempts>());
+            CompetitionsTask = Task.Run(() => dataRetrievalService.GetData<Competitions>());
+            CountriesTask = Task.Run(() => dataRetrievalService.GetData<Countries>());
+            DisqualificationsTask = Task.Run(() => dataRetrievalService.GetData<Disqualifications>());
+            PeriodsTask = Task.Run(() => dataRetrievalService.GetData<Periods>());
+            PlacesTask = Task.Run(() => dataRetrievalService.GetData<Places>());
+            RecordsTask = Task.Run(() => dataRetrievalService.GetData<Records>());
+            RecordTypesTask = Task.Run(() => dataRetrievalService.GetData<RecordTypes>());
+            WeightCategoriesTask = Task.Run(() => dataRetrievalService.GetData<WeightCategories>());
         }
     }
 }
