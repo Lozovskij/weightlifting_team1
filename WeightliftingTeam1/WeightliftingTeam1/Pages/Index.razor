@@ -37,22 +37,22 @@
                    @onclick="()=>ChangePanelTypeEvent(PanelType.Attempts)">@PanelType.Attempts</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="pills-athletes-tab" data-toggle="pill" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="false"
+                <a class="nav-link" id="pills-athletes-tab" data-toggle="pill" href="#pills-area2" role="tab" aria-controls="pills-area2" aria-selected="false"
                    @onclick="()=>ChangePanelTypeEvent(PanelType.Athletes)">@PanelType.Athletes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="pills-records-tab" data-toggle="pill" href="#pills-area" role="tab" aria-controls="pills-area" aria-selected="false"
+                <a class="nav-link" id="pills-records-tab" data-toggle="pill" href="#pills-area3" role="tab" aria-controls="pills-area3" aria-selected="false"
                    @onclick="()=>ChangePanelTypeEvent(PanelType.Records)">@PanelType.Records</a>
             </li>
         </ul>
         
         <div class="tab-content" id="pills-tabContent">
-            <div class=" container-fluid tab-pane fade show active" id="pills-area" role="tabpanel">
 
+            <div class=" container-fluid tab-pane fade show active" id="pills-area" role="tabpanel" aria-labelledby="pills-attempts-tab">
                 <div class="row align-items-start">
                     <div class="col-md-4 col-lg-3 order-md-12 p-2">
                         <div class="shadow-sm">
-                            <AggregationPanel PanelType="CurrPanelType"
+                            <AggregationPanel PanelType="PanelType.Attempts"
                                               AggregationPanels="AggregationPanels"
                                               OnSearchClick="SetDataForGrid"
                                               OnClearButtonClick="OnClearButtonClick">
@@ -60,13 +60,73 @@
                         </div>
                     </div>
                     <div class="col-md-8 col-lg-9 p-2">
-                        <MyTelerikGrids PanelType="CurrPanelType" DataForGrids="DataForGrids"></MyTelerikGrids>
+                        @if (DataForGrids == null)
+                        {
+                            <p>Loading @CurrPanelType......</p>
+                        }
+                        else
+                        {
+                            <GridForUsers GridData="DataForGrids.Attempts"></GridForUsers>
+                        }
                     </div>
                 </div>
             </div>
+
+            <div class="container-fluid tab-pane fade" id="pills-area2" role="tabpanel" aria-labelledby="pills-athletes-tab">
+                <div class="row align-items-start">
+                    <div class="col-md-4 col-lg-3 order-md-12 p-2">
+                        <div class="shadow-sm">
+                            <AggregationPanel PanelType="PanelType.Athletes"
+                                              AggregationPanels="AggregationPanels"
+                                              OnSearchClick="SetDataForGrid"
+                                              OnClearButtonClick="OnClearButtonClick">
+                            </AggregationPanel>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-lg-9 p-2">
+                        @if (DataForGrids == null)
+                        {
+                            <p>Loading @CurrPanelType......</p>
+                        }
+                        else
+                        {
+                        <GridForUsers GridData="DataForGrids.Athletes"></GridForUsers>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid tab-pane fade" id="pills-area3" role="tabpanel" aria-labelledby="pills-records-tab">
+                <div class="row align-items-start">
+                    <div class="col-md-4 col-lg-3 order-md-12 p-2">
+                        <div class="shadow-sm">
+                            <AggregationPanel PanelType="PanelType.Records"
+                                              AggregationPanels="AggregationPanels"
+                                              OnSearchClick="SetDataForGrid"
+                                              OnClearButtonClick="OnClearButtonClick">
+                            </AggregationPanel>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-lg-9 p-2">
+                        @if (DataForGrids == null)
+                        {
+                            <p>Loading @CurrPanelType......</p>
+                        }
+                        else
+                        {
+                            <GridForUsers GridData="DataForGrids.Records"></GridForUsers>
+                        }
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-
-    
-
 </div>
+<style>
+    @@media (max-width: 1050px) {
+        .k-pager-numbers-wrap {
+            display: none;
+        }
+    }
+</style>
