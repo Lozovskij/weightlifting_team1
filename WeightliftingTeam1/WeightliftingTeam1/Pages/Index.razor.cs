@@ -24,7 +24,6 @@ namespace WeightliftingTeam1.Pages
             CurrPanelType = PanelType.Attempts;
             AggregationPanels = new AggregationPanels(new DataForDropdowns());
             DataForGrids = await Task.Run(() => InitializeDataForGrids());
-            AggregationPanels.DataForDropdowns = await Task.Run(() => InitializeDataForDropdowns());
         }
 
 
@@ -42,12 +41,6 @@ namespace WeightliftingTeam1.Pages
 
             return dataForGrids;
         }
-
-        private DataForDropdowns InitializeDataForDropdowns() => new DataForDropdowns {
-                Competitions = searchResultService.GetCompetitions(),
-                Countries = searchResultService.GetCountries(),
-                AthleteNames = searchResultService.GetAthleteNames()
-        };
 
         //public void ChangePanelTypeEvent(ChangeEventArgs e)
         //{

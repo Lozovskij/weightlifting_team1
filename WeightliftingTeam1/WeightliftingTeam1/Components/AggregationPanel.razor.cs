@@ -18,5 +18,21 @@ namespace WeightliftingTeam1.Components
 
         [Parameter]
         public AggregationPanels AggregationPanels { get; set; }
+
+        [Parameter]
+        public Task<DataForDropdowns> GetDataForDropdownsTask { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            AggregationPanels.DataForDropdowns = await Task.Run(() => InitializeDataForDropdowns());
+        }
+
+        private DataForDropdowns InitializeDataForDropdowns() => new DataForDropdowns
+        {
+            Competitions = searchResultService.GetCompetitions(),
+            Countries = searchResultService.GetCountries(),
+            AthleteNames = searchResultService.GetAthleteNames()
+        };
+
     }
 }
