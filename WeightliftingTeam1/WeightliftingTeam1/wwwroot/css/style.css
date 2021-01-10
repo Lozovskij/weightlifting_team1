@@ -43,9 +43,34 @@ nav {
     /*background-color:rgba(0,0,0,0.5);*/
 }
 
+.navbar {
+    /*background: rgba(255,255,255,0.2) !important;*/ /* Give transparent white background to navbar */
+    /* 0.2 to give little whitish effect. */
+    /* Put 0 to get complete transperency */
+    opacity:0.8;
+    backdrop-filter: blur(10px) saturate(125%); /* Blur the background */
+    /* 10px Gaussian Blur and saturate for fluent design */
+    -webkit-backdrop-filter: blur(10px) saturate(125%); /* Increases browser compability (safari ios and mac) */
+}
+
+
 footer {
     height: 40vh;
    
+}
+
+.fade-in-animation {
+    animation: fadein 0.4s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .parallax {

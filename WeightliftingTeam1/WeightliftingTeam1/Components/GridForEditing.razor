@@ -4,7 +4,7 @@
 @typeparam TItem
 
 
-<div class="shadow-lg my-container mx-2 mx-sm-3 mx-md-4 mx-lg-5 my-3 p-2">
+<div class="shadow-lg my-container mx-2 mx-sm-3 mx-md-4 mx-lg-5 my-3 p-2 fade-in-animation">
     <h5 class="m-3">@TableName</h5>
     @if (GridData == null)
     {
@@ -14,7 +14,7 @@
     {
         <TelerikGrid Data=GridData
                      @bind-Page=CurrentPage PageSize=PageSize
-                     Class=""
+                     Class="fade-in-animation"
                      Height="100%"
                      Pageable="true" Sortable="true" Groupable="false"
                      Resizable="false" Reorderable="true" AutoGenerateColumns="true"
