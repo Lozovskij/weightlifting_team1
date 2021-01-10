@@ -27,7 +27,7 @@ namespace WeightliftingTeam1.Pages
         public GridForUsers<Athlete> AthletesGrid { get; set; }
         public GridForUsers<Record> RecordsGrid { get; set; }
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
             CurrPanelType = PanelType.Attempts;
             AggregationPanels = new AggregationPanels(new DataForDropdowns());
@@ -35,8 +35,16 @@ namespace WeightliftingTeam1.Pages
             AttemptsTask = Task.Run(() => searchResultService.FindData(AggregationPanels.AttemptPanel));
             AthletsTask = Task.Run(() => searchResultService.FindData(AggregationPanels.AthletePanel));
             RecordsTask = Task.Run(() => searchResultService.FindData(AggregationPanels.RecordPanel));
+
+            AggregationPanels.DataForDropdowns = await Task.Run(() => InitializeDataForDropdowns());
         }
 
+        private DataForDropdowns InitializeDataForDropdowns() => new DataForDropdowns
+        {
+            Competitions = searchResultService.GetCompetitions(),
+            Countries = searchResultService.GetCountries(),
+            AthleteNames = searchResultService.GetAthleteNames()
+        };
 
         //public void ChangePanelTypeEvent(ChangeEventArgs e)
         //{

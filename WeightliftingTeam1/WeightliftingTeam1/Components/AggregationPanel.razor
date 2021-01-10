@@ -76,13 +76,16 @@
                     </div>
                 </div>
 
+
                 <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.Competitions" @bind-Value="@AggregationPanels.AttemptPanel.Competition"
                                      Placeholder="Enter Competition" ClearButton="true"
                                      Width="100%" Class="mb-1" />
 
+                
                 <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.AthleteNames" @bind-Value="@AggregationPanels.AttemptPanel.AthleteName"
                                      Placeholder="Enter Athlete's Name" ClearButton="true"
                                      Width="100%" Class="mb-1" />
+                
 
                 <div class="my-param-container d-flex flex-column mb-1">
                     <label class="m-1">Athlete's weight:</label>
