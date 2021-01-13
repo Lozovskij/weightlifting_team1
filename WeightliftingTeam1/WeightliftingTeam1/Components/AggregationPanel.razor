@@ -13,243 +13,380 @@
     {
         <EditForm Model="@AggregationPanels">
             <DataAnnotationsValidator />
-            @if (PanelType == PanelType.Attempts)
-            {
-                <div class="my-param-container d-flex flex-column mb-1">
-                    <div>
-                        <InputCheckbox class="m-2" id="men" @bind-Value=AggregationPanels.AttemptPanel.MenIsIncluded />
-                        <label for="men">
-                            Men
-                        </label>
-                    </div>
-                    <div>
-                        <InputCheckbox class="m-2" id="women" @bind-Value=AggregationPanels.AttemptPanel.WomenIsIncluded />
-                        <label for="women">
-                            Women
-                        </label>
-                    </div>
+            <div class="panel">
+                @if (PanelType == PanelType.Attempts)
+                {
+
+                    <section>
+                        <h6>
+                            Athlete's gender
+                        </h6>
+                        <div class="stacked-checkboxes">
+                            <div class="checkbox-items">
+                                <InputCheckbox class="margin-helper" id="men" @bind-Value=AggregationPanels.AttemptPanel.MenIsIncluded />
+                                <label for="men">
+                                    Men
+                                </label>
+                            </div>
+                            <div class="d-flex align-items-baseline">
+                                <InputCheckbox class="margin-helper" id="women" @bind-Value=AggregationPanels.AttemptPanel.WomenIsIncluded />
+                                <label for="women">
+                                    Women
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h6>
+                            Event's date
+                        </h6>
+                        <select @onchange="AggregationPanels.AttemptPanel.ChangePeriodEvent" class="custom-select">
+                            <option value="">Select period</option>
+                            <option value="1920 - 1972">1920 - 1972</option>
+                            <option value="1973 - 1992">1973 - 1992</option>
+                            <option value="1993 - 1997">1993 - 1997</option>
+                            <option value="(current)1998+">(current)1998+</option>
+                        </select>
+                        <div>
+                            <InputDate @bind-Value=AggregationPanels.AttemptPanel.DateLowerLimit class="form-control date-style-correction" />
+                        </div>
+                        <div>
+                            <InputDate @bind-Value=AggregationPanels.AttemptPanel.DateUpperLimit class="form-control date-style-correction" />
+                        </div>
+                    </section>
+
+                    <section>
+                        <h6>
+                            Included results
+                        </h6>
+                        <div class="stacked-checkboxes">
+                            <div class="checkbox-items">
+                                <InputCheckbox class="margin-helper" id="snatch" @bind-Value=AggregationPanels.AttemptPanel.SnatchIsIncluded />
+                                <label for="snatch">
+                                    Snatch results
+                                </label>
+                            </div>
+                            <div class="checkbox-items">
+                                <InputCheckbox class="margin-helper" id="cleanAndJerk" @bind-Value=AggregationPanels.AttemptPanel.CleanAndJerkIsIncluded />
+                                <label for="cleanAndJerk">
+                                    Clean and jerk results
+                                </label>
+                            </div>
+
+                            <div class="checkbox-items">
+                                <InputCheckbox class="margin-helper" id="total" @bind-Value=AggregationPanels.AttemptPanel.TotalIsIncluded />
+                                <label for="total">
+                                    Total results
+                                </label>
+                            </div>
+
+                            <div class="checkbox-items">
+                                <InputCheckbox class="margin-helper" id="press" @bind-Value=AggregationPanels.AttemptPanel.CleanAndPressIsIncluded />
+                                <label for="press">
+                                    Clean and press (is excluded from 1973)
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h6>
+                            Define competition
+                        </h6>
+                        <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.Competitions" @bind-Value="@AggregationPanels.AttemptPanel.Competition"
+                                             Placeholder="Enter Competition" ClearButton="true"
+                                             Width="100%" Class="" />
+                    </section>
+
+                    <section>
+                        <h6>
+                            Define athlete's name
+                        </h6>
+                        <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.AthleteNames" @bind-Value="@AggregationPanels.AttemptPanel.AthleteName"
+                                             Placeholder="Enter Athlete's Name" ClearButton="true"
+                                             Width="100%" Class="" />
+                    </section>
+
+                    <section>
+                        <h6>
+                            Weight spread of athletes
+                        </h6>
+                        <div class="d-flex flex-column">
+                            <div class="d-flex">
+                                <InputNumber class="form-control" @bind-Value=AggregationPanels.AttemptPanel.WeightLowerLimit />
+                                @*<div class="my-auto">—</div>*@
+                                <InputNumber class="form-control" @bind-Value=AggregationPanels.AttemptPanel.WeightUpperLimit />
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h6>
+                            Result spread
+                        </h6>
+                        <div class="d-flex flex-column">
+                            <div class="d-flex">
+                                <InputNumber class="form-control" @bind-Value=AggregationPanels.AttemptPanel.ResultLowerLimit />
+                                @*<div class="my-auto">—</div>*@
+                                <InputNumber class="form-control" @bind-Value=AggregationPanels.AttemptPanel.ResultUpperLimit />
+                            </div>
+                        </div>
+
+                        <div class="checkbox-items">
+                            <InputCheckbox class="margin-helper" id="checkboxDisqualified" @bind-Value=AggregationPanels.AttemptPanel.IsDisqualified />
+                            <label for="checkboxDisqualified">
+                                Disqualified
+                            </label>
+                        </div>
+                    </section>
+
+
+                }
+                else if (PanelType == PanelType.Athletes)
+                {
+
+
+                    <section>
+                        <h6>
+                            Define athlete's name
+                        </h6>
+                        <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.AthleteNames" @bind-Value="@AggregationPanels.AthletePanel.Name"
+                                             Placeholder="Name" ClearButton="true"
+                                             Width="100%" Class="" />
+                    </section>
+
+                    <section>
+                        <h6>
+                            Define athlete's country
+                        </h6>
+                        <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.Countries" @bind-Value="@AggregationPanels.AthletePanel.Country"
+                                             Placeholder="Country" ClearButton="true"
+                                             Width="100%" Class="" />
+                    </section>
+
+
+                    <section>
+                        <h6>
+                            Athlete's gender
+                        </h6>
+                        <div class="stacked-checkboxes">
+                            <div>
+                                <InputCheckbox class="margin-helper" id="men-athletes" @bind-Value=AggregationPanels.AthletePanel.MenIsIncluded />
+                                <label for="men-athletes">
+                                    Men
+                                </label>
+                            </div>
+                            <div>
+                                <InputCheckbox class="margin-helper" id="women-athletes" @bind-Value=AggregationPanels.AthletePanel.WomenIsIncluded />
+                                <label for="women-athletes">
+                                    Women
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                }
+                else if (PanelType == PanelType.Records)
+                {
+                    <section>
+                        <h6>
+                            Athlete's gender
+                        </h6>
+                        <div class="stacked-checkboxes">
+                            <div class="checkbox-items">
+                                <InputCheckbox class="margin-helper" id="men-records" @bind-Value=AggregationPanels.RecordPanel.MenIsIncluded />
+                                <label for="men-records">
+                                    Men
+                                </label>
+                            </div>
+                            <div class="d-flex align-items-baseline">
+                                <InputCheckbox class="margin-helper" id="women-records" @bind-Value=AggregationPanels.RecordPanel.WomenIsIncluded />
+                                <label for="men-records">
+                                    Men
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+                    <section>
+                        <h6>
+                            Event's date
+                        </h6>
+                        <select @onchange="AggregationPanels.RecordPanel.ChangePeriodEvent" class="custom-select">
+                            <option value="">Select period</option>
+                            <option value="1920 - 1972">1920 - 1972</option>
+                            <option value="1973 - 1992">1973 - 1992</option>
+                            <option value="1993 - 1997">1993 - 1997</option>
+                            <option value="(current)1998+">(current)1998+</option>
+                        </select>
+                        <div>
+                            <InputDate @bind-Value=AggregationPanels.RecordPanel.DateLowerLimit class="form-control date-style-correction" />
+                        </div>
+                        <div>
+                            <InputDate @bind-Value=AggregationPanels.RecordPanel.DateUpperLimit class="form-control date-style-correction" />
+                        </div>
+                    </section>
+
+
+                    <section>
+                        <h6>
+                            Included results
+                        </h6>
+                        <div class="stacked-checkboxes">
+                            <div class="checkbox-items">
+                                <InputCheckbox class="margin-helper" id="snatch-records" @bind-Value=AggregationPanels.RecordPanel.SnatchIsIncluded />
+                                <label for="snatch-records">
+                                    Snatch results
+                                </label>
+                            </div>
+                            <div class="checkbox-items">
+                                <InputCheckbox class="margin-helper" id="cleanAndJerk-records" @bind-Value=AggregationPanels.RecordPanel.CleanAndJerkIsIncluded />
+                                <label for="cleanAndJerk-records">
+                                    Clean and jerk results
+                                </label>
+                            </div>
+
+                            <div class="checkbox-items">
+                                <InputCheckbox class="margin-helper" id="total-records" @bind-Value=AggregationPanels.RecordPanel.TotalIsIncluded />
+                                <label for="total-records">
+                                    Total results
+                                </label>
+                            </div>
+
+                            <div class="checkbox-items">
+                                <InputCheckbox class="margin-helper" id="press-records" @bind-Value=AggregationPanels.RecordPanel.CleanAndPressIsIncluded />
+                                <label for="press-records">
+                                    Clean and press (is excluded from 1973)
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h6>
+                            Define competition
+                        </h6>
+                        <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.Competitions" @bind-Value="@AggregationPanels.RecordPanel.Competition"
+                                             Placeholder="Enter Competition" ClearButton="true"
+                                             Width="100%" Class="" />
+                    </section>
+
+                    <section>
+                        <h6>
+                            Define athlete's name
+                        </h6>
+                        <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.AthleteNames" @bind-Value="@AggregationPanels.RecordPanel.AthleteName"
+                                             Placeholder="Enter Athlete's Name" ClearButton="true"
+                                             Width="100%" Class="" />
+                    </section>
+
+                    <section>
+                        <h6>
+                            Weight spread of athletes
+                        </h6>
+                        <div class="d-flex flex-column">
+                            <div class="d-flex">
+                                <InputNumber class="form-control" @bind-Value=AggregationPanels.RecordPanel.WeightLowerLimit />
+                                <InputNumber class="form-control" @bind-Value=AggregationPanels.RecordPanel.WeightUpperLimit />
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h6>
+                            Included records
+                        </h6>
+                        <div class="stacked-checkboxes">
+                            <div class="checkbox-items">
+                                <InputCheckbox class="margin-helper" id="world" @bind-Value=AggregationPanels.RecordPanel.IsWorldRecordsIncluded />
+                                <label for="world">
+                                    World Records
+                                </label>
+                            </div>
+
+                            <div class="checkbox-items">
+                                <InputCheckbox class="margin-helper" id="olympic" @bind-Value=AggregationPanels.RecordPanel.IsOlympicRecordsIncluded />
+                                <label for="olympic">
+                                    Olympic Records
+                                </label>
+                            </div>
+
+                            <div class="checkbox-items">
+                                <InputCheckbox class="margin-helper" id="active" @bind-Value=AggregationPanels.RecordPanel.IsActive />
+                                <label for="active">
+                                    Active records
+                                </label>
+                            </div>
+                        </div>
+                        
+                    </section>
+
+                       
+                        
+
+                        }
+                        <section class="buttons d-flex flex-wrap">
+                            <button type="button" class="btn btn-outline-secondary operation-button shadow-sm"
+                                    @onclick="(() => OnClearButtonClick.InvokeAsync(PanelType))" value="Clear">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <button type="button" class="btn btn-success operation-button shadow-sm"
+                                    @onclick="(() => OnSearchClick.InvokeAsync(PanelType))" value="Save">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </section>
                 </div>
-                <select @onchange="AggregationPanels.AttemptPanel.ChangePeriodEvent" class="custom-select">
-                    <option value="">Period</option>
-                    <option value="1920 - 1972">1920 - 1972</option>
-                    <option value="1973 - 1992">1973 - 1992</option>
-                    <option value="1993 - 1997">1993 - 1997</option>
-                    <option value="(current)1998+">(current)1998+</option>
-                </select>
-                <label class="m-1">Lower Date:</label>
-                <div>
-                    <InputDate @bind-Value=AggregationPanels.AttemptPanel.DateLowerLimit class="form-control" />
-                </div>
-                <label class="m-1">Upper Date:</label>
-                <div class="mb-1">
-                    <InputDate @bind-Value=AggregationPanels.AttemptPanel.DateUpperLimit class="form-control" />
-                </div>
 
-
-                <div class="my-param-container d-flex flex-column mb-1">
-                    <div class="d-flex">
-                        <InputCheckbox class="m-2" id="snatch" @bind-Value=AggregationPanels.AttemptPanel.SnatchIsIncluded />
-                        <label for="snatch">
-                            Include Snatch
-                        </label>
-                    </div>
-
-                    <div class="d-flex">
-                        <InputCheckbox class="m-2 " id="cleanAndJerk" @bind-Value=AggregationPanels.AttemptPanel.CleanAndJerkIsIncluded />
-                        <label for="cleanAndJerk">
-                            Include Clean and jerk
-                        </label>
-                    </div>
-
-                    <div class="d-flex">
-                        <InputCheckbox class="m-2 " id="total" @bind-Value=AggregationPanels.AttemptPanel.TotalIsIncluded />
-                        <label for="total">
-                            Include Total result
-                        </label>
-                    </div>
-
-                    <div class="d-flex">
-                        <InputCheckbox class="m-2" id="press" @bind-Value=AggregationPanels.AttemptPanel.CleanAndPressIsIncluded />
-                        <label for="press">
-                            Clean and press (is excluded from 1973)
-                        </label>
-                    </div>
-                </div>
-
-
-                <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.Competitions" @bind-Value="@AggregationPanels.AttemptPanel.Competition"
-                                     Placeholder="Enter Competition" ClearButton="true"
-                                     Width="100%" Class="mb-1" />
-
-                
-                <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.AthleteNames" @bind-Value="@AggregationPanels.AttemptPanel.AthleteName"
-                                     Placeholder="Enter Athlete's Name" ClearButton="true"
-                                     Width="100%" Class="mb-1" />
-                
-
-                <div class="my-param-container d-flex flex-column mb-1">
-                    <label class="m-1">Athlete's weight:</label>
-                    <div class="d-flex">
-                        <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.AttemptPanel.WeightLowerLimit />
-                        <div class="my-auto">—</div>
-                        <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.AttemptPanel.WeightUpperLimit />
-                    </div>
-                </div>
-
-                <div class="my-param-container d-flex flex-column mb-1">
-                    <label class="m-1">Result:</label>
-                    <div class="d-flex">
-                        <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.AttemptPanel.ResultLowerLimit />
-                        <div class="my-auto">—</div>
-                        <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.AttemptPanel.ResultUpperLimit />
-                    </div>
-                </div>
-
-                <label for="checkboxDisqualified">
-                    <InputCheckbox class="m-2" id="checkboxDisqualified" @bind-Value=AggregationPanels.AttemptPanel.IsDisqualified />
-                    Disqualified
-                </label>
-            }
-            else if (PanelType == PanelType.Athletes)
-            {
-                <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.AthleteNames" @bind-Value="@AggregationPanels.AthletePanel.Name"
-                                     Placeholder="Name" ClearButton="true"
-                                     Width="100%" Class="mb-1" />
-
-                <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.Countries" @bind-Value="@AggregationPanels.AthletePanel.Country"
-                                     Placeholder="Country" ClearButton="true"
-                                     Width="100%" Class="mb-1" />
-                <div class="my-param-container d-flex flex-column mb-1">
-                    <div>
-                        <InputCheckbox class="m-2" id="snatch" @bind-Value=AggregationPanels.AthletePanel.MenIsIncluded />
-                        <label for="snatch">
-                            Men
-                        </label>
-                    </div>
-                    <div>
-                        <InputCheckbox class="m-2" id="press" @bind-Value=AggregationPanels.AthletePanel.WomenIsIncluded />
-                        <label for="press">
-                            Women
-                        </label>
-                    </div>
-                </div>
-            }
-            else if (PanelType == PanelType.Records)
-            {
-                <div class="my-param-container d-flex flex-column mb-1">
-                    <div>
-                        <InputCheckbox class="m-2" id="men" @bind-Value=AggregationPanels.RecordPanel.MenIsIncluded />
-                        <label for="men">
-                            Men
-                        </label>
-                    </div>
-                    <div>
-                        <InputCheckbox class="m-2" id="women" @bind-Value=AggregationPanels.RecordPanel.WomenIsIncluded />
-                        <label for="women">
-                            Women
-                        </label>
-                    </div>
-                </div>
-                <select @onchange="AggregationPanels.RecordPanel.ChangePeriodEvent" class="custom-select">
-                    <option value="">Period</option>
-                    <option value="1920 - 1972">1920 - 1972</option>
-                    <option value="1973 - 1992">1973 - 1992</option>
-                    <option value="1993 - 1997">1993 - 1997</option>
-                    <option value="(current)1998+">(current)1998+</option>
-                </select>
-                <label class="m-1">Lower Date:</label>
-                <div>
-                    <InputDate @bind-Value=AggregationPanels.RecordPanel.DateLowerLimit class="form-control" />
-                </div>
-                <label class="m-1">Upper Date:</label>
-                <div class="mb-1">
-                    <InputDate @bind-Value=AggregationPanels.RecordPanel.DateUpperLimit class="form-control" />
-                </div>
-
-
-                <div class="my-param-container d-flex flex-column mb-1">
-                    <div class="d-flex">
-                        <InputCheckbox class="m-2" id="snatch" @bind-Value=AggregationPanels.RecordPanel.SnatchIsIncluded />
-                        <label for="snatch">
-                            Include Snatch
-                        </label>
-                    </div>
-
-                    <div class="d-flex">
-                        <InputCheckbox class="m-2 " id="cleanAndJerk" @bind-Value=AggregationPanels.RecordPanel.CleanAndJerkIsIncluded />
-                        <label for="cleanAndJerk">
-                            Include Clean and jerk
-                        </label>
-                    </div>
-
-                    <div class="d-flex">
-                        <InputCheckbox class="m-2 " id="total" @bind-Value=AggregationPanels.RecordPanel.TotalIsIncluded />
-                        <label for="total">
-                            Include Total result
-                        </label>
-                    </div>
-
-                    <div class="d-flex">
-                        <InputCheckbox class="m-2" id="press" @bind-Value=AggregationPanels.RecordPanel.CleanAndPressIsIncluded />
-                        <label for="press">
-                            Clean and press (is excluded from 1973)
-                        </label>
-                    </div>
-                </div>
-
-                <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.Competitions" @bind-Value="@AggregationPanels.RecordPanel.Competition"
-                                     Placeholder="Enter Competition" ClearButton="true"
-                                     Width="100%" Class="mb-1" />
-
-                <TelerikAutoComplete Data="@AggregationPanels.DataForDropdowns.AthleteNames" @bind-Value="@AggregationPanels.RecordPanel.AthleteName"
-                                     Placeholder="Enter Athlete's Name" ClearButton="true"
-                                     Width="100%" Class="mb-1" />
-
-                <div class="my-param-container d-flex flex-column mb-1">
-                    <label class="m-1">Athlete's weight:</label>
-                    <div class="d-flex">
-                        <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.RecordPanel.WeightLowerLimit />
-                        <div class="my-auto">—</div>
-                        <InputNumber class="form-control m-1" @bind-Value=AggregationPanels.RecordPanel.WeightUpperLimit />
-                    </div>
-                </div>
-
-                <div class="my-param-container d-flex flex-column mb-1">
-                    <div>
-                        <InputCheckbox class="m-2" id="world" @bind-Value=AggregationPanels.RecordPanel.IsWorldRecordsIncluded />
-                        <label for="world">
-                            Include World Records
-                        </label>
-                    </div>
-
-                    <div class="d-flex">
-                        <InputCheckbox class="m-2 " id="olympic" @bind-Value=AggregationPanels.RecordPanel.IsOlympicRecordsIncluded />
-                        <label for="olympic">
-                            Include Olympic Records
-                        </label>
-                    </div>
-                </div>
-                <div>
-                    <InputCheckbox class="m-2" id="active" @bind-Value=AggregationPanels.RecordPanel.IsActive />
-                    <label for="active">
-                        Record Is Active
-                    </label>
-                </div>
-
-            }
         </EditForm>
-        <div class="buttons d-flex justify-content-between flex-wrap mt-2">
-            <button type="button" class="btn btn-outline-secondary " style="margin:2px; width: 90px;"
-                    @onclick="(() => OnClearButtonClick.InvokeAsync(PanelType))" value="Clear">
-                <i class="fas fa-times"></i>
-            </button>
-            <button type="button" class="btn btn-success" style="margin:2px; width: 90px;"
-                    @onclick="(() => OnSearchClick.InvokeAsync(PanelType))" value="Save">
-                <i class="fas fa-search"></i>
-            </button>
-        </div>
+
     }
 
-
-
 </div>
+
+
+<style>
+    .panel {
+        padding: 13px 10px 10px 10px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    section {
+        margin: 0 10px 10px 10px;
+        flex: 1 1 220px;
+    }
+
+        section h6 {
+            font-size: 1.4rem;
+            color:rgba(0,0,0,0.72);
+        }
+
+        section .stacked-checkboxes {
+            display: flex;
+            flex-direction: column;
+        }
+
+            section .stacked-checkboxes .checkbox-items {
+                display: flex;
+                align-items: baseline;
+            }
+
+    .operation-button {
+        height: 45px;
+        /*width: 90px;*/
+        margin: 0 5px;
+        margin-top: auto;
+        flex: 1;
+    }
+
+    .margin-helper {
+        margin-right: 0.5em;
+    }
+
+    .date-style-correction {
+        padding: 0;
+        padding-left: .37rem;
+    }
+</style>
