@@ -24,16 +24,16 @@ namespace WeightliftingTeam1.Pages
 
         protected override void OnInitialized()
         {
-            AthletesTask = Task.Run(() => dataRetrievalService.GetData<Athletes>());
-            AttemptsTask = Task.Run(() => dataRetrievalService.GetData<Attempts>());
-            CompetitionsTask = Task.Run(() => dataRetrievalService.GetData<Competitions>());
-            CountriesTask = Task.Run(() => dataRetrievalService.GetData<Countries>());
-            DisqualificationsTask = Task.Run(() => dataRetrievalService.GetData<Disqualifications>());
-            PeriodsTask = Task.Run(() => dataRetrievalService.GetData<Periods>());
-            PlacesTask = Task.Run(() => dataRetrievalService.GetData<Places>());
-            RecordsTask = Task.Run(() => dataRetrievalService.GetData<Records>());
-            RecordTypesTask = Task.Run(() => dataRetrievalService.GetData<RecordTypes>());
-            WeightCategoriesTask = Task.Run(() => dataRetrievalService.GetData<WeightCategories>());
+            AthletesTask = Task.Run(() => (IEnumerable<Athletes>)dataRetrievalService.GetData<Athletes>().OrderBy(item => item.Id));
+            AttemptsTask = Task.Run(() => (IEnumerable<Attempts>)dataRetrievalService.GetData<Attempts>().OrderBy(item => item.Id));
+            CompetitionsTask = Task.Run(() => (IEnumerable<Competitions>)dataRetrievalService.GetData<Competitions>().OrderBy(item => item.Id));
+            CountriesTask = Task.Run(() => (IEnumerable<Countries>)dataRetrievalService.GetData<Countries>().OrderBy(item => item.Id));
+            DisqualificationsTask = Task.Run(() => (IEnumerable<Disqualifications>)dataRetrievalService.GetData<Disqualifications>().OrderBy(item => item.Id));
+            PeriodsTask = Task.Run(() => (IEnumerable<Periods>)dataRetrievalService.GetData<Periods>().OrderBy(item => item.Id));
+            PlacesTask = Task.Run(() => (IEnumerable<Places>)dataRetrievalService.GetData<Places>().OrderBy(item => item.Id));
+            RecordsTask = Task.Run(() => (IEnumerable<Records>)dataRetrievalService.GetData<Records>().OrderBy(item => item.Id));
+            RecordTypesTask = Task.Run(() => (IEnumerable<RecordTypes>)dataRetrievalService.GetData<RecordTypes>().OrderBy(item => item.Id));
+            WeightCategoriesTask = Task.Run(() => (IEnumerable<WeightCategories>)dataRetrievalService.GetData<WeightCategories>().OrderBy(item => item.Id));
         }
     }
 }

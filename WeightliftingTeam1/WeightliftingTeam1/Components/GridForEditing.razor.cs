@@ -59,7 +59,7 @@ namespace WeightliftingTeam1.Components
             TItem item = (TItem)args.Item;
             await Task.Run(() => crudService.Update(item));
             await Task.Run(() => UpdateDataForView());
-
+            
         }
 
         async Task DeleteHandler(GridCommandEventArgs args)
@@ -76,6 +76,7 @@ namespace WeightliftingTeam1.Components
             TItem item = (TItem)args.Item;
             await Task.Run(() => crudService.Delete(item));
             await Task.Run(() => UpdateDataForView());
+            
         }
 
         async Task CreateHandler(GridCommandEventArgs args)
@@ -93,6 +94,7 @@ namespace WeightliftingTeam1.Components
             TItem item = (TItem)args.Item;
             await Task.Run(() => crudService.Create(item));
             await Task.Run(() => UpdateDataForView());
+           
         }
 
         async Task CancelHandler(GridCommandEventArgs args)
@@ -104,9 +106,12 @@ namespace WeightliftingTeam1.Components
             */
         }
 
-        void UpdateDataForView()
+        async void UpdateDataForView()
         {
-            GridData = dataRetrievalService.GetData<TItem>();
+            GridData = GetData<TItem>();
         }
+
+        //it is slow
+        public IEnumerable<T> GetData<T>() => dataRetrievalService.GetData<T>().OrderBy(item => typeof(T).GetProperty("Id").GetValue(item,null));
     }
 }
