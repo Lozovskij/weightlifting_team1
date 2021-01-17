@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WeightliftingTeam1.Models
 {
@@ -13,6 +14,7 @@ namespace WeightliftingTeam1.Models
 
         public float Result { get; set; }
         public int AthleteId { get; set; }
+        [Editable(false)]
         public int Id { get; set; }
         public DateTime? Date { get; set; }
         public int? CompetitionId { get; set; }

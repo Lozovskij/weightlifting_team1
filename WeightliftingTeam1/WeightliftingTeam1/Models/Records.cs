@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WeightliftingTeam1.Models
 {
     public partial class Records
     {
+        [Editable(false)]
         public int Id { get; set; }
         public int AttemptId { get; set; }
         public int CategoryId { get; set; }
