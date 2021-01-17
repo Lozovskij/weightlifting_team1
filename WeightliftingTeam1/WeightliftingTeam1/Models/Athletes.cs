@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WeightliftingTeam1.Models
 {
@@ -10,7 +11,7 @@ namespace WeightliftingTeam1.Models
             AthleteComments = new HashSet<AthleteComments>();
             Attempts = new HashSet<Attempts>();
         }
-
+        [Editable(false)]
         public int Id { get; set; }
         public string Name { get; set; }
         public int? CountryId { get; set; }
