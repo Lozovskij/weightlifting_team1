@@ -61,6 +61,21 @@ namespace WeightliftingTeam1.Data
             context.SaveChanges();
         }
 
+        public void DeletePeriod(Periods period)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            foreach (var weightCategory in context.WeightCategories.Where(wc => wc.Period == period).ToArray())
+            {
+                foreach (var record in context.Records.Where(r => r.Category == weightCategory))
+                {
+                    context.Records.Remove(record);
+                }
+                context.WeightCategories.Remove(weightCategory);
+            }
+            context.Periods.Remove(period);
+            context.SaveChanges();
+        }
+
         private System.Reflection.PropertyInfo FindProperty(Type genericArgumentType)
         {
             return typeof(WeightliftingContext).GetProperties().Single(propertyInfo => propertyInfo.PropertyType.IsGenericType && propertyInfo.PropertyType.GenericTypeArguments[0] == genericArgumentType);
