@@ -46,6 +46,21 @@ namespace WeightliftingTeam1.Data
             context.SaveChanges();
         }
 
+        public void DeleteAthlete(Athletes athlete)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            foreach (var attempt in context.Attempts.Where(a => a.Athlete == athlete).ToArray())
+            {
+                foreach (var record in context.Records.Where(r => r.Attempt == attempt))
+                {
+                    context.Records.Remove(record);
+                }
+                context.Attempts.Remove(attempt);
+            }
+            context.Athletes.Remove(athlete);
+            context.SaveChanges();
+        }
+
         private System.Reflection.PropertyInfo FindProperty(Type genericArgumentType)
         {
             return typeof(WeightliftingContext).GetProperties().Single(propertyInfo => propertyInfo.PropertyType.IsGenericType && propertyInfo.PropertyType.GenericTypeArguments[0] == genericArgumentType);
