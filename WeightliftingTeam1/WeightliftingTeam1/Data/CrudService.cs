@@ -40,13 +40,28 @@ namespace WeightliftingTeam1.Data
 
         public void Delete<TEntity>(TEntity entity)
         {
-            var propertyInfo = FindProperty(typeof(TEntity));
-            using var context = _contextFactory.CreateDbContext();
-            propertyInfo.PropertyType.GetMethod("Remove").Invoke(propertyInfo.GetValue(context), new object[] { entity });
-            context.SaveChanges();
+            if (entity is Athletes athete)
+            {
+                DeleteAthlete(athete);
+            }
+            else if (entity is Periods period)
+            {
+                DeletePeriod(period);
+            }
+            else if (entity is Places place)
+            {
+                DeletePlace(place);
+            }
+            else
+            {
+                var propertyInfo = FindProperty(typeof(TEntity));
+                using var context = _contextFactory.CreateDbContext();
+                propertyInfo.PropertyType.GetMethod("Remove").Invoke(propertyInfo.GetValue(context), new object[] { entity });
+                context.SaveChanges();
+            }
         }
 
-        public void DeleteAthlete(Athletes athlete)
+        private void DeleteAthlete(Athletes athlete)
         {
             using var context = _contextFactory.CreateDbContext();
             foreach (var attempt in context.Attempts.Where(a => a.Athlete == athlete).ToArray())
@@ -61,7 +76,7 @@ namespace WeightliftingTeam1.Data
             context.SaveChanges();
         }
 
-        public void DeletePeriod(Periods period)
+        private void DeletePeriod(Periods period)
         {
             using var context = _contextFactory.CreateDbContext();
             foreach (var weightCategory in context.WeightCategories.Where(wc => wc.Period == period).ToArray())
@@ -76,7 +91,7 @@ namespace WeightliftingTeam1.Data
             context.SaveChanges();
         }
 
-        public void DeletePlace(Places place)
+        private void DeletePlace(Places place)
         {
             using var context = _contextFactory.CreateDbContext();
             foreach (var competition in context.Competitions.Where(c => c.Place == place).ToArray())
