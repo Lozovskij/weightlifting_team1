@@ -52,6 +52,10 @@ namespace WeightliftingTeam1.Data
             {
                 DeletePlace(place);
             }
+            else if (entity is Countries country)
+            {
+                DeleteCountry(country);
+            }
             else
             {
                 var propertyInfo = FindProperty(typeof(TEntity));
@@ -108,6 +112,24 @@ namespace WeightliftingTeam1.Data
             }
             context.Places.Remove(place);
             context.SaveChanges();
+        }
+
+        private void DeleteCountry(Countries country)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            foreach (var athlete in context.Athletes.Where(athlete => athlete.Country == country))
+            {
+                DeleteAthlete(athlete);
+            }
+            foreach (var attempt in context.Attempts.Where(attempt => attempt.AthleteCountry == country))
+            {
+                context.Attempts.Remove(attempt);
+                context.SaveChanges();
+            }
+            foreach (var place in context.Places.Where(place => place.Country == country))
+            {
+                DeletePlace(place);
+            }
         }
 
         private System.Reflection.PropertyInfo FindProperty(Type genericArgumentType)
