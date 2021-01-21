@@ -4,7 +4,7 @@
 @typeparam TItem
 
 
-<div class="shadow-lg my-container mx-2 mx-sm-3 mx-md-4 mx-lg-5 my-3 p-2 fade-in-animation">
+<div class="shadow-lg my-container mx-2 mx-sm-3 mx-md-4 mx-lg-5 my-3 p-2 fade-in-animation @(IsShown?"visible-item":"hidden-item")">
     <h5 class="m-3">@TableName</h5>
     @if (GridData == null)
     {
@@ -42,7 +42,17 @@
     .add-max-width {
         max-width: 150px;
     }
+
     .k-grid .k-grid-search {
         max-width: 195px;
     }
+
+    .visible-item {
+        display: block;
+    }
+
+    .hidden-item {
+        display: none;
+    }
+
 </style>

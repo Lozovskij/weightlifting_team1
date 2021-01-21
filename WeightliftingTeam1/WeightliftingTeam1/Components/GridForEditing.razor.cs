@@ -11,11 +11,13 @@ namespace WeightliftingTeam1.Components
 {
     public partial class GridForEditing<TItem>
     {
-        
-        public IEnumerable<TItem> GridData { get; set; }
+        [Parameter]
+        public bool IsShown { get; set; }
 
         [Parameter]
         public Task<IEnumerable<TItem>> SearchDataTask { get; set; }
+
+        public IEnumerable<TItem> GridData { get; set; }
 
         public string TableName { get; set; }
 

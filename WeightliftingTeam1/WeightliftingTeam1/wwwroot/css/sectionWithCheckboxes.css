@@ -1,0 +1,28 @@
+﻿.flex-wrap-container {
+    padding: 13px 10px 10px 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section {
+    margin: 0 10px 10px 10px;
+    flex: 1 1 220px;
+}
+
+h6 {
+    font-size: 1.4rem;
+    color: rgba(0,0,0,0.72);
+}
+
+section .stacked-checkboxes {
+    display: flex;
+    flex-direction: column;
+}
+
+section .stacked-checkboxes .checkbox-items {
+    display: flex;
+    align-items: baseline;
+}
+.margin-helper {
+    margin-right: 0.5em;
+}
