@@ -22,6 +22,17 @@ namespace WeightliftingTeam1.Pages
         public Task<IEnumerable<RecordTypes>> RecordTypesTask { get; set; }
         public Task<IEnumerable<WeightCategories>> WeightCategoriesTask { get; set; }
 
+        public bool AthletesShown { get; set; }
+        public bool AttemptsShown { get; set; }
+        public bool CompetitionsShown { get; set; }
+        public bool CountriesShown { get; set; }
+        public bool DisqualificationsShown { get; set; }
+        public bool PeriodsShown { get; set; }
+        public bool PlacesShown { get; set; }
+        public bool RecordsShown { get; set; }
+        public bool RecordTypesShown { get; set; }
+        public bool WeightCategoriesShown { get; set; }
+
         protected override void OnInitialized()
         {
             AthletesTask = Task.Run(() => (IEnumerable<Athletes>)dataRetrievalService.GetData<Athletes>().OrderBy(item => item.Id));

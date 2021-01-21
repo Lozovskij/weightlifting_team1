@@ -13,7 +13,7 @@
     {
         <EditForm Model="@AggregationPanels">
             <DataAnnotationsValidator />
-            <div class="panel">
+            <div class="flex-wrap-container ">
                 @if (PanelType == PanelType.Attempts)
                 {
 
@@ -320,24 +320,24 @@
                                 </label>
                             </div>
                         </div>
-                        
+
                     </section>
 
-                       
-                        
 
-                        }
-                        <section class="buttons d-flex flex-wrap">
-                            <button type="button" class="btn btn-outline-secondary operation-button shadow-sm"
-                                    @onclick="(() => OnClearButtonClick.InvokeAsync(PanelType))" value="Clear">
-                                <i class="fas fa-times"></i>
-                            </button>
-                            <button type="button" class="btn btn-success operation-button shadow-sm"
-                                    @onclick="(() => OnSearchClick.InvokeAsync(PanelType))" value="Save">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </section>
-                </div>
+
+
+                }
+                <section class="buttons d-flex flex-wrap">
+                    <button type="button" class="btn btn-outline-secondary operation-button shadow-sm"
+                            @onclick="(() => OnClearButtonClick.InvokeAsync(PanelType))" value="Clear">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button type="button" class="btn btn-success operation-button shadow-sm"
+                            @onclick="(() => OnSearchClick.InvokeAsync(PanelType))" value="Save">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </section>
+            </div>
 
         </EditForm>
 
@@ -347,31 +347,7 @@
 
 
 <style>
-    .panel {
-        padding: 13px 10px 10px 10px;
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    section {
-        margin: 0 10px 10px 10px;
-        flex: 1 1 220px;
-    }
-
-        section h6 {
-            font-size: 1.4rem;
-            color:rgba(0,0,0,0.72);
-        }
-
-        section .stacked-checkboxes {
-            display: flex;
-            flex-direction: column;
-        }
-
-            section .stacked-checkboxes .checkbox-items {
-                display: flex;
-                align-items: baseline;
-            }
+    
 
     .operation-button {
         height: 45px;
@@ -381,10 +357,7 @@
         flex: 1;
     }
 
-    .margin-helper {
-        margin-right: 0.5em;
-    }
-
+    
     .date-style-correction {
         padding: 0;
         padding-left: .37rem;

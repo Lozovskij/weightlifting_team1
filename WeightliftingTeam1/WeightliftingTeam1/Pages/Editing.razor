@@ -6,27 +6,134 @@
 @using WeightliftingTeam1.Panels
 @inject DataRetrievalService dataRetrievalService
 
-    <div class="min-vh-70 " style="overflow: auto; padding-top:70px;">
+    <div class="min-vh-70" style="padding-top:56px;">
 
-        <GridForEditing SearchDataTask="AthletesTask"></GridForEditing>
 
-        <GridForEditing SearchDataTask="AttemptsTask"></GridForEditing>
+        <div class="shadow my-container container-max-width mx-2 mx-sm-3 mx-md-4 mx-lg-5 my-4 p-2 fade-in-animation">
+            <h6 class="flex-wrap-container ">
+                Define which tables should be shown
+            </h6>
+            <div class="flex-wrap-container ">
 
-        <GridForEditing SearchDataTask="CompetitionsTask"></GridForEditing>
+                <section>
 
-        <GridForEditing SearchDataTask="CountriesTask"></GridForEditing>
+                    <div class="stacked-checkboxes">
+                        <EditForm Model="this">
+                            <div class="checkbox-items">
+                                <InputCheckbox id="Athletes-checkbox" class="margin-helper" @bind-Value="AthletesShown" />
+                                <label for="Athletes-checkbox">
+                                    Athletes
+                                </label>
+                            </div>
 
-        <GridForEditing SearchDataTask="DisqualificationsTask"></GridForEditing>
+                            <div class="checkbox-items">
+                                <InputCheckbox id="Attempts-checkbox" class="margin-helper" @bind-Value="AttemptsShown" />
+                                <label for="Attempts-checkbox">
+                                    Attempts
+                                </label>
+                            </div>
 
-        <GridForEditing SearchDataTask="PeriodsTask"></GridForEditing>
+                            <div class="checkbox-items">
+                                <InputCheckbox id="Competitions-checkbox" class="margin-helper" @bind-Value="CompetitionsShown" />
+                                <label for="Competitions-checkbox">
+                                    Competitions
+                                </label>
+                            </div>
 
-        <GridForEditing SearchDataTask="PlacesTask"></GridForEditing>
+                            <div class="checkbox-items">
+                                <InputCheckbox id="Countries-checkbox" class="margin-helper" @bind-Value="CountriesShown" />
+                                <label for="Countries-checkbox">
+                                    Countries
+                                </label>
+                            </div>
 
-        <GridForEditing SearchDataTask="RecordsTask"></GridForEditing>
+                            <div class="checkbox-items">
+                                <InputCheckbox id="Disqualifications-checkbox" class="margin-helper" @bind-Value="DisqualificationsShown" />
+                                <label for="Disqualifications-checkbox">
+                                    Disqualifications
+                                </label>
+                            </div>
 
-        <GridForEditing SearchDataTask="RecordTypesTask"></GridForEditing>
+                            
+                        </EditForm>
+                    </div>
+                </section>
+                <section>
+                    <div class="stacked-checkboxes">
+                        <EditForm Model="this">
 
-        <GridForEditing SearchDataTask="WeightCategoriesTask"></GridForEditing>
+                            <div class="checkbox-items">
+                                <InputCheckbox id="Periods-checkbox" class="margin-helper" @bind-Value="PeriodsShown" />
+                                <label for="Periods-checkbox">
+                                    Periods
+                                </label>
+                            </div>
+
+                            <div class="checkbox-items">
+                                <InputCheckbox id="Places-checkbox" class="margin-helper" @bind-Value="PlacesShown" />
+                                <label for="Places-checkbox">
+                                    Places
+                                </label>
+                            </div>
+
+                            <div class="checkbox-items">
+                                <InputCheckbox id="Records-checkbox" class="margin-helper" @bind-Value="RecordsShown" />
+                                <label for="Records-checkbox">
+                                    Records
+                                </label>
+                            </div>
+
+                            <div class="checkbox-items">
+                                <InputCheckbox id="RecordTypes-checkbox" class="margin-helper" @bind-Value="RecordTypesShown" />
+                                <label for="RecordTypes-checkbox">
+                                    RecordTypes
+                                </label>
+                            </div>
+
+                            <div class="checkbox-items">
+                                <InputCheckbox id="WeightCategories-checkbox" class="margin-helper" @bind-Value="WeightCategoriesShown" />
+                                <label for="WeightCategories-checkbox">
+                                    WeightCategories
+                                </label>
+                            </div>
+                        </EditForm>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+
+        <GridForEditing SearchDataTask="AthletesTask" IsShown="AthletesShown"></GridForEditing>
+
+        <GridForEditing SearchDataTask="AttemptsTask" IsShown="AttemptsShown"></GridForEditing>
+
+        <GridForEditing SearchDataTask="CompetitionsTask" IsShown="CompetitionsShown"></GridForEditing>
+
+        <GridForEditing SearchDataTask="CountriesTask" IsShown="CountriesShown"></GridForEditing>
+
+        <GridForEditing SearchDataTask="DisqualificationsTask" IsShown="DisqualificationsShown"></GridForEditing>
+
+        <GridForEditing SearchDataTask="PeriodsTask" IsShown="PeriodsShown"></GridForEditing>
+
+        <GridForEditing SearchDataTask="PlacesTask" IsShown="PlacesShown"></GridForEditing>
+
+        <GridForEditing SearchDataTask="RecordsTask" IsShown="RecordsShown"></GridForEditing>
+
+        <GridForEditing SearchDataTask="RecordTypesTask" IsShown="RecordTypesShown"></GridForEditing>
+
+        <GridForEditing SearchDataTask="WeightCategoriesTask" IsShown="WeightCategoriesShown"></GridForEditing>
 
     </div>
 
+<style>
+    
+
+    .container-max-width {
+        max-width: 600px;
+    }
+    section {
+        margin: 0 10px;
+        flex: 1 1 220px;
+    }
+</style>
