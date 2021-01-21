@@ -68,12 +68,8 @@ namespace WeightliftingTeam1.Data
         private void DeleteAthlete(Athletes athlete)
         {
             using var context = _contextFactory.CreateDbContext();
-            foreach (var attempt in context.Attempts.Where(a => a.Athlete == athlete).ToArray())
+            foreach (var attempt in context.Attempts.Where(a => a.Athlete == athlete))
             {
-                foreach (var record in context.Records.Where(r => r.Attempt == attempt))
-                {
-                    context.Records.Remove(record);
-                }
                 context.Attempts.Remove(attempt);
             }
             context.Athletes.Remove(athlete);
@@ -83,12 +79,8 @@ namespace WeightliftingTeam1.Data
         private void DeletePeriod(Periods period)
         {
             using var context = _contextFactory.CreateDbContext();
-            foreach (var weightCategory in context.WeightCategories.Where(wc => wc.Period == period).ToArray())
+            foreach (var weightCategory in context.WeightCategories.Where(wc => wc.Period == period))
             {
-                foreach (var record in context.Records.Where(r => r.Category == weightCategory))
-                {
-                    context.Records.Remove(record);
-                }
                 context.WeightCategories.Remove(weightCategory);
             }
             context.Periods.Remove(period);
@@ -100,12 +92,8 @@ namespace WeightliftingTeam1.Data
             using var context = _contextFactory.CreateDbContext();
             foreach (var competition in context.Competitions.Where(c => c.Place == place).ToArray())
             {
-                foreach (var attempt in context.Attempts.Where(a => a.Competition == competition).ToArray())
+                foreach (var attempt in context.Attempts.Where(a => a.Competition == competition))
                 {
-                    foreach (var record in context.Records.Where(r => r.Attempt == attempt))
-                    {
-                        context.Records.Remove(record);
-                    }
                     context.Attempts.Remove(attempt);
                 }
                 context.Competitions.Remove(competition);
