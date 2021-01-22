@@ -32,9 +32,9 @@ namespace WeightliftingTeam1.Pages
             CurrPanelType = PanelType.Attempts;
             AggregationPanels = new AggregationPanels(new DataForDropdowns());
 
-            AttemptsTask = Task.Run(() => searchResultService.FindData(AggregationPanels.AttemptPanel));
-            AthletsTask = Task.Run(() => searchResultService.FindData(AggregationPanels.AthletePanel));
-            RecordsTask = Task.Run(() => searchResultService.FindData(AggregationPanels.RecordPanel));
+            AttemptsTask = Task.Run(() => (IEnumerable<Attempt>)searchResultService.FindData(AggregationPanels.AttemptPanel).OrderByDescending(item => item.Competition));
+            AthletsTask = Task.Run(() => (IEnumerable<Athlete>)searchResultService.FindData(AggregationPanels.AthletePanel).OrderBy(item => item.Name));
+            RecordsTask = Task.Run(() => (IEnumerable<Record>)searchResultService.FindData(AggregationPanels.RecordPanel).OrderByDescending(item=>item.Competition));
 
             AggregationPanels.DataForDropdowns = await Task.Run(() => InitializeDataForDropdowns());
         }
@@ -50,15 +50,15 @@ namespace WeightliftingTeam1.Pages
         {
             if (panelType == PanelType.Attempts)
             {
-                AttemptsGrid.GridData = searchResultService.FindData(AggregationPanels.AttemptPanel);
+                AttemptsGrid.GridData = searchResultService.FindData(AggregationPanels.AttemptPanel).OrderByDescending(item => item.Competition);
             }
             else if (panelType == PanelType.Athletes)
             {
-                AthletesGrid.GridData = searchResultService.FindData(AggregationPanels.AthletePanel);
+                AthletesGrid.GridData = searchResultService.FindData(AggregationPanels.AthletePanel).OrderBy(item => item.Name);
             }
             else if (panelType == PanelType.Records)
             {
-                RecordsGrid.GridData = searchResultService.FindData(AggregationPanels.RecordPanel);
+                RecordsGrid.GridData = searchResultService.FindData(AggregationPanels.RecordPanel).OrderByDescending(item => item.Competition);
             }
             else
             {
