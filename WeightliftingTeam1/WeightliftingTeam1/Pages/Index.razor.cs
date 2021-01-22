@@ -41,20 +41,10 @@ namespace WeightliftingTeam1.Pages
 
         private DataForDropdowns InitializeDataForDropdowns() => new DataForDropdowns
         {
-            Competitions = searchResultService.GetCompetitions(),
-            Countries = searchResultService.GetCountries(),
-            AthleteNames = searchResultService.GetAthleteNames()
+            Competitions = searchResultService.GetCompetitions().OrderByDescending(item => item),
+            Countries = searchResultService.GetCountries().OrderBy(item => item),
+            AthleteNames = searchResultService.GetAthleteNames().OrderBy(item => item)
         };
-
-        //public void ChangePanelTypeEvent(ChangeEventArgs e)
-        //{
-        //    CurrPanelType = (PanelType)Enum.Parse(typeof(PanelType), e.Value.ToString(), true);
-        //}
-
-        //public void ChangePanelTypeEvent(PanelType panelType)
-        //{
-        //    CurrPanelType = panelType;
-        //}
 
         private void SetDataForGrid(PanelType panelType)
         {
