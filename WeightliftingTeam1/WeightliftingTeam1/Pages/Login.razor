@@ -1,4 +1,4 @@
-﻿@layout LoginLayout
+﻿@layout MainLayout
 @page "/login"
 @using WeightliftingTeam1.Data;
 @inject NavigationManager NavigationManager
@@ -6,19 +6,27 @@
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 
 
-<div class="my-param-container p-3">
+
+    <div style="height:20vh"></div>
     <EditForm Model="@user" OnValidSubmit="@ValidateUser">
-        <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password" class="form-control" id="inputPassword" @bind="user.Password">
-            <small class="form-text text-muted">@LoginMessage</small>
+        <div class="container fade-in-animation">
+            <div class="row">
+                <div class="col-md-3 col-lg-4">
+                </div>
+                <div class="col-md-6 col-lg-4 py-4">
+
+                    <div class="my-param-container shadow-sm p-4">
+                        <div class="form-group">
+                            <label for="inputPassword">Password</label>
+                            <input type="password" class="form-control" id="inputPassword" @bind="user.Password">
+                            <small class="form-text text-muted">@LoginMessage</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Sign In</button>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-4">
+                </div>
+            </div>
         </div>
-
-        @*<div class="form-check">
-                <input type="checkbox" class="form-check-input" id="check1">
-                <label class="form-check-label" for="check1">Remember me</label>
-            </div>*@
-
-        <button type="submit" class="btn btn-primary mt-3">Sign In</button>
     </EditForm>
-</div>
+
