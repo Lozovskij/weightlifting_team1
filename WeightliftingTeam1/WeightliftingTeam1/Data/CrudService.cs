@@ -68,7 +68,7 @@ namespace WeightliftingTeam1.Data
         private void DeleteAthlete(Athletes athlete)
         {
             using var context = _contextFactory.CreateDbContext();
-            foreach (var attempt in context.Attempts.Where(a => a.Athlete == athlete))
+            foreach (var attempt in context.Attempts.Where(attempt => attempt.AthleteId == athlete.Id))
             {
                 context.Attempts.Remove(attempt);
             }
@@ -79,7 +79,7 @@ namespace WeightliftingTeam1.Data
         private void DeletePeriod(Periods period)
         {
             using var context = _contextFactory.CreateDbContext();
-            foreach (var weightCategory in context.WeightCategories.Where(wc => wc.Period == period))
+            foreach (var weightCategory in context.WeightCategories.Where(weightCategory => weightCategory.PeriodId == period.Id))
             {
                 context.WeightCategories.Remove(weightCategory);
             }
@@ -90,9 +90,9 @@ namespace WeightliftingTeam1.Data
         private void DeletePlace(Places place)
         {
             using var context = _contextFactory.CreateDbContext();
-            foreach (var competition in context.Competitions.Where(c => c.Place == place).ToArray())
+            foreach (var competition in context.Competitions.Where(competition => competition.PlaceId == place.Id).ToArray())
             {
-                foreach (var attempt in context.Attempts.Where(a => a.Competition == competition))
+                foreach (var attempt in context.Attempts.Where(attempt => attempt.CompetitionId == competition.Id))
                 {
                     context.Attempts.Remove(attempt);
                 }
@@ -105,16 +105,16 @@ namespace WeightliftingTeam1.Data
         private void DeleteCountry(Countries country)
         {
             using var context = _contextFactory.CreateDbContext();
-            foreach (var athlete in context.Athletes.Where(athlete => athlete.Country == country))
+            foreach (var athlete in context.Athletes.Where(athlete => athlete.CountryId == country.Id))
             {
                 DeleteAthlete(athlete);
             }
-            foreach (var attempt in context.Attempts.Where(attempt => attempt.AthleteCountry == country))
+            foreach (var attempt in context.Attempts.Where(attempt => attempt.AthleteCountryId == country.Id))
             {
                 context.Attempts.Remove(attempt);
                 context.SaveChanges();
             }
-            foreach (var place in context.Places.Where(place => place.Country == country))
+            foreach (var place in context.Places.Where(place => place.CountryId == country.Id))
             {
                 DeletePlace(place);
             }
