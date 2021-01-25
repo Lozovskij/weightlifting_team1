@@ -113,14 +113,13 @@ namespace WeightliftingTeam1.Data
             {
                 DeleteAthlete(athlete);
             }
-            foreach (var attempt in context.Attempts.Where(attempt => attempt.AthleteCountryId == country.Id))
-            {
-                context.Attempts.Remove(attempt);
-                context.SaveChanges();
-            }
             foreach (var place in context.Places.Where(place => place.CountryId == country.Id))
             {
                 DeletePlace(place);
+            }
+            foreach (var attempt in context.Attempts.Where(attempt => attempt.AthleteCountryId == country.Id))
+            {
+                context.Attempts.Remove(attempt);
             }
             context.Countries.Remove(country);
             context.SaveChanges();
