@@ -109,13 +109,25 @@ namespace WeightliftingTeam1.Data
         private void DeleteCountry(Countries country)
         {
             using var context = _contextFactory.CreateDbContext();
-            foreach (var athlete in context.Athletes.Where(athlete => athlete.CountryId == country.Id))
+            foreach (var athlete in context.Athletes.Where(athlete => athlete.CountryId == country.Id).ToArray())
             {
-                DeleteAthlete(athlete);
+                foreach (var attempt in context.Attempts.Where(attempt => attempt.AthleteId == athlete.Id))
+                {
+                    context.Attempts.Remove(attempt);
+                }
+                context.Athletes.Remove(athlete);
             }
-            foreach (var place in context.Places.Where(place => place.CountryId == country.Id))
+            foreach (var place in context.Places.Where(place => place.CountryId == country.Id).ToArray())
             {
-                DeletePlace(place);
+                foreach (var competition in context.Competitions.Where(competition => competition.PlaceId == place.Id).ToArray())
+                {
+                    foreach (var attempt in context.Attempts.Where(attempt => attempt.CompetitionId == competition.Id))
+                    {
+                        context.Attempts.Remove(attempt);
+                    }
+                    context.Competitions.Remove(competition);
+                }
+                context.Places.Remove(place);
             }
             foreach (var attempt in context.Attempts.Where(attempt => attempt.AthleteCountryId == country.Id))
             {
