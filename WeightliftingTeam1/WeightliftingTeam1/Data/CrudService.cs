@@ -118,6 +118,8 @@ namespace WeightliftingTeam1.Data
             {
                 DeletePlace(place);
             }
+            context.Countries.Remove(country);
+            context.SaveChanges();
         }
 
         private System.Reflection.PropertyInfo FindProperty(Type genericArgumentType)
