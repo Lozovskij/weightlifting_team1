@@ -56,6 +56,10 @@ namespace WeightliftingTeam1.Data
             {
                 DeleteCountry(country);
             }
+            else if (entity is RecordTypes recordType)
+            {
+                DeleteRecordType(recordType);
+            }
             else
             {
                 var propertyInfo = FindProperty(typeof(TEntity));
@@ -119,6 +123,17 @@ namespace WeightliftingTeam1.Data
                 DeletePlace(place);
             }
             context.Countries.Remove(country);
+            context.SaveChanges();
+        }
+
+        private void DeleteRecordType(RecordTypes recordType)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            foreach (var record in context.Records.Where(record => record.RecordType == recordType.Id))
+            {
+                context.Records.Remove(record);
+            }
+            context.RecordTypes.Remove(recordType);
             context.SaveChanges();
         }
 
