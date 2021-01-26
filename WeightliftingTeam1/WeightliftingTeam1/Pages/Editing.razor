@@ -104,25 +104,35 @@
 
 
 
-        <GridForEditing SearchDataTask="AthletesTask" IsShown="AthletesShown"></GridForEditing>
+        <GridForEditing @ref="AthletesGridForEditing" OnDeleteClick="UpdataDataForViews" SearchDataTask="AthletesTask" IsShown="AthletesShown">
+        </GridForEditing>
 
-        <GridForEditing SearchDataTask="AttemptsTask" IsShown="AttemptsShown"></GridForEditing>
+        <GridForEditing @ref="AttemptsGridForEditing" OnDeleteClick="UpdataDataForViews" SearchDataTask="AttemptsTask" IsShown="AttemptsShown">
+        </GridForEditing>
 
-        <GridForEditing SearchDataTask="CompetitionsTask" IsShown="CompetitionsShown"></GridForEditing>
+        <GridForEditing @ref="CompetitionsGridForEditing" OnDeleteClick="UpdataDataForViews" SearchDataTask="CompetitionsTask" 
+                        IsShown="CompetitionsShown"></GridForEditing>
 
-        <GridForEditing SearchDataTask="CountriesTask" IsShown="CountriesShown"></GridForEditing>
+        <GridForEditing @ref="CountriesGridForEditing" OnDeleteClick="UpdataDataForViews" SearchDataTask="CountriesTask" IsShown="CountriesShown">
+        </GridForEditing>
 
-        <GridForEditing SearchDataTask="DisqualificationsTask" IsShown="DisqualificationsShown"></GridForEditing>
+        <GridForEditing @ref="DisqualificationsGridForEditing" OnDeleteClick="UpdataDataForViews" SearchDataTask="DisqualificationsTask" 
+                        IsShown="DisqualificationsShown"></GridForEditing>
 
-        <GridForEditing SearchDataTask="PeriodsTask" IsShown="PeriodsShown"></GridForEditing>
+        <GridForEditing @ref="PeriodsGridForEditing" OnDeleteClick="UpdataDataForViews" SearchDataTask="PeriodsTask" IsShown="PeriodsShown">
+        </GridForEditing>
 
-        <GridForEditing SearchDataTask="PlacesTask" IsShown="PlacesShown"></GridForEditing>
+        <GridForEditing @ref="PlacesGridForEditing" OnDeleteClick="UpdataDataForViews" SearchDataTask="PlacesTask" IsShown="PlacesShown">
+        </GridForEditing>
 
-        <GridForEditing SearchDataTask="RecordsTask" IsShown="RecordsShown"></GridForEditing>
+        <GridForEditing @ref="RecordsGridForEditing" OnDeleteClick="UpdataDataForViews" SearchDataTask="RecordsTask" IsShown="RecordsShown">
+        </GridForEditing>
 
-        <GridForEditing SearchDataTask="RecordTypesTask" IsShown="RecordTypesShown"></GridForEditing>
+        <GridForEditing @ref="RecordTypesGridForEditing" OnDeleteClick="UpdataDataForViews" SearchDataTask="RecordTypesTask" 
+                        IsShown="RecordTypesShown"></GridForEditing>
 
-        <GridForEditing SearchDataTask="WeightCategoriesTask" IsShown="WeightCategoriesShown"></GridForEditing>
+        <GridForEditing @ref="WeightCategoriesGridForEditing" OnDeleteClick="UpdataDataForViews" SearchDataTask="WeightCategoriesTask" 
+                        IsShown="WeightCategoriesShown"></GridForEditing>
 
     </div>
 

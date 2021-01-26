@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Telerik.Blazor.Components;
+using WeightliftingTeam1.Components;
 using WeightliftingTeam1.Models;
 
 namespace WeightliftingTeam1.Pages
@@ -32,6 +33,32 @@ namespace WeightliftingTeam1.Pages
         public bool RecordsShown { get; set; }
         public bool RecordTypesShown { get; set; }
         public bool WeightCategoriesShown { get; set; }
+
+        public GridForEditing<Athletes> AthletesGridForEditing { get; set; }
+        public GridForEditing<Attempts> AttemptsGridForEditing { get; set; }
+        public GridForEditing<Competitions> CompetitionsGridForEditing { get; set; }
+        public GridForEditing<Countries> CountriesGridForEditing { get; set; }
+        public GridForEditing<Disqualifications> DisqualificationsGridForEditing { get; set; }
+        public GridForEditing<Periods> PeriodsGridForEditing { get; set; }
+        public GridForEditing<Places> PlacesGridForEditing { get; set; }
+        public GridForEditing<Records> RecordsGridForEditing { get; set; }
+        public GridForEditing<RecordTypes> RecordTypesGridForEditing { get; set; }
+        public GridForEditing<WeightCategories> WeightCategoriesGridForEditing { get; set; }
+        
+
+        private void UpdataDataForViews()
+        {
+            AthletesGridForEditing.UpdateDataForView();
+            AttemptsGridForEditing.UpdateDataForView();
+            CompetitionsGridForEditing.UpdateDataForView();
+            CountriesGridForEditing.UpdateDataForView();
+            DisqualificationsGridForEditing.UpdateDataForView();
+            PeriodsGridForEditing.UpdateDataForView();
+            PlacesGridForEditing.UpdateDataForView();
+            RecordsGridForEditing.UpdateDataForView();
+            RecordTypesGridForEditing.UpdateDataForView();
+            WeightCategoriesGridForEditing.UpdateDataForView();
+        }
 
         protected override void OnInitialized()
         {
