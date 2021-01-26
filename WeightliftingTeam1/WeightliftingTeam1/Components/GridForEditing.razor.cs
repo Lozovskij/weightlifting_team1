@@ -17,6 +17,9 @@ namespace WeightliftingTeam1.Components
         [Parameter]
         public Task<IEnumerable<TItem>> SearchDataTask { get; set; }
 
+        [Parameter]
+        public EventCallback OnDeleteClick { get; set; }
+
         public IEnumerable<TItem> GridData { get; set; }
 
         public string TableName { get; set; }
@@ -78,6 +81,7 @@ namespace WeightliftingTeam1.Components
             TItem item = (TItem)args.Item;
             await Task.Run(() => crudService.Delete(item));
             await Task.Run(() => UpdateDataForView());
+            await OnDeleteClick.InvokeAsync(new object());
             
         }
 
@@ -108,7 +112,7 @@ namespace WeightliftingTeam1.Components
             */
         }
 
-        async void UpdateDataForView()
+        public async void UpdateDataForView()
         {
             GridData = GetData<TItem>();
         }
