@@ -32,7 +32,6 @@ namespace WeightliftingTeam1
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
 
             services.AddTransient<SearchResultService>();
             services.AddTransient<DataRetrievalService>();
