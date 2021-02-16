@@ -111,10 +111,10 @@ namespace WeightliftingTeam1.Data
                                                                     (recordPanel.MenIsIncluded ? record.Attempt.Athlete.Sex == Men :
                                                                         recordPanel.WomenIsIncluded && record.Attempt.Athlete.Sex == Women)) &&
                                                                  (record.Attempt.Date >= recordPanel.DateLowerLimit && record.Attempt.Date <= recordPanel.DateUpperLimit) &&
-                                                                 (recordPanel.TotalIsIncluded ? record.Exercise.Name == Total : false ||
-                                                                 recordPanel.SnatchIsIncluded ? record.Exercise.Name == Snatch : false ||
-                                                                 recordPanel.CleanAndPressIsIncluded ? record.Exercise.Name == Press : false ||
-                                                                 recordPanel.CleanAndJerkIsIncluded ? record.Exercise.Name == CleanAndJerk : false) &&
+                                                                 (record.Exercise.Name == (recordPanel.TotalIsIncluded ? Total : null) ||
+                                                                 record.Exercise.Name == (recordPanel.SnatchIsIncluded ? Snatch : null) ||
+                                                                 record.Exercise.Name == (recordPanel.CleanAndPressIsIncluded ? Press : null) ||
+                                                                 record.Exercise.Name == (recordPanel.CleanAndJerkIsIncluded ? CleanAndJerk : null)) &&
                                                                  (recordPanel.Competition == null || record.Attempt.Competition.Name == recordPanel.Competition) &&
                                                                  (recordPanel.AthleteName == null || record.Attempt.Athlete.Name == recordPanel.AthleteName) &&
                                                                  (record.Attempt.AthleteWeight >= recordPanel.WeightLowerLimit && record.Attempt.AthleteWeight <= recordPanel.WeightUpperLimit) &&
