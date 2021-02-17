@@ -39,7 +39,7 @@
 
                     <section>
                         <h6>
-                            Event's date
+                            Event date
                         </h6>
                         <select @onchange="AggregationPanels.AttemptPanel.ChangePeriodEvent" class="custom-select">
                             <option value="">Select period</option>
@@ -49,7 +49,7 @@
                             <option value="(current)1998+">(current)1998+</option>
                         </select>
                         <div>
-                            <InputDate @bind-Value=AggregationPanels.AttemptPanel.DateLowerLimit class="form-control date-style-correction" />
+                            <InputDate @bind-Value=AggregationPanels.AttemptPanel.DateLowerLimit class="form-control date-style-correction y-margins-8px" />
                         </div>
                         <div>
                             <InputDate @bind-Value=AggregationPanels.AttemptPanel.DateUpperLimit class="form-control date-style-correction" />
@@ -133,7 +133,7 @@
                             </div>
                         </div>
 
-                        <div class="checkbox-items">
+                        <div class="checkbox-items" style="margin-top: 8px">
                             <InputCheckbox class="margin-helper" id="checkboxDisqualified" @bind-Value=AggregationPanels.AttemptPanel.IsDisqualified />
                             <label for="checkboxDisqualified">
                                 Disqualified
@@ -212,7 +212,7 @@
 
                     <section>
                         <h6>
-                            Event's date
+                            Event date
                         </h6>
                         <select @onchange="AggregationPanels.RecordPanel.ChangePeriodEvent" class="custom-select">
                             <option value="">Select period</option>
@@ -222,7 +222,7 @@
                             <option value="(current)1998+">(current)1998+</option>
                         </select>
                         <div>
-                            <InputDate @bind-Value=AggregationPanels.RecordPanel.DateLowerLimit class="form-control date-style-correction" />
+                            <InputDate @bind-Value=AggregationPanels.RecordPanel.DateLowerLimit class="form-control date-style-correction y-margins-8px" />
                         </div>
                         <div>
                             <InputDate @bind-Value=AggregationPanels.RecordPanel.DateUpperLimit class="form-control date-style-correction" />
@@ -361,5 +361,10 @@
     .date-style-correction {
         padding: 0;
         padding-left: .37rem;
+    }
+
+    .y-margins-8px {
+        margin-top: 8px;
+        margin-bottom: 8px;
     }
 </style>
