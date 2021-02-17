@@ -4,16 +4,29 @@
     box-sizing: border-box;
 
 }
+
+body {
+    background-color: #15294b;
+}
+
+
+@media only screen and (min-width: 760px) {
+    .my-fixed-top {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+}
+
 .text-section {
-    min-height: 40vh;
+    /*min-height: 40vh;*/
     font-size: 2.5rem;
     text-shadow: 0 0 2px #000;
     color: white;
-    padding-top: 33vh;
-    /*background-color: rgba(142, 173, 230, 0.678);*/
-}
-.grid-section {
-    /*background-color: rgba(142, 173, 230, 0.678);*/
+    /*padding-top: 33vh;*/
+    padding-top: 25vh;
 }
 
 .my-container {
@@ -38,6 +51,12 @@
    
 }
 
+@media only screen and (max-width: 700px) {
+    .content {
+        min-height:unset;
+    }
+}
+
 
 
 .navbar {
@@ -54,7 +73,17 @@
 
 footer {
     height: 40vh;
-   
+    /*height: 10vh;
+      color: #003b75!important;//
+    */
+}
+
+@media only screen and (max-width: 700px) {
+    footer {
+        height: 10vh;
+        align-items:center;
+        justify-content:center;
+    }
 }
 
 .fade-in-animation {
@@ -80,11 +109,27 @@ footer {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    /*
-    position: absolute;
-    z-index: -1;
-    height: 100vh;*/
 }
+
+
+@media only screen and (max-width: 700px) {
+    .parallax {
+        background-image: linear-gradient(rgba(119, 119, 119, 0.3), rgba(119, 119, 119, 0.3)),url(../images/picture.jpg);
+        background-attachment:unset;
+        height: 600px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+}
+
+.main-background {
+    background-image: linear-gradient(rgba(119, 119, 119, 0.3), rgba(119, 119, 119, 0.3));
+    background-size: cover;
+}
+
 
 #blazor-error-ui {
     background: lightyellow;

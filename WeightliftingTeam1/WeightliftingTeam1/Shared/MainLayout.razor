@@ -21,47 +21,49 @@
 
 *@
 <TelerikRootComponent>
-    <div class="parallax">
-        <nav class="navbar navbar-dark fixed-top navbar-expand-md">
-            <a class="navbar-brand" href="">Home</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarMenu">
-                <ul class="navbar-nav ml-auto">
-                    <AuthorizeView>
-                        <Authorized>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/editing">Editing</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/login" @onclick="(() => Logout())">Logout</a>
-                            </li>
-                        </Authorized>
-                        <NotAuthorized>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/login">Login</a>
-                            </li>
-                        </NotAuthorized>
-                    </AuthorizeView>
+    <div class="main-background">
+        <div class="parallax">
+            <nav class="navbar navbar-dark my-fixed-top navbar-expand-md">
+                <a class="navbar-brand" href="">Home</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarMenu">
+                    <ul class="navbar-nav ml-auto">
+                        <AuthorizeView>
+                            <Authorized>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/editing">Editing</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/login" @onclick="(() => Logout())">Logout</a>
+                                </li>
+                            </Authorized>
+                            <NotAuthorized>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/login">Login</a>
+                                </li>
+                            </NotAuthorized>
+                        </AuthorizeView>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/Lozovskij/weightlifting_team1" target="_blank">Contacts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/Lozovskij/weightlifting_team1" target="_blank">About</a>
-                    </li>
-                </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/Lozovskij/weightlifting_team1" target="_blank">Contacts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/Lozovskij/weightlifting_team1" target="_blank">About</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="content">
+                @*Index Page is rendered here*@
+                @Body
             </div>
-        </nav>
-        <div class="content">
-            @*Index Page is rendered here*@
-            @Body
-        </div>
 
-        <footer class="d-flex  flex-row-reverse align-items-end">
-            <a class="text-light m-3" href="https://github.com/Lozovskij/weightlifting_team1" target="_blank">github.com</a>
-        </footer>
+            <footer class="d-flex  flex-row-reverse align-items-end">
+                <a class="text-light m-3" href="https://github.com/Lozovskij/weightlifting_team1" target="_blank">github.com</a>
+            </footer>
+        </div>
     </div>
 
 
