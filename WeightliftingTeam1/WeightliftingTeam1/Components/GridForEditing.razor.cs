@@ -61,9 +61,16 @@ namespace WeightliftingTeam1.Components
             // update the local view-model data with the service data
             await GetGridData();
             */
-            TItem item = (TItem)args.Item;
-            await Task.Run(() => crudService.Update(item));
-            await Task.Run(() => UpdateDataForView());
+            try
+            {
+                TItem item = (TItem)args.Item;
+                await Task.Run(() => crudService.Update(item));
+                await Task.Run(() => UpdateDataForView());
+            }
+            catch
+            {
+                Console.WriteLine("Edit error");
+            }
             
         }
 
@@ -97,9 +104,16 @@ namespace WeightliftingTeam1.Components
              await GetGridData();
             */
 
-            TItem item = (TItem)args.Item;
-            await Task.Run(() => crudService.Create(item));
-            await Task.Run(() => UpdateDataForView());
+            try
+            {
+                TItem item = (TItem)args.Item;
+                await Task.Run(() => crudService.Create(item));
+                await Task.Run(() => UpdateDataForView());
+            }
+            catch
+            {
+                Console.WriteLine("Add error");
+            }
            
         }
 
