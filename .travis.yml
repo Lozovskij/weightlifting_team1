@@ -1,7 +1,7 @@
 language: csharp
 mono: none
 dotnet: 5.0.103
-before_install:
+before_script:
   - wget --user dmtr.astapchik@gmail.com --password YI%-PY2p9gcU https://nuget.telerik.com/nuget
 script:
  - dotnet restore ./WeightliftingTeam1/WeightliftingTeam1.sln
