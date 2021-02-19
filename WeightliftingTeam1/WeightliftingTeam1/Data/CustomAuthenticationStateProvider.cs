@@ -1,8 +1,5 @@
 ﻿using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -17,7 +14,8 @@ namespace WeightliftingTeam1.Data
         }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var hash = await sessionStorageService.GetItemAsync<string>("hash");
+            var password = await sessionStorageService.GetItemAsync<string>("password");
+            string hash = password == null ? null : PasswordValidation.GetHash(password);
             ClaimsIdentity identity;
             if (PasswordValidation.IsValidHash(hash))
             {
@@ -28,7 +26,7 @@ namespace WeightliftingTeam1.Data
             else
             {
                 identity = new ClaimsIdentity();
-            } 
+            }
             var user = new ClaimsPrincipal(identity);
 
             return await Task.FromResult(new AuthenticationState(user));
@@ -47,7 +45,7 @@ namespace WeightliftingTeam1.Data
 
         public void MarkUserAsLoggedOut()
         {
-            sessionStorageService.RemoveItemAsync("hash");
+            sessionStorageService.RemoveItemAsync("password");
 
             var identity = new ClaimsIdentity();
 
