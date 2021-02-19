@@ -28,7 +28,7 @@ namespace WeightliftingTeam1.Pages
             {
                 ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(PasswordValidation.GetHash(user.Password));
 
-                await sessionStorage.SetItemAsync("hash", PasswordValidation.GetHash(user.Password));
+                await sessionStorage.SetItemAsync("password", user.Password);
 
                 NavigationManager.NavigateTo("/editing");
             }
