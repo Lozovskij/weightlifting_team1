@@ -2,4 +2,4 @@ language: csharp
 mono: none
 dotnet: 5.0.103
 script:
- - dotnet restore
+ - dotnet restore ./WeightliftingTeam1/WeightliftingTeam1.sln
