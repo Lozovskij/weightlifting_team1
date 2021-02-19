@@ -1,7 +1,6 @@
 language: csharp
 mono: none
 dotnet: 5.0.103
-before_script:
-  - wget --user dmtr.astapchik@gmail.com --password YI%-PY2p9gcU https://nuget.telerik.com/nuget
 script:
+ - dotnet nuget add source https://nuget.telerik.com/nuget -n telerik -u dmtr.astapchik@gmail.com -p YI%-PY2p9gcU --store-password-in-clear-text
  - dotnet restore ./WeightliftingTeam1/WeightliftingTeam1.sln
