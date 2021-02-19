@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Telerik.UI.for.Blazor.Trial</id>
+    <version>2.18.0</version>
+    <authors>Progress</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>http://www.telerik.com/sfimages/default-source/logos/blazor.png</iconUrl>
+    <description>Telerik UI for Blazor provides a suite of Blazor Components for use in Blazor applications, providing a native Blazor experience and performance.</description>
+    <tags>aspnet blazor Telerik</tags>
+    <dependencies>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="Microsoft.AspNetCore.Components.WebAssembly" version="3.2.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Components.WebAssembly.DevServer" version="3.2.1" exclude="Build,Analyzers" />
+        <dependency id="System.Data.Common" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Linq.Queryable" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="Telerik.DataSource.Trial" version="2.0.5" exclude="Build,Analyzers" />
+        <dependency id="Telerik.Documents.SpreadsheetStreaming.Trial" version="2020.3.1019" exclude="Build,Analyzers" />
+        <dependency id="Telerik.Recurrence.Trial" version="0.1.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

@@ -1,0 +1,32 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\css\kendo-theme-bootstrap\all.css">
+      <SourceType>Package</SourceType>
+      <SourceId>Telerik.UI.for.Blazor.Trial</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Telerik.UI.for.Blazor.Trial</BasePath>
+      <RelativePath>css\kendo-theme-bootstrap\all.css</RelativePath>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\css\kendo-theme-default\all.css">
+      <SourceType>Package</SourceType>
+      <SourceId>Telerik.UI.for.Blazor.Trial</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Telerik.UI.for.Blazor.Trial</BasePath>
+      <RelativePath>css\kendo-theme-default\all.css</RelativePath>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\css\kendo-theme-material\all.css">
+      <SourceType>Package</SourceType>
+      <SourceId>Telerik.UI.for.Blazor.Trial</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Telerik.UI.for.Blazor.Trial</BasePath>
+      <RelativePath>css\kendo-theme-material\all.css</RelativePath>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\js\telerik-blazor.js">
+      <SourceType>Package</SourceType>
+      <SourceId>Telerik.UI.for.Blazor.Trial</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Telerik.UI.for.Blazor.Trial</BasePath>
+      <RelativePath>js\telerik-blazor.js</RelativePath>
+    </StaticWebAsset>
+  </ItemGroup>
+</Project>
