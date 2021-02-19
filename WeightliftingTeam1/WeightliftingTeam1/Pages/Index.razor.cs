@@ -17,8 +17,6 @@ namespace WeightliftingTeam1.Pages
 
         public AggregationPanels AggregationPanels { get; set; }
 
-        //public DataForGrids DataForGrids { get; set; }
-
         public Task<IEnumerable<Attempt>> AttemptsTask { get; set; }
         public Task<IEnumerable<Athlete>> AthletsTask { get; set; }
         public Task<IEnumerable<Record>> RecordsTask { get; set; }
@@ -60,10 +58,6 @@ namespace WeightliftingTeam1.Pages
             {
                 RecordsGrid.GridData = searchResultService.FindData(AggregationPanels.RecordPanel).OrderByDescending(item => item.Competition);
             }
-            /*else
-            {
-                DataForGrids = null;
-            }*/
         }
 
         public void OnClearButtonClick(PanelType panelType)
