@@ -14,6 +14,9 @@ namespace WeightliftingTeam1.Components
         [Parameter]
         public bool IsShown { get; set; }
 
+        public bool IsModalVisible { get; set; }
+        public string ErrorMsg { get; set; } = "Unhandled error";
+
         [Parameter]
         public Task<IEnumerable<TItem>> SearchDataTask { get; set; }
 
@@ -69,7 +72,8 @@ namespace WeightliftingTeam1.Components
             }
             catch
             {
-                Console.WriteLine("Edit error");
+                IsModalVisible = true;
+                ErrorMsg = "An error occurred during the update, please enter the data again";
             }
             
         }
@@ -112,7 +116,8 @@ namespace WeightliftingTeam1.Components
             }
             catch
             {
-                Console.WriteLine("Add error");
+                IsModalVisible = true;
+                ErrorMsg = "An error occurred during the add data operation, please enter the data again";
             }
            
         }
