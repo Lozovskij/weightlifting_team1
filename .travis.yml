@@ -3,7 +3,7 @@ mono: none
 dotnet: 5.0.103
 script:
 - dotnet nuget add source https://nuget.telerik.com/nuget -n telerik -u dmtr.astapchik@gmail.com
-  -p TELERIK_PASSWORD --store-password-in-clear-text
+  -p {TELERIK_PASSWORD} --store-password-in-clear-text
 - dotnet restore ./WeightliftingTeam1/WeightliftingTeam1.sln
 env:
   global:
