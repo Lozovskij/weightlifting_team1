@@ -2,5 +2,6 @@ language: csharp
 mono: none
 dotnet: 5.0.103
 script:
- - dotnet nuget add source https://nuget.telerik.com/nuget -n telerik -u dmtr.astapchik@gmail.com -p YI%-PY2p9gcU --store-password-in-clear-text
+ - dotnet nuget add source https://nuget.telerik.com/nuget -n telerik -u dmtr.astapchik@gmail.com -p TELERIK_PASSWORD --store-password-in-clear-text
  - dotnet restore ./WeightliftingTeam1/WeightliftingTeam1.sln
+secure: "OAxJZvgFfmauxqqfsy2oMuuBEu3QgaNl7gRcdiuUQUEUglSL3AZCVHTRxc8Oe2yom0QfPHRmdwc3DKu1wO5XFRgeAsun6Prs1zG30d+eXREXZ3rLP0Rq0U8sK1ejtXthSFQluVZKUkNy7G4pUpzIIhGXBywH94hCrpRewuaUYiltowvypZJV32LGOIVpp6PZV1aHo1GFn8zeW29WeofRxx0O1C4dVtZQpoLH4gsnHJPrwOkb2FCDF30Wl8cj+Rm1K2VMX24Cm2YeAuIJJZXH6pqXXPqJYUaCplMIkfY3LplLW3wlZ6VaSfG5AklV9hbfkNS9tnYZz6Y0A4Keg6caS87itdipzNC5BREwZuGcII/vcqbzZTI9LUsqzdbOLgyyaC8QSm/cche1dIALQh/tWkBtwo53UAFZ1Uzd5gcqyBEuqo+I5isWKoysfLDTCCWIGmaYYq40aapNsSjZwLDWGZKmwSqRSphP74A1OyTkIewcbC+dxtYSPmMfNYRoldeTiYF6dNcgjQ1EKSfVRAFoldU8fsbwoECA1XpAesoeO0s5Yqis5o/S9OKAAUC8tfuG2/SEkxWmMfxRLZYByMEQ1iTg/cdb92j2MteN0GzAvOW+EeMjgLMg4WOeZzOeMU7nAHmYEr+V3FB9LfE+Z+XnhRwNgzrGj6J6v3ocjNJQB6A="
