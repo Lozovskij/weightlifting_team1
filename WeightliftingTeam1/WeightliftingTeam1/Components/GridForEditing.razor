@@ -36,9 +36,30 @@
 
             </GridColumns>
         </TelerikGrid>
+
+        <TelerikWindow Class="demo-window" Width="500px" Height="150px" Centered="true" @bind-Visible=@IsModalVisible Modal="true">
+            <WindowTitle>
+                <strong>Error</strong>
+            </WindowTitle>
+            <WindowActions>
+                <WindowAction Name="Close" />
+            </WindowActions>
+            <WindowContent>
+                <p>@ErrorMsg</p>
+            </WindowContent>
+        </TelerikWindow>
     }
 </div>
+
+
+
+
+
 <style>
+    .demo-window {
+        z-index: 44444;
+    }
+
     .add-max-width {
         max-width: 150px;
     }
@@ -54,5 +75,4 @@
     .hidden-item {
         display: none;
     }
-
 </style>
